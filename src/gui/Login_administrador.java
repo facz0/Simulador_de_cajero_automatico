@@ -14,7 +14,7 @@ public class Login_administrador extends JPanel {
 	 */
 	public Login_administrador(VentanaPrincipal principal) {
 		this.ventanaPrincipal = principal;
-		setPreferredSize(new java.awt.Dimension(1280, 720));
+		setPreferredSize(new java.awt.Dimension(1000, 620));
 		setLayout(null);
 		
 		JPanel panel = new JPanel();
