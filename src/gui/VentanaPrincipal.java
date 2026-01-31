@@ -41,7 +41,7 @@ public class VentanaPrincipal extends JFrame {
 		panel_inicio = new Panel_inicio(this);
 		login_administrador = new Login_administrador(this);
 		login_usuario = new Login_usuario(this);
-		panel_inicio.setPreferredSize(new java.awt.Dimension(1280, 720));
+		panel_inicio.setPreferredSize(new java.awt.Dimension(1000, 620));
 		setContentPane(panel_inicio);
 		pack();
 		setLocationRelativeTo(null);
