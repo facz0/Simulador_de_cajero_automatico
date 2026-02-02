@@ -19,12 +19,15 @@ public class Login_administrador extends JPanel implements ActionListener{
 	private JPasswordField passwordAdmin;
 	private JButton btnVolver;
 	private JButton btnIngresarLoginAdmin;
+	private String tipoAcceso;
+    private JLabel lbltitulo;
 	/**
 	 * Create the panel.
 	 * @param ventanaPrincipal 
 	 */
 	public Login_administrador(VentanaPrincipal principal) {
 		this.ventanaPrincipal = principal;
+		this.tipoAcceso = "";
 		setPreferredSize(new java.awt.Dimension(1000, 620));
 		setLayout(null);
 		
@@ -34,11 +37,11 @@ public class Login_administrador extends JPanel implements ActionListener{
 		add(panel);
 		panel.setLayout(null);
 		
-		JLabel lblIngresaTusCredenciales = new JLabel("Ingresa tus credenciales para iniciar sesión");
-		lblIngresaTusCredenciales.setForeground(new Color(255, 255, 255));
-		lblIngresaTusCredenciales.setBounds(80, 44, 391, 29);
-		panel.add(lblIngresaTusCredenciales);
-		lblIngresaTusCredenciales.setFont(new Font("Tahoma", Font.PLAIN, 20));
+		lbltitulo = new JLabel("Ingresa tus credenciales para iniciar sesión");
+		lbltitulo.setForeground(new Color(255, 255, 255));
+		lbltitulo.setBounds(80, 44, 391, 29);
+		panel.add(lbltitulo);
+		lbltitulo.setFont(new Font("Tahoma", Font.PLAIN, 20));
 		
 		JLabel lblDni = new JLabel("DNI:");
 		lblDni.setForeground(new Color(255, 255, 255));
@@ -65,6 +68,7 @@ public class Login_administrador extends JPanel implements ActionListener{
 		btnIngresarLoginAdmin = new JButton("Ingresar");
 		btnIngresarLoginAdmin.setForeground(new Color(255, 255, 255));
 		btnIngresarLoginAdmin.setBackground(new Color(128, 191, 33));
+		btnIngresarLoginAdmin.addActionListener(this);
 		btnIngresarLoginAdmin.setFont(new Font("Tahoma", Font.PLAIN, 15));
 		btnIngresarLoginAdmin.setBounds(231, 367, 116, 36);
 		panel.add(btnIngresarLoginAdmin);
@@ -80,19 +84,43 @@ public class Login_administrador extends JPanel implements ActionListener{
 		add(btnVolver);
 		btnVolver.setContentAreaFilled(false); 
 		btnVolver.setOpaque(true);
-		
-
 	}
+	
+	public void setModo(String modo) {
+        this.tipoAcceso = modo;
+        if (modo.equals("MANTENIMIENTO")) {
+            lbltitulo.setText("LOGIN MANTENIMIENTO");
+        } else {
+            lbltitulo.setText("LOGIN REPORTES");
+        }
+    }
+	
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		// TODO Auto-generated method stub
 		if(e.getSource() == btnVolver) {
 	        ventanaPrincipal.Panel_inicio();
 	    }
+		if (e.getSource() == btnIngresarLoginAdmin) {
+	        String usuario = txtAdminDni.getText();
+	        String password = new String(passwordAdmin.getPassword());
+	        
+	        if ("MANTENIMIENTO".equals(this.tipoAcceso)) {
+	        	if (usuario.equals("admin") && password.equals("admin123")) {
+	                ventanaPrincipal.Menu_mantenimiento();
+	            } else {
+	                // Aquí podrías poner un JOptionPane
+	                System.out.println("ERROR: Credenciales de Mantenimiento incorrectas");
+	            }
+	        }
+	        
+	        else if ("REPORTES".equals(this.tipoAcceso)) {
+	            if (usuario.equals("admin") && password.equals("reporte123")) {
+	                ventanaPrincipal.Menu_reportes();
+	            } else {
+	                System.out.println("ERROR: Credenciales de Reportes incorrectas");
+	            }
+	        }
+		}
 	}
 }
-
-
-
-
-

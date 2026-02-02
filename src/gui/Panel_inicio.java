@@ -41,12 +41,12 @@ public class Panel_inicio extends JPanel implements ActionListener{
 		this.ventanaPrincipal = principal;
 		setPreferredSize(new java.awt.Dimension(1000, 620));
 		setLayout(null);
-		ImageIcon userOriginal = new ImageIcon(getClass().getResource("/iconos/user.png"));
+		ImageIcon userOriginal = new ImageIcon(getClass().getResource("/iconosf/user.png"));
 		Image imgEscalada = userOriginal.getImage().getScaledInstance(20, 20, Image.SCALE_SMOOTH);
 		ImageIcon user = new ImageIcon(imgEscalada);
-		ImageIcon reportes = new ImageIcon(getClass().getResource("/iconos/report.png"));
-		ImageIcon mantenimiento = new ImageIcon(getClass().getResource("/iconos/mantenimiento.png"));
-		ImageIcon logo = new ImageIcon(getClass().getResource("/iconos/logo.png"));
+		ImageIcon reportes = new ImageIcon(getClass().getResource("/iconosf/report.png"));
+		ImageIcon mantenimiento = new ImageIcon(getClass().getResource("/iconosf/mantenimiento.png"));
+		ImageIcon logo = new ImageIcon(getClass().getResource("/iconosf/logo.png"));
 		Image logoescalado = logo.getImage().getScaledInstance(240, 254, Image.SCALE_SMOOTH);
 		ImageIcon logoFinal = new ImageIcon(logoescalado);
 		
@@ -127,14 +127,13 @@ public class Panel_inicio extends JPanel implements ActionListener{
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		if(e.getSource() == btnMantenimiento) {
-			ventanaPrincipal.Login_administrador();
+			ventanaPrincipal.Login_administrador("MANTENIMIENTO");
 		}
 		if(e.getSource() == btnUsuario) {
 			ventanaPrincipal.Login_usuario();
 		}
 		if(e.getSource() == btnReportes) {
-			ventanaPrincipal.Login_administrador();
+			ventanaPrincipal.Login_administrador("REPORTES");
 		}
 	}
 }
-

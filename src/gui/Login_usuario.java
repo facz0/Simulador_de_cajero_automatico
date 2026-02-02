@@ -92,8 +92,9 @@ public class Login_usuario extends JPanel implements ActionListener{
 		if(e.getSource() == btnVolver) {
 	        ventanaPrincipal.Panel_inicio();
 	    }
-		if(e.getSource() == btnIngresarLoginUser) {
-	        ventanaPrincipal.menu_usuario();
-	    }
+		//if(e.getSource() == btnIngresarLoginUser) {
+	    //    ventanaPrincipal.menu_usuario();
+	    //}
 	}
 }
+
