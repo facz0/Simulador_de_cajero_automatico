@@ -27,8 +27,8 @@ public class Saldo_cliente extends JPanel implements ActionListener {
         add(sep);
 
         JLabel lblCliente = new JLabel("Nombre del cliente:");
-        lblCliente.setBackground(new Color(255, 255, 255));
         lblCliente.setBounds(30, 90, 103, 25);
+        lblCliente.setBackground(new Color(255, 255, 255));
         add(lblCliente);
 
         txtCliente = new JTextField();
@@ -36,8 +36,8 @@ public class Saldo_cliente extends JPanel implements ActionListener {
         add(txtCliente);
 
         btnGenerar = new JButton("Generar");
-        btnGenerar.setBackground(new Color(0, 128, 0));
         btnGenerar.setBounds(570, 87, 120, 30);
+        btnGenerar.setBackground(new Color(0, 128, 0));
         btnGenerar.addActionListener(this);
         add(btnGenerar);
 
