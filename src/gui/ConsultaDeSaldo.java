@@ -77,7 +77,7 @@ public class ConsultaDeSaldo extends JPanel implements ActionListener{
 	public void actionPerformed(ActionEvent e) {
 		// TODO Auto-generated method stub
 		if(e.getSource() == btnVolver) {
-	        ventanaPrincipal.Menu_mantenimiento();
+	        ventanaPrincipal.menu_usuario();
 	    }
 	}
 

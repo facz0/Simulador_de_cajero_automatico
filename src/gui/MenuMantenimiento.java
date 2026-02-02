@@ -2,12 +2,14 @@ package gui;
 
 import java.awt.Color;
 import java.awt.Font;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
-public class MenuMantenimiento extends JPanel {
+public class MenuMantenimiento extends JPanel implements ActionListener{
 
 	private static final long serialVersionUID = 1L;
 	private VentanaPrincipal ventanaPrincipal;
@@ -34,6 +36,7 @@ public class MenuMantenimiento extends JPanel {
 		add(lblNewLabel);
 		
 		btnCuenta = new JButton("CUENTA BANCARIA");
+		btnCuenta.addActionListener(this);
 		btnCuenta.setForeground(new Color(255, 255, 255));
 		btnCuenta.setFont(new Font("Tahoma", Font.BOLD, 21));
 		btnCuenta.setBackground(new Color(128, 191, 33));
@@ -43,6 +46,7 @@ public class MenuMantenimiento extends JPanel {
 		add(btnCuenta);
 		
 		btnCliente = new JButton("CLIENTE");
+		btnCliente.addActionListener(this);
 		btnCliente.setForeground(new Color(255, 255, 255));
 		btnCliente.setFont(new Font("Tahoma", Font.BOLD, 21));
 		btnCliente.setBackground(new Color(128, 191, 33));
@@ -52,6 +56,7 @@ public class MenuMantenimiento extends JPanel {
 		add(btnCliente);
 		
 		btnTipoTransaccion = new JButton("TIPO DE TRANSACCION");
+		btnTipoTransaccion.addActionListener(this);
 		btnTipoTransaccion.setForeground(new Color(255, 255, 255));
 		btnTipoTransaccion.setFont(new Font("Tahoma", Font.BOLD, 21));
 		btnTipoTransaccion.setBackground(new Color(128, 191, 33));
@@ -61,6 +66,7 @@ public class MenuMantenimiento extends JPanel {
 		add(btnTipoTransaccion);
 		
 		btnMoneda = new JButton("MONEDA");
+		btnMoneda.addActionListener(this);
 		btnMoneda.setForeground(new Color(255, 255, 255));
 		btnMoneda.setFont(new Font("Tahoma", Font.BOLD, 21));
 		btnMoneda.setBackground(new Color(128, 191, 33));
@@ -70,6 +76,7 @@ public class MenuMantenimiento extends JPanel {
 		add(btnMoneda);
 		
 		btnTipoCambio = new JButton("TIPO DE CAMBIO ");
+		btnTipoCambio.addActionListener(this);
 		btnTipoCambio.setForeground(new Color(255, 255, 255));
 		btnTipoCambio.setFont(new Font("Tahoma", Font.BOLD, 21));
 		btnTipoCambio.setBackground(new Color(128, 191,33));
@@ -79,6 +86,7 @@ public class MenuMantenimiento extends JPanel {
 		add(btnTipoCambio);
 		
 		btnSalir = new JButton("SALIR");
+		btnSalir.addActionListener(this);
 		btnSalir.setForeground(new Color(255, 255, 255));
 		btnSalir.setFont(new Font("Tahoma", Font.BOLD, 21));
 		btnSalir.setBackground(new Color(2, 64, 89));
@@ -86,6 +94,28 @@ public class MenuMantenimiento extends JPanel {
 		btnSalir.setOpaque(true);
 		btnSalir.setBounds(563, 414, 400, 75);
 		add(btnSalir);
+	}
+	@Override
+	public void actionPerformed(ActionEvent e) {
+		// TODO Auto-generated method stub
+		if(e.getSource()==btnCuenta) {
+			ventanaPrincipal.Mantenimiento_cuenta_bancaria();
+		}
+		if(e.getSource()==btnCliente) {
+			ventanaPrincipal.Mantenimiento_cliente();
+		}
+		if(e.getSource()==btnTipoTransaccion) {
+			ventanaPrincipal.Mantenimiento_tipo_transaccion();
+		}
+		if(e.getSource()==btnMoneda) {
+			ventanaPrincipal.Mantenimiento_Moneda();
+		}
+		if(e.getSource()==btnTipoCambio) {
+			ventanaPrincipal.Mantenimiento_Tipo_de_cambio();
+		}
+		if(e.getSource()==btnSalir) {
+			ventanaPrincipal.Panel_inicio();
+		}
 	}
 
 }

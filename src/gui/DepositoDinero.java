@@ -3,6 +3,9 @@ package gui;
 import javax.swing.JPanel;
 import javax.swing.JLabel;
 import java.awt.Font;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
 import javax.swing.SwingConstants;
 import javax.swing.JSeparator;
 import javax.swing.JButton;
@@ -10,9 +13,10 @@ import java.awt.Color;
 import javax.swing.JTextField;
 import javax.swing.JRadioButton;
 
-public class DepositoDinero extends JPanel {
+public class DepositoDinero extends JPanel implements ActionListener{
 
 	private static final long serialVersionUID = 1L;
+	private VentanaPrincipal ventanaPrincipal;
 	private JLabel lblTitulo;
 	private JSeparator separator;
 	private JLabel lblClaveActual;
@@ -31,8 +35,9 @@ public class DepositoDinero extends JPanel {
 	/**
 	 * Create the panel.
 	 */
-	public DepositoDinero() {
+	public DepositoDinero(VentanaPrincipal principal) {
 		setBackground(new Color(255, 255, 255));
+		this.ventanaPrincipal = principal;
 		setPreferredSize(new java.awt.Dimension(1000, 620));
 		setLayout(null);
 		
@@ -70,6 +75,7 @@ public class DepositoDinero extends JPanel {
 		add(btnCambiar);
 		
 		btnCancelar = new JButton("CANCELAR");
+		btnCancelar.addActionListener(this);
 		btnCancelar.setForeground(Color.WHITE);
 		btnCancelar.setFont(new Font("Tahoma", Font.BOLD, 20));
 		btnCancelar.setFocusPainted(false);
@@ -127,6 +133,7 @@ public class DepositoDinero extends JPanel {
 		add(lblSaldoActal);
 		
 		btnVolver = new JButton("VOLVER");
+		btnVolver.addActionListener(this);
 		btnVolver.setForeground(Color.WHITE);
 		btnVolver.setFont(new Font("Tahoma", Font.BOLD, 20));
 		btnVolver.setFocusPainted(false);
@@ -136,5 +143,16 @@ public class DepositoDinero extends JPanel {
 		btnVolver.setContentAreaFilled(false); 
 		btnVolver.setOpaque(true);
 
+	}
+
+	@Override
+	public void actionPerformed(ActionEvent e) {
+		// TODO Auto-generated method stub
+		if(e.getSource() == btnVolver) {
+			ventanaPrincipal.menu_usuario();
+		}
+		if(e.getSource() == btnCancelar) {
+			ventanaPrincipal.menu_usuario();
+		}
 	}
 }

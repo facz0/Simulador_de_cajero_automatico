@@ -16,9 +16,10 @@ import java.awt.event.ActionEvent;
 
 
 
-public class MenuPrincipal extends JPanel implements ActionListener {
+public class Menu_usuario extends JPanel implements ActionListener {
 
 	private static final long serialVersionUID = 1L;
+	private VentanaPrincipal ventanaPrincipal;
 	private JSeparator separator;
 	private JLabel lblTitulo;
 	private JLabel lblSelecciona;
@@ -36,9 +37,10 @@ public class MenuPrincipal extends JPanel implements ActionListener {
 	/**
 	 * Create the panel.
 	 */
-	public MenuPrincipal() {
+	public Menu_usuario(VentanaPrincipal principal) {
 		setBackground(new Color(255, 255, 255));
 		setPreferredSize(new java.awt.Dimension(1000, 620));
+		this.ventanaPrincipal = principal;
 		setLayout(null);
 		
 		
@@ -81,7 +83,7 @@ public class MenuPrincipal extends JPanel implements ActionListener {
 		btnCambiarClave.setFocusPainted(false);
 		btnCambiarClave.setContentAreaFilled(false);
 		btnCambiarClave.setBackground(new Color(128, 191, 33));
-		btnCambiarClave.setBounds(161, 193, 256, 50);
+		btnCambiarClave.setBounds(161, 193, 299, 50);
 		add(btnCambiarClave);
 		btnCambiarClave.setContentAreaFilled(false); 
 		btnCambiarClave.setOpaque(true);
@@ -90,13 +92,14 @@ public class MenuPrincipal extends JPanel implements ActionListener {
 		
 		
 		btnRetiroDeDinero = new JButton("Retiro de dinero");
+		btnRetiroDeDinero.addActionListener(this);
 		btnRetiroDeDinero.setOpaque(true);
 		btnRetiroDeDinero.setForeground(Color.WHITE);
 		btnRetiroDeDinero.setFont(new Font("Tahoma", Font.BOLD, 20));
 		btnRetiroDeDinero.setFocusPainted(false);
 		btnRetiroDeDinero.setContentAreaFilled(false);
 		btnRetiroDeDinero.setBackground(new Color(128, 191, 33));
-		btnRetiroDeDinero.setBounds(164, 276, 256, 50);
+		btnRetiroDeDinero.setBounds(164, 276, 299, 50);
 		add(btnRetiroDeDinero);
 		btnRetiroDeDinero.setContentAreaFilled(false); 
 		btnRetiroDeDinero.setOpaque(true);
@@ -104,13 +107,14 @@ public class MenuPrincipal extends JPanel implements ActionListener {
 		
 		
 		btnDepositoDeDinero = new JButton("Deposito de dinero");
+		btnDepositoDeDinero.addActionListener(this);
 		btnDepositoDeDinero.setOpaque(true);
 		btnDepositoDeDinero.setForeground(Color.WHITE);
 		btnDepositoDeDinero.setFont(new Font("Tahoma", Font.BOLD, 20));
 		btnDepositoDeDinero.setFocusPainted(false);
 		btnDepositoDeDinero.setContentAreaFilled(false);
 		btnDepositoDeDinero.setBackground(new Color(128, 191, 33));
-		btnDepositoDeDinero.setBounds(164, 354, 256, 50);
+		btnDepositoDeDinero.setBounds(164, 354, 299, 50);
 		add(btnDepositoDeDinero);
 		btnDepositoDeDinero.setContentAreaFilled(false); 
 		btnDepositoDeDinero.setOpaque(true);
@@ -119,19 +123,21 @@ public class MenuPrincipal extends JPanel implements ActionListener {
 		
 		
 		btnCambiarMoneda = new JButton("Cambiar moneda");
+		btnCambiarMoneda.addActionListener(this);
 		btnCambiarMoneda.setOpaque(true);
 		btnCambiarMoneda.setForeground(Color.WHITE);
 		btnCambiarMoneda.setFont(new Font("Tahoma", Font.BOLD, 20));
 		btnCambiarMoneda.setFocusPainted(false);
 		btnCambiarMoneda.setContentAreaFilled(false);
 		btnCambiarMoneda.setBackground(new Color(128, 191, 33));
-		btnCambiarMoneda.setBounds(164, 436, 256, 50);
+		btnCambiarMoneda.setBounds(164, 436, 299, 50);
 		add(btnCambiarMoneda);
 		btnCambiarMoneda.setContentAreaFilled(false); 
 		btnCambiarMoneda.setOpaque(true);
 		btnCambiarMoneda.setIcon(cambioMoneda);
 		
 		btnConsultaDeSaldo = new JButton("Consulta de saldo");
+		btnConsultaDeSaldo.addActionListener(this);
 		btnConsultaDeSaldo.setOpaque(true);
 		btnConsultaDeSaldo.setForeground(Color.WHITE);
 		btnConsultaDeSaldo.setFont(new Font("Tahoma", Font.BOLD, 20));
@@ -145,6 +151,7 @@ public class MenuPrincipal extends JPanel implements ActionListener {
 		btnConsultaDeSaldo.setIcon(consultaSaldo);
 		
 		btnltimosMovimientos = new JButton("Últimos movimientos");
+		btnltimosMovimientos.addActionListener(this);
 		btnltimosMovimientos.setOpaque(true);
 		btnltimosMovimientos.setForeground(Color.WHITE);
 		btnltimosMovimientos.setFont(new Font("Tahoma", Font.BOLD, 20));
@@ -158,9 +165,8 @@ public class MenuPrincipal extends JPanel implements ActionListener {
 		btnltimosMovimientos.setIcon(consultaUltimo);
 		
 		
-		
-		
-		btnConsultasDeOperaciones = new JButton("Consultas de operaciones");
+		btnConsultasDeOperaciones = new JButton("Op. por rango de fecha");
+		btnConsultasDeOperaciones.addActionListener(this);
 		btnConsultasDeOperaciones.setOpaque(true);
 		btnConsultasDeOperaciones.setForeground(Color.WHITE);
 		btnConsultasDeOperaciones.setFont(new Font("Tahoma", Font.BOLD, 20));
@@ -174,6 +180,7 @@ public class MenuPrincipal extends JPanel implements ActionListener {
 		btnConsultasDeOperaciones.setIcon(consultaMovi);
 		
 		btnCancelar = new JButton("CANCELAR");
+		btnCancelar.addActionListener(this);
 		btnCancelar.setOpaque(true);
 		btnCancelar.setForeground(Color.WHITE);
 		btnCancelar.setFont(new Font("Tahoma", Font.BOLD, 18));
@@ -189,9 +196,28 @@ public class MenuPrincipal extends JPanel implements ActionListener {
 	}
 	public void actionPerformed(ActionEvent e) {
 		if (e.getSource() == btnCambiarClave) {
-			actionPerformedBtnCambiarClave(e);
+			ventanaPrincipal.Cambiar_clave();
 		}
-	}
-	protected void actionPerformedBtnCambiarClave(ActionEvent e) {
+		if(e.getSource() == btnDepositoDeDinero) {
+			ventanaPrincipal.Depositar_dinero();
+		}
+		if(e.getSource() == btnCambiarMoneda) {
+			ventanaPrincipal.Cambio_moneda();
+		}
+		if(e.getSource() == btnConsultaDeSaldo) {
+			ventanaPrincipal.Consultar_saldo();
+		}
+		if(e.getSource() == btnRetiroDeDinero) {
+			ventanaPrincipal.Retirar_dinero();
+		}
+		if(e.getSource() == btnltimosMovimientos) {
+			ventanaPrincipal.Ultimos_movimientos();
+		}
+		if(e.getSource() == btnConsultasDeOperaciones) {
+			ventanaPrincipal.Consultar_por_ranfo();
+		}
+		if(e.getSource() == btnCancelar) {
+			ventanaPrincipal.Panel_inicio();
+		}
 	}
 }

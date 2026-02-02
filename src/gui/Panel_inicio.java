@@ -27,6 +27,7 @@ public class Panel_inicio extends JPanel implements ActionListener{
 	private JButton btnMantenimiento;
 	private JButton btnUsuario;
 	private JButton btnReportes;
+	private JButton btnVolver;
 	private JLabel lblLogo;
 	private JLabel lblNewLabel;
 	private JLabel lblBancoInstitucional;
@@ -41,12 +42,12 @@ public class Panel_inicio extends JPanel implements ActionListener{
 		this.ventanaPrincipal = principal;
 		setPreferredSize(new java.awt.Dimension(1000, 620));
 		setLayout(null);
-		ImageIcon userOriginal = new ImageIcon(getClass().getResource("/iconosf/user.png"));
+		ImageIcon userOriginal = new ImageIcon(getClass().getResource("/iconos/user.png"));
 		Image imgEscalada = userOriginal.getImage().getScaledInstance(20, 20, Image.SCALE_SMOOTH);
 		ImageIcon user = new ImageIcon(imgEscalada);
-		ImageIcon reportes = new ImageIcon(getClass().getResource("/iconosf/report.png"));
-		ImageIcon mantenimiento = new ImageIcon(getClass().getResource("/iconosf/mantenimiento.png"));
-		ImageIcon logo = new ImageIcon(getClass().getResource("/iconosf/logo.png"));
+		ImageIcon reportes = new ImageIcon(getClass().getResource("/iconos/report.png"));
+		ImageIcon mantenimiento = new ImageIcon(getClass().getResource("/iconos/mantenimiento.png"));
+		ImageIcon logo = new ImageIcon(getClass().getResource("/iconos/logo.png"));
 		Image logoescalado = logo.getImage().getScaledInstance(240, 254, Image.SCALE_SMOOTH);
 		ImageIcon logoFinal = new ImageIcon(logoescalado);
 		
@@ -83,7 +84,7 @@ public class Panel_inicio extends JPanel implements ActionListener{
 		panel.add(btnReportes);
 		btnReportes.setFont(new Font("Tahoma", Font.PLAIN, 20));
 		btnReportes.setContentAreaFilled(false); 
-		btnReportes.setOpaque(true);
+		btnReportes.setOpaque(true); 
 		btnReportes.setIcon(reportes);
 		btnReportes.setIconTextGap(10);
 		btnReportes.setFocusPainted(false);

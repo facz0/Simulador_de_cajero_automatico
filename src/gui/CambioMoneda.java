@@ -3,6 +3,9 @@ package gui;
 import javax.swing.JPanel;
 import javax.swing.JLabel;
 import java.awt.Font;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
 import javax.swing.SwingConstants;
 import javax.swing.JSeparator;
 import javax.swing.JButton;
@@ -11,9 +14,10 @@ import javax.swing.JTextField;
 import javax.swing.JComboBox;
 import javax.swing.DefaultComboBoxModel;
 
-public class CambioMoneda extends JPanel {
+public class CambioMoneda extends JPanel implements ActionListener{
 
 	private static final long serialVersionUID = 1L;
+	private VentanaPrincipal ventanaPrincipal;
 	private JLabel lblTitulo;
 	private JSeparator separator;
 	private JLabel lblClaveActual;
@@ -27,13 +31,13 @@ public class CambioMoneda extends JPanel {
 	private JComboBox comboBox_1;
 	private JLabel lblResultado;
 	private JLabel lblEur;
-	private JButton btnVolver;
 
 	/**
 	 * Create the panel.
 	 */
-	public CambioMoneda() {
+	public CambioMoneda(VentanaPrincipal principal) {
 		setBackground(new Color(255, 255, 255));
+		this.ventanaPrincipal = principal;
 		setPreferredSize(new java.awt.Dimension(1000, 620));
 		setLayout(null);
 		
@@ -77,6 +81,7 @@ public class CambioMoneda extends JPanel {
 		btnCambiar.setOpaque(true);
 		
 		btnCancelar = new JButton("CANCELAR");
+		btnCancelar.addActionListener(this);
 		btnCancelar.setForeground(Color.WHITE);
 		btnCancelar.setFont(new Font("Tahoma", Font.BOLD, 20));
 		btnCancelar.setFocusPainted(false);
@@ -121,16 +126,14 @@ public class CambioMoneda extends JPanel {
 		lblEur.setFont(new Font("Tahoma", Font.BOLD, 16));
 		lblEur.setBounds(510, 366, 250, 20);
 		add(lblEur);
-		
-		btnVolver = new JButton("VOLVER");
-		btnVolver.setForeground(Color.WHITE);
-		btnVolver.setFont(new Font("Tahoma", Font.BOLD, 20));
-		btnVolver.setFocusPainted(false);
-		btnVolver.setBackground(new Color(128, 191, 33));
-		btnVolver.setBounds(402, 517, 200, 50);
-		add(btnVolver);
-		btnVolver.setContentAreaFilled(false); 
-		btnVolver.setOpaque(true);
 
+	}
+
+	@Override
+	public void actionPerformed(ActionEvent e) {
+		// TODO Auto-generated method stub
+		if(e.getSource() == btnCancelar) {
+			ventanaPrincipal.menu_usuario();
+		}
 	}
 }

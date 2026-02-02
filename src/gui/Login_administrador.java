@@ -11,6 +11,8 @@ import java.awt.event.ActionListener;
 import javax.swing.JTextField;
 import javax.swing.JPasswordField;
 import javax.swing.JButton;
+import javax.swing.JSlider;
+import javax.swing.JMenuBar;
 
 public class Login_administrador extends JPanel implements ActionListener{
 	private static final long serialVersionUID = 1L;
@@ -109,7 +111,6 @@ public class Login_administrador extends JPanel implements ActionListener{
 	        	if (usuario.equals("admin") && password.equals("admin123")) {
 	                ventanaPrincipal.Menu_mantenimiento();
 	            } else {
-	                // Aquí podrías poner un JOptionPane
 	                System.out.println("ERROR: Credenciales de Mantenimiento incorrectas");
 	            }
 	        }
