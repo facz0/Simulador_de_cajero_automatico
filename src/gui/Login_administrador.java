@@ -77,12 +77,12 @@ public class Login_administrador extends JPanel implements ActionListener{
 		btnIngresarLoginAdmin.setContentAreaFilled(false); 
 		btnIngresarLoginAdmin.setOpaque(true);
 		
-		btnVolver = new JButton("< Volver");
+		btnVolver = new JButton("< VOLVER");
 		btnVolver.setForeground(new Color(255, 255, 255));
-		btnVolver.setBackground(new Color(128, 191, 33));
+		btnVolver.setBackground(new Color(220, 53, 69)); // color deseado ROJO
 		btnVolver.addActionListener(this);
 		btnVolver.setFont(new Font("Tahoma", Font.PLAIN, 15));
-		btnVolver.setBounds(10, 11, 97, 35);
+		btnVolver.setBounds(10, 11, 127, 35);
 		add(btnVolver);
 		btnVolver.setContentAreaFilled(false); 
 		btnVolver.setOpaque(true);

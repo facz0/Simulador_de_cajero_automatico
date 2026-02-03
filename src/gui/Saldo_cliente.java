@@ -15,7 +15,7 @@ public class Saldo_cliente extends JPanel implements ActionListener {
 
     public Saldo_cliente() {
     	
-        setBackground(new Color(2, 64, 89));  //color del fondo azul
+    	setBackground(new Color(2, 64, 89));  //color del fondo azul
         setLayout(null);
 
         JLabel lblTitulo = new JLabel("Saldo de cliente");
@@ -30,7 +30,7 @@ public class Saldo_cliente extends JPanel implements ActionListener {
 
         JLabel lblCliente = new JLabel("Nombre del cliente:");
         lblCliente.setForeground(new Color(255, 255, 255));
-        lblCliente.setBounds(30, 90, 103, 25);
+        lblCliente.setBounds(30, 90, 136, 25);
         lblCliente.setBackground(new Color(255, 255, 255));
         add(lblCliente);
 

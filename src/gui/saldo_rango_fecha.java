@@ -19,6 +19,7 @@ public class saldo_rango_fecha extends JPanel implements ActionListener {
         setBackground(new Color(2, 64, 89));  //color del fondo azul
 
         JLabel lblTitulo = new JLabel("Transacciones por rango de fecha");
+        lblTitulo.setForeground(new Color(255, 255, 255));
         lblTitulo.setFont(new Font("Segoe UI", Font.BOLD, 16));
         lblTitulo.setBounds(30, 20, 350, 30);
         add(lblTitulo);
@@ -28,6 +29,7 @@ public class saldo_rango_fecha extends JPanel implements ActionListener {
         add(sep);
 
         JLabel lblInicio = new JLabel("Fecha inicio:");
+        lblInicio.setForeground(new Color(255, 255, 255));
         lblInicio.setBounds(30, 90, 150, 25);
         add(lblInicio);
 
