@@ -5,7 +5,7 @@ import javax.swing.border.EmptyBorder;
 import java.awt.*;
 import java.awt.event.*;
 
-public class Ventana_reporte extends JPanel implements ItemListener {
+public class Ventana_reporte extends JPanel implements ItemListener, ActionListener {
 
     private static final long serialVersionUID = 1L;
     private VentanaPrincipal ventanaPrincipal;
@@ -17,6 +17,7 @@ public class Ventana_reporte extends JPanel implements ItemListener {
     private Saldo_cliente pnlSaldoCliente;
     private Saldo_rango_montos pnlRangoMontos;
     private saldo_rango_fecha pnlRangoFechas;
+    private JButton btnSalir;
 
     public Ventana_reporte(VentanaPrincipal principal) {
 
@@ -49,6 +50,15 @@ public class Ventana_reporte extends JPanel implements ItemListener {
         pnlContenedor.setBackground(new Color(230, 235, 240));
         pnlContenedor.setBorder(BorderFactory.createLineBorder(new Color(180, 180, 180)));
         add(pnlContenedor);
+        
+        btnSalir = new JButton("<---"); //esel boton salir, me dio frojera poner el icono :)
+        btnSalir.setForeground(new Color(255, 255, 255)); //blanquito
+        btnSalir.setBackground(new Color(220, 53, 69)); // color deseado
+        btnSalir.setContentAreaFilled(false); //fondo de color
+        btnSalir.setOpaque(true);//fondo de color
+        btnSalir.addActionListener(this);
+        btnSalir.setBounds(30, 19, 89, 23);
+        add(btnSalir);
 
         // Crear subpaneles
         pnlSaldoCliente = new Saldo_cliente();
@@ -84,4 +94,16 @@ public class Ventana_reporte extends JPanel implements ItemListener {
         	}
         }
     }
+	public void actionPerformed(ActionEvent e) {
+		if (e.getSource() == btnSalir) {
+			actionPerformedBtnNewButton(e);
+		}
+	}
+	
+	//boton salir :v
+	protected void actionPerformedBtnNewButton(ActionEvent e) {
+		if(e.getSource()==btnSalir) {
+			ventanaPrincipal.Panel_inicio();
+		}
+	}
 }
