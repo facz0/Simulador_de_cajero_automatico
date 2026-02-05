@@ -1,4 +1,4 @@
-package gui;
+package operaciones;
 
 import java.awt.Color;
 import java.awt.Dimension;
@@ -16,6 +16,8 @@ import javax.swing.JTextField;
 import javax.swing.SwingConstants;
 import javax.swing.UIManager; // Necesario para el estilo visual
 import javax.swing.border.EmptyBorder;
+
+import gui.VentanaPrincipal;
 
 public class Retiro_dinero extends JPanel implements ActionListener{
 

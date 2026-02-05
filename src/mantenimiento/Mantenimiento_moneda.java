@@ -1,4 +1,4 @@
-package gui;
+package mantenimiento;
 
 import java.awt.Color;
 import java.awt.Font;
@@ -11,7 +11,9 @@ import javax.swing.JPanel;
 import javax.swing.JSeparator;
 import javax.swing.JTextArea;
 
-public class Mantenimiento_transaccion extends JPanel implements ActionListener{
+import gui.VentanaPrincipal;
+
+public class Mantenimiento_moneda extends JPanel implements ActionListener{
 
 	private static final long serialVersionUID = 1L;
 	private VentanaPrincipal ventanaPrincipal;
@@ -25,7 +27,7 @@ public class Mantenimiento_transaccion extends JPanel implements ActionListener{
 	/**
 	 * Create the panel.
 	 */
-	public Mantenimiento_transaccion(VentanaPrincipal principal) {
+	public Mantenimiento_moneda(VentanaPrincipal principal) {
 		setBackground(new Color(2, 64, 89));
 		setLayout(null);
 		this.ventanaPrincipal = principal;		
@@ -35,7 +37,7 @@ public class Mantenimiento_transaccion extends JPanel implements ActionListener{
 		separator.setBounds(98, 83, 792, 20);
 		add(separator);
 		
-		JLabel lblNewLabel = new JLabel("Transacciónes");
+		JLabel lblNewLabel = new JLabel("Moneda");
 		lblNewLabel.setForeground(new Color(255, 255, 255));
 		lblNewLabel.setFont(new Font("Tahoma", Font.PLAIN, 20));
 		lblNewLabel.setBounds(98, 38, 393, 34);
@@ -95,6 +97,7 @@ public class Mantenimiento_transaccion extends JPanel implements ActionListener{
 		add(btnVolver);
 		btnVolver.setContentAreaFilled(false); 
 		btnVolver.setOpaque(true);
+
 	}
 
 	@Override

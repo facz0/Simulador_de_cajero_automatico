@@ -1,11 +1,14 @@
-package gui;
+package reportes;
 
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
+
+import gui.VentanaPrincipal;
+
 import java.awt.*;
 import java.awt.event.*;
 
-public class Ventana_reporte extends JPanel implements ItemListener, ActionListener {
+public class Ventana_reportee extends JPanel implements ItemListener, ActionListener {
 
     private static final long serialVersionUID = 1L;
     private VentanaPrincipal ventanaPrincipal;
@@ -19,7 +22,7 @@ public class Ventana_reporte extends JPanel implements ItemListener, ActionListe
     private saldo_rango_fecha pnlRangoFechas;
     private JButton btnSalir;
 
-    public Ventana_reporte(VentanaPrincipal principal) {
+    public Ventana_reportee(VentanaPrincipal principal) {
 
         setLayout(null);
         setBorder(new EmptyBorder(10, 10, 10, 10));

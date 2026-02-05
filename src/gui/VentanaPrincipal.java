@@ -7,6 +7,22 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
+import consultas_busquedas.ConsultaDeSaldo;
+import consultas_busquedas.Consultas_Rango;
+import consultas_busquedas.Ultimos_movimientos;
+import mantenimiento.Mantenimiento_cliente;
+import mantenimiento.Mantenimiento_cuentaBancaria;
+import mantenimiento.Mantenimiento_moneda;
+import mantenimiento.Mantenimiento_tipoCambio;
+import mantenimiento.Mantenimiento_transaccion;
+import operaciones.CambioMoneda;
+import operaciones.Cambio_clave;
+import operaciones.DepositoDinero;
+import operaciones.Login_administrador;
+import operaciones.Login_usuario;
+import operaciones.Retiro_dinero;
+import reportes.Ventana_reportee;
+
 public class VentanaPrincipal extends JFrame {
 
 	private static final long serialVersionUID = 1L;
@@ -17,7 +33,7 @@ public class VentanaPrincipal extends JFrame {
 	private Login_administrador login_administrador;
 	private Login_usuario login_usuario;
 	private Menu_usuario menu_usuario;
-	private Ventana_reporte ventana_reporte;
+	private Ventana_reportee ventana_reportee;
 	private MenuMantenimiento menu_mantenimiento;
 	private DepositoDinero depositar_dinero;
 	private CambioMoneda cambio_moneda;
@@ -57,7 +73,7 @@ public class VentanaPrincipal extends JFrame {
 		login_administrador = new Login_administrador(this);
 		login_usuario = new Login_usuario(this);
 		menu_usuario = new Menu_usuario(this);
-		ventana_reporte = new Ventana_reporte(this);
+		ventana_reportee = new Ventana_reportee(this);
 		menu_mantenimiento = new MenuMantenimiento(this);
 		depositar_dinero = new DepositoDinero(this);
 		cambio_moneda = new CambioMoneda(this);
@@ -100,7 +116,7 @@ public class VentanaPrincipal extends JFrame {
 	}
 	
 	public void Menu_reportes() {
-		cambiar_panel(ventana_reporte);
+		cambiar_panel(ventana_reportee);
 	}
 	
 	public void Depositar_dinero() {

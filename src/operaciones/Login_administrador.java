@@ -1,7 +1,10 @@
-package gui;
+package operaciones;
 
 import javax.swing.JPanel;
 import javax.swing.JTextPane;
+
+import gui.VentanaPrincipal;
+
 import java.awt.Color;
 import javax.swing.JLabel;
 import java.awt.Font;

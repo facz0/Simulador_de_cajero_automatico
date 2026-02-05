@@ -1,4 +1,4 @@
-package gui;
+package mantenimiento;
 
 import java.awt.Color;
 import java.awt.Font;
@@ -10,6 +10,8 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JSeparator;
 import javax.swing.JTextArea;
+
+import gui.VentanaPrincipal;
 
 public class Mantenimiento_tipoCambio extends JPanel implements ActionListener{
 

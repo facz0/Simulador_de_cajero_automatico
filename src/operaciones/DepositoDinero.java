@@ -1,4 +1,4 @@
-package gui;
+package operaciones;
 
 import javax.swing.JPanel;
 import javax.swing.JLabel;
@@ -7,6 +7,9 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 import javax.swing.SwingConstants;
+
+import gui.VentanaPrincipal;
+
 import javax.swing.JSeparator;
 import javax.swing.JButton;
 import java.awt.Color;

@@ -1,10 +1,13 @@
-package gui;
+package consultas_busquedas;
 
 import javax.swing.JPanel;
 import javax.swing.JLabel;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JTextField;
+
+import gui.VentanaPrincipal;
+
 import javax.swing.JTextArea;
 import java.awt.Color;
 import java.awt.Font;
