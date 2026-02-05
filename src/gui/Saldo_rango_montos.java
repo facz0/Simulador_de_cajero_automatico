@@ -8,7 +8,7 @@ import java.awt.event.ActionListener;
 public class Saldo_rango_montos extends JPanel implements ActionListener {
 
     private static final long serialVersionUID = 1L;
-    private Ventana_reportee ventana_reporte;
+    private Ventana_reporte ventana_reporte;
     private JTextField txtMin, txtMax;
     private JTextArea txtResultado;
     private JButton btnGenerar, btnLimpiar;

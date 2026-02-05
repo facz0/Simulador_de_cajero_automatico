@@ -17,7 +17,7 @@ public class VentanaPrincipal extends JFrame {
 	private Login_administrador login_administrador;
 	private Login_usuario login_usuario;
 	private Menu_usuario menu_usuario;
-	private Ventana_reportee ventana_reporte;
+	private Ventana_reporte ventana_reporte;
 	private MenuMantenimiento menu_mantenimiento;
 	private DepositoDinero depositar_dinero;
 	private CambioMoneda cambio_moneda;
@@ -57,7 +57,7 @@ public class VentanaPrincipal extends JFrame {
 		login_administrador = new Login_administrador(this);
 		login_usuario = new Login_usuario(this);
 		menu_usuario = new Menu_usuario(this);
-		ventana_reporte = new Ventana_reportee(this);
+		ventana_reporte = new Ventana_reporte(this);
 		menu_mantenimiento = new MenuMantenimiento(this);
 		depositar_dinero = new DepositoDinero(this);
 		cambio_moneda = new CambioMoneda(this);
