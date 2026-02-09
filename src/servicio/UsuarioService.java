@@ -1,5 +1,7 @@
 package servicio;
 
+import java.util.ArrayList;
+
 import datos.AlmacenDatos;
 import modelos.Usuario;
 
@@ -39,6 +41,9 @@ public class UsuarioService {
 		
 	}
 	
+	public ArrayList<Usuario> listarUsuarios(){
+		return AlmacenDatos.listaUsuarios;
+	}
 	
 	
 }
