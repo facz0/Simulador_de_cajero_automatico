@@ -26,6 +26,7 @@ public class Retiro_dinero extends JPanel implements ActionListener{
 	private JTextField txtMontoRetirar;
     private JComboBox<String> comboMoneda;
     private JLabel lblSimboloMoneda;
+    private JButton btnVolver;
 
 	/**
 	 * Create the panel.
@@ -106,7 +107,8 @@ public class Retiro_dinero extends JPanel implements ActionListener{
         crearBotonMonto("S/. 1000", 650, 350, azulMontos);
 
         // --- BOTONES DE ACCIÓN (Verdes) ---
-        JButton btnVolver = new JButton("VOLVER");
+        btnVolver = new JButton("VOLVER");
+        btnVolver.addActionListener(this);
         btnVolver.setBounds(20, 30, 100, 35);
         configurarBotonVerde(btnVolver, 20, 30, 100, 35, verdeBoton);
         add(btnVolver);
@@ -160,7 +162,9 @@ public class Retiro_dinero extends JPanel implements ActionListener{
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		// TODO Auto-generated method stub
-		
+		if (e.getSource() == btnVolver) {
+			ventanaPrincipal.menu_usuario();
+		}
 	}
 
 }
