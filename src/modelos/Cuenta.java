@@ -8,6 +8,7 @@ public class Cuenta {
 	private Usuario usuario;
 	private Moneda moneda;
 	private double saldo;
+	private String estado;
 	private ArrayList<Transaccion> movimientos;
 	
 	public Cuenta(String NumeroCuenta, Usuario usuario, Moneda moneda, double saldo ) {

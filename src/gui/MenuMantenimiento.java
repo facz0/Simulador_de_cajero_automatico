@@ -35,7 +35,7 @@ public class MenuMantenimiento extends JPanel implements ActionListener{
 		lblNewLabel.setBounds(320, 23, 368, 75);
 		add(lblNewLabel);
 		
-		btnCuenta = new JButton("CUENTA BANCARIA");
+		btnCuenta = new JButton("CUENTAS BANCARIAS");
 		btnCuenta.addActionListener(this);
 		btnCuenta.setForeground(new Color(255, 255, 255));
 		btnCuenta.setFont(new Font("Tahoma", Font.BOLD, 21));

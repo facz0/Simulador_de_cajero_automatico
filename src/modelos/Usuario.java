@@ -3,12 +3,12 @@ package modelos;
 public class Usuario {
 	private String DNI;
 	private String nombre;
-	private String password;
+	private String clave;
 	
-	public Usuario(String DNI, String nombre, String password) {
+	public Usuario(String DNI, String nombre, String clave) {
 		this.DNI = DNI;
 		this.nombre = nombre;
-		this.password = password;
+		this.clave = clave;
 	}
 
 	public String getDNI() {
@@ -28,11 +28,11 @@ public class Usuario {
 	}
 
 	public String getPassword() {
-		return password;
+		return clave;
 	}
 
 	public void setPassword(String password) {
-		this.password = password;
+		this.clave = password;
 	}
 	
 	

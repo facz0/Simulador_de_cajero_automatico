@@ -22,7 +22,8 @@ public class Mantenimiento_cliente extends JPanel implements ActionListener{
 	private JButton btnModificar;
 	private JButton btnEliminar;
 	private JButton btnVolver;
-	private JTextArea txtResultado;
+	private JPanel panelPrincipal;
+	private CrearUsuario crearusuario;
 
 	/**
 	 * Create the panel.
@@ -44,7 +45,7 @@ public class Mantenimiento_cliente extends JPanel implements ActionListener{
 		add(lblNewLabel);
 		
 		btnListar = new JButton("LISTAR");
-		btnListar.setBounds(108, 151, 150, 42);
+		btnListar.setBounds(98, 114, 150, 42);
 		btnListar.setFont(new Font("Tahoma", Font.PLAIN, 17));
 		btnListar.setForeground(new Color(255, 255, 255));
 		btnListar.addActionListener(this);
@@ -54,7 +55,7 @@ public class Mantenimiento_cliente extends JPanel implements ActionListener{
 		btnListar.setOpaque(true); 
 		
 		btnCrear = new JButton("CREAR");
-		btnCrear.setBounds(108, 238, 150, 42);
+		btnCrear.setBounds(98, 209, 150, 42);
 		btnCrear.setFont(new Font("Tahoma", Font.PLAIN, 17));
 		btnCrear.setForeground(new Color(255, 255, 255));
 		btnCrear.addActionListener(this);
@@ -64,7 +65,7 @@ public class Mantenimiento_cliente extends JPanel implements ActionListener{
 		btnCrear.setOpaque(true); 
 		
 		btnModificar = new JButton("Modificar");
-		btnModificar.setBounds(108, 328, 150, 42);
+		btnModificar.setBounds(98, 305, 150, 42);
 		btnModificar.setFont(new Font("Tahoma", Font.PLAIN, 17));
 		btnModificar.setForeground(new Color(255, 255, 255));
 		btnModificar.addActionListener(this);
@@ -74,19 +75,14 @@ public class Mantenimiento_cliente extends JPanel implements ActionListener{
 		btnModificar.setOpaque(true); 
 		
 		btnEliminar = new JButton("Eliminar");
-		btnEliminar.setBounds(108, 430, 150, 42);
+		btnEliminar.setBounds(98, 401, 150, 42);
 		btnEliminar.setFont(new Font("Tahoma", Font.PLAIN, 17));
 		btnEliminar.setForeground(new Color(255, 255, 255));
 		btnEliminar.addActionListener(this);
 		btnEliminar.setBackground(new Color(128, 191, 33));
 		add(btnEliminar);
 		btnEliminar.setContentAreaFilled(false); 
-		btnEliminar.setOpaque(true); 
-		
-		txtResultado = new JTextArea();
-		txtResultado.setEditable(false);
-		txtResultado.setBounds(352, 151, 523, 321);
-		add(txtResultado);
+		btnEliminar.setOpaque(true);
 		
 		btnVolver = new JButton("< Volver");
 		btnVolver.setForeground(new Color(255, 255, 255));
@@ -98,7 +94,22 @@ public class Mantenimiento_cliente extends JPanel implements ActionListener{
 		btnVolver.setContentAreaFilled(false); 
 		btnVolver.setOpaque(true);
 		
+		panelPrincipal = new JPanel();
+		panelPrincipal.setBounds(278, 114, 612, 455);
+		add(panelPrincipal);
+		
+		crearusuario = new CrearUsuario();
+		
 	}
+	
+	// ===== CAMBIO DE PANELES =====
+    private void mostrarPanel(JPanel panel) {
+        panelPrincipal.removeAll();
+        panel.setBounds(0, 0, 612, 455);
+        panelPrincipal.add(panel);
+        panelPrincipal.revalidate();
+        panelPrincipal.repaint();
+    }
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
@@ -107,5 +118,4 @@ public class Mantenimiento_cliente extends JPanel implements ActionListener{
 			ventanaPrincipal.Menu_mantenimiento();
 		}
 	}
-
 }
