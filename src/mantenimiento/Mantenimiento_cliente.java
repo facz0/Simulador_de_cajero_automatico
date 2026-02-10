@@ -24,6 +24,9 @@ public class Mantenimiento_cliente extends JPanel implements ActionListener{
 	private JButton btnVolver;
 	private JPanel panelPrincipal;
 	private CrearUsuario crearusuario;
+	private EliminarUsuario eliminarUsuario;
+	private ModificarUsuario modificarUsuario;
+	private ListarUsuarios listarUsuario;
 
 	/**
 	 * Create the panel.
@@ -99,6 +102,11 @@ public class Mantenimiento_cliente extends JPanel implements ActionListener{
 		add(panelPrincipal);
 		
 		crearusuario = new CrearUsuario();
+		eliminarUsuario = new EliminarUsuario();
+		modificarUsuario = new ModificarUsuario();
+		listarUsuario = new ListarUsuarios();
+		
+		mostrarPanel(listarUsuario);
 		
 	}
 	
@@ -117,5 +125,29 @@ public class Mantenimiento_cliente extends JPanel implements ActionListener{
 		if(e.getSource() == btnVolver) {
 			ventanaPrincipal.Menu_mantenimiento();
 		}
+		if(e.getSource() == btnCrear) {
+			actionPerformedbtnCrear(e);
+		}
+		if(e.getSource() == btnListar) {
+			actionPerformedbtnListar(e);
+		}
+		if(e.getSource() == btnModificar) {
+			mostrarPanel(modificarUsuario);
+		}
+		if(e.getSource() == btnEliminar) {
+			mostrarPanel(eliminarUsuario);
+		}
 	}
+	
+	private void actionPerformedbtnListar(ActionEvent e) {
+		listarUsuario.cargarDatos();
+		mostrarPanel(listarUsuario);
+	}
+	
+	private void actionPerformedbtnCrear(ActionEvent e) {
+		mostrarPanel(crearusuario);
+		
+		
+	}
+	
 }

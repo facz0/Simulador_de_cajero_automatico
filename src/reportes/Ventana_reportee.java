@@ -103,7 +103,7 @@ public class Ventana_reportee extends JPanel implements ItemListener, ActionList
 		}
 	}
 	
-	//boton salir :v
+	//boton salir
 	protected void actionPerformedBtnNewButton(ActionEvent e) {
 		if(e.getSource()==btnSalir) {
 			ventanaPrincipal.Panel_inicio();
