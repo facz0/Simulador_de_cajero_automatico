@@ -1,21 +1,22 @@
 package servicio;
 
 import java.util.ArrayList;
-
 import datos.AlmacenDatos;
+
 import modelos.Usuario;
 
 public class UsuarioService {
 	
-	public void crearUsuario(String DNI, String nombre, String clave) {
-		
-		Usuario u = new Usuario(DNI, nombre, clave);
-		AlmacenDatos.listaUsuarios.add(u);
-		
+	public void crearUsuario(String DNI, String nombre, String clave) throws Exception{
+		Usuario u = AlmacenDatos.clientePorDni(DNI);
+		if(u != null) {
+			throw new Exception("Error: El DNI "+DNI+" ya está registrado");
+		}
+		Usuario nuevo = new Usuario(DNI, nombre, clave);
+		AlmacenDatos.listaUsuarios.add(nuevo);
 	}
 	
 	public void modificarUsuario(String dni, String nombre, String clave) throws Exception{
-		
 		Usuario user = AlmacenDatos.clientePorDni(dni);
 		
 		if(user == null) {
@@ -45,5 +46,8 @@ public class UsuarioService {
 		return AlmacenDatos.listaUsuarios;
 	}
 	
+	public void validarDuplicado() {
+		
+	}
 	
 }

@@ -72,6 +72,9 @@ public class EliminarUsuario extends JPanel implements ActionListener{
 		if(e.getSource() == btnEliminar) {
 			actionPerformedbtnEliminar(e);
 		}
+		if(e.getSource() == comboBox) {
+			comboActionPerformed(e);
+		}
 	}
 	
 	private void comboActionPerformed(ActionEvent e) {
@@ -83,28 +86,30 @@ public class EliminarUsuario extends JPanel implements ActionListener{
 	}
 	
 	private void actionPerformedbtnEliminar(ActionEvent e) {
-		
 		String dni = (String) comboBox.getSelectedItem();
-		
 		if(dni == null) {
 			JOptionPane.showMessageDialog(this, "Selecciones un usuario para eliminar");
 			return;
 		}
 		
 		try {
-			
 			UsuarioService user = new UsuarioService();
 			user.EliminarUsuario(dni);
 			JOptionPane.showMessageDialog(this, "Usuario Eliminado correctamente");
 			txtNombre.setText("");
-			
+		
 			if(comboBox.getItemCount() == 0) {txtNombre.setText("");}
-			
-			
 		} catch (Exception err){
 			JOptionPane.showMessageDialog(this, err.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
 		}
-		
+	}
+	
+	public void actualizar() {
+		comboBox.removeAllItems();
+		for(int i = 0; i < AlmacenDatos.listaUsuarios.size(); i++) {
+			Usuario user = AlmacenDatos.listaUsuarios.get(i);
+			comboBox.addItem(user.getDNI());
+		}
 	}
 
 }

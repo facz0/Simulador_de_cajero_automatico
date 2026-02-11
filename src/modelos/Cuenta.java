@@ -11,16 +11,27 @@ public class Cuenta {
 	private String estado;
 	private ArrayList<Transaccion> movimientos;
 	
+	public Cuenta() {}
+	
 	public Cuenta(String NumeroCuenta, Usuario usuario, Moneda moneda, double saldo ) {
 		this.NumeroCuenta = NumeroCuenta;
 		this.usuario = usuario;
 		this.moneda = moneda;
 		this.saldo = saldo;
+		this.estado = estado;
 		this.movimientos = new ArrayList<>();
 	}
 
 	public String getNumeroCuenta() {
 		return NumeroCuenta;
+	}
+
+	public String getEstado() {
+		return estado;
+	}
+
+	public void setEstado(String estado) {
+		this.estado = estado;
 	}
 
 	public void setNumeroCuenta(String numeroCuenta) {

@@ -134,6 +134,14 @@ public class ModificarUsuario extends JPanel implements ActionListener{
 		}
 	}
 	
+	public void actualizar() {
+		comboBox.removeAllItems();
+		for(int i = 0; i < AlmacenDatos.listaUsuarios.size(); i++) {
+			Usuario user = AlmacenDatos.listaUsuarios.get(i);
+			comboBox.addItem(user.getDNI());
+		}
+	}
+	
 	
 
 }

@@ -16,7 +16,6 @@ public class MenuMantenimiento extends JPanel implements ActionListener{
 	private JLabel lblNewLabel;
 	private JButton btnCuenta;
 	private JButton btnCliente;
-	private JButton btnTipoTransaccion;
 	private JButton btnMoneda;
 	private JButton btnTipoCambio;
 	private JButton btnSalir;
@@ -55,16 +54,6 @@ public class MenuMantenimiento extends JPanel implements ActionListener{
 		btnCliente.setBounds(35, 304, 400, 75);
 		add(btnCliente);
 		
-		btnTipoTransaccion = new JButton("TIPO DE TRANSACCION");
-		btnTipoTransaccion.addActionListener(this);
-		btnTipoTransaccion.setForeground(new Color(255, 255, 255));
-		btnTipoTransaccion.setFont(new Font("Tahoma", Font.BOLD, 21));
-		btnTipoTransaccion.setBackground(new Color(128, 191, 33));
-		btnTipoTransaccion.setContentAreaFilled(false); 
-		btnTipoTransaccion.setOpaque(true);
-		btnTipoTransaccion.setBounds(35, 414, 400, 75);
-		add(btnTipoTransaccion);
-		
 		btnMoneda = new JButton("MONEDA");
 		btnMoneda.addActionListener(this);
 		btnMoneda.setForeground(new Color(255, 255, 255));
@@ -92,7 +81,7 @@ public class MenuMantenimiento extends JPanel implements ActionListener{
 		btnSalir.setBackground(new Color(2, 64, 89));
 		btnSalir.setContentAreaFilled(false); 
 		btnSalir.setOpaque(true);
-		btnSalir.setBounds(563, 414, 400, 75);
+		btnSalir.setBounds(299, 414, 400, 75);
 		add(btnSalir);
 	}
 	@Override
@@ -103,9 +92,6 @@ public class MenuMantenimiento extends JPanel implements ActionListener{
 		}
 		if(e.getSource()==btnCliente) {
 			ventanaPrincipal.Mantenimiento_cliente();
-		}
-		if(e.getSource()==btnTipoTransaccion) {
-			ventanaPrincipal.Mantenimiento_tipo_transaccion();
 		}
 		if(e.getSource()==btnMoneda) {
 			ventanaPrincipal.Mantenimiento_Moneda();

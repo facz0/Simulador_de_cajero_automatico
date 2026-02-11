@@ -99,23 +99,36 @@ public class CrearUsuario extends JPanel implements ActionListener{
 		java.util.Arrays.fill(claveChar, '0');
 		
 		if(!dni.matches("[0-9]{8}")) {
-			JOptionPane.showMessageDialog(this, "El DNI debe tener 8 números.");
-			return;
+			JOptionPane.showMessageDialog(this, "El DNI debe tener 8 números.", "Error en DNI", JOptionPane.INFORMATION_MESSAGE);
+			return; 
 		}
 		
 		if(!nombre.matches("[a-zA-Z ]+")) {
-			JOptionPane.showMessageDialog(this, "El nombre solo puede tener letras.");
+			JOptionPane.showMessageDialog(this, "El nombre solo puede tener letras.", "Error en nombre", JOptionPane.INFORMATION_MESSAGE);
 			return;
 		}
+		
+		if(!clave.matches("[0-9]{4}")) {
+			JOptionPane.showMessageDialog(this, "La clave solo puede tener 4 dígitos", "Error en clave", JOptionPane.ERROR_MESSAGE);
+			return;
+		}
+		
 		
 		try {
 			
 			UsuarioService usuario = new UsuarioService();
 			usuario.crearUsuario(dni, nombre, clave);
 			JOptionPane.showMessageDialog(this, "Cliente registrado exitosamente", "Éxito", JOptionPane.INFORMATION_MESSAGE);
+			limpiarCampos();
 			
 		} catch (Exception err) {
 			JOptionPane.showMessageDialog(this, err.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
 		}
+	}
+	
+	public void limpiarCampos() {
+		this.txtClave.setText("");
+		this.txtDNI.setText("");
+		this.txtNombre.setText("");
 	}
 }

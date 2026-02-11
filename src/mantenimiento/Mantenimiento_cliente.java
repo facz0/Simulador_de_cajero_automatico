@@ -132,9 +132,11 @@ public class Mantenimiento_cliente extends JPanel implements ActionListener{
 			actionPerformedbtnListar(e);
 		}
 		if(e.getSource() == btnModificar) {
+			modificarUsuario.actualizar();
 			mostrarPanel(modificarUsuario);
 		}
 		if(e.getSource() == btnEliminar) {
+			eliminarUsuario.actualizar();
 			mostrarPanel(eliminarUsuario);
 		}
 	}
@@ -146,8 +148,7 @@ public class Mantenimiento_cliente extends JPanel implements ActionListener{
 	
 	private void actionPerformedbtnCrear(ActionEvent e) {
 		mostrarPanel(crearusuario);
-		
-		
+		crearusuario.limpiarCampos();		
 	}
 	
 }
