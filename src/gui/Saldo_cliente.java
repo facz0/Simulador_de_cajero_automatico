@@ -4,6 +4,8 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.Image;
+import javax.swing.ImageIcon;
 
 public class Saldo_cliente extends JPanel implements ActionListener {
 
@@ -17,7 +19,13 @@ public class Saldo_cliente extends JPanel implements ActionListener {
     	
     	setBackground(new Color(2, 64, 89));  //color del fondo azul
         setLayout(null);
-
+        
+        //imagenes
+        ImageIcon usuarioReporte = new ImageIcon(getClass().getResource("/iconos/usuarioReporte.png"));
+        ImageIcon generarReporte = new ImageIcon(getClass().getResource("/iconos/generarReporte.png"));
+        ImageIcon limpiarReporte = new ImageIcon(getClass().getResource("/iconos/limpiarReporte.png"));
+        //
+        
         JLabel lblTitulo = new JLabel("Saldo de cliente");
         lblTitulo.setForeground(new Color(255, 255, 255));
         lblTitulo.setBounds(30, 20, 300, 30);
@@ -32,6 +40,8 @@ public class Saldo_cliente extends JPanel implements ActionListener {
         lblCliente.setForeground(new Color(255, 255, 255));
         lblCliente.setBounds(30, 90, 136, 25);
         lblCliente.setBackground(new Color(255, 255, 255));
+        
+        lblCliente.setIcon(usuarioReporte);//icono
         add(lblCliente);
 
         txtCliente = new JTextField();
@@ -45,6 +55,7 @@ public class Saldo_cliente extends JPanel implements ActionListener {
         btnGenerar.setOpaque(true);//fondo de color
         btnGenerar.setBounds(570, 87, 120, 30);
         btnGenerar.addActionListener(this);
+        btnGenerar.setIcon(generarReporte);//icono
         add(btnGenerar);
 
         btnLimpiar = new JButton("Limpiar");
@@ -54,6 +65,7 @@ public class Saldo_cliente extends JPanel implements ActionListener {
         btnLimpiar.setOpaque(true);//fondo de color
         btnLimpiar.setBounds(730, 87, 120, 30);
         btnLimpiar.addActionListener(this);
+        btnLimpiar.setIcon(limpiarReporte);//icono
         add(btnLimpiar);
 
         JScrollPane scroll = new JScrollPane();
