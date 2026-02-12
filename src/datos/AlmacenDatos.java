@@ -44,6 +44,16 @@ public class AlmacenDatos {
     	return null;
     }
     
+    public static Cuenta cuentaPorNumero(String numeroCuenta) {
+    	for(int i = 0; i < listaCuentas.size(); i++) {
+    		Cuenta cuenta = listaCuentas.get(i);
+    		if(cuenta.getNumeroCuenta().equals(numeroCuenta)) {
+    			return cuenta;
+    		}
+    	}
+    	return null;
+    }
+    
     
 
 }
