@@ -29,7 +29,7 @@ public class ListarUsuarios extends JPanel implements ActionListener{
 		setPreferredSize(new java.awt.Dimension(612, 455));
 		setLayout(null);
 		
-		String[] columnas = {"DNI", "Nombres y apellidos"};
+		String[] columnas = {"DNI", "Nombres y apellidos", "Clave"};
 		modelo = new DefaultTableModel(null, columnas) {
 			@Override
 			public boolean isCellEditable(int row, int column) {
@@ -60,7 +60,8 @@ public class ListarUsuarios extends JPanel implements ActionListener{
 			Usuario user = lista.get(i);
 			Object[] fila = {
 					user.getDNI(), 
-					user.getNombre()
+					user.getNombre(),
+					user.getPassword()
 			};
 			
 			modelo.addRow(fila);

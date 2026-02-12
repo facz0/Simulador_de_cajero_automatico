@@ -31,6 +31,7 @@ public class Login_administrador extends JPanel implements ActionListener{
 	 * @param ventanaPrincipal 
 	 */
 	public Login_administrador(VentanaPrincipal principal) {
+		setBackground(new Color(255, 255, 255));
 		this.ventanaPrincipal = principal;
 		this.tipoAcceso = "";
 		setPreferredSize(new java.awt.Dimension(1000, 620));

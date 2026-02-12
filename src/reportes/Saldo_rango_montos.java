@@ -18,6 +18,11 @@ public class Saldo_rango_montos extends JPanel implements ActionListener {
     		//setBackground(new Color(4, 40, 56));  //color reporte principal
         	setBackground(new Color(2, 64, 89));  //color del fondo azul
             setLayout(null);
+            
+            ImageIcon billeteReporte = new ImageIcon(getClass().getResource("/iconos/billeteReporte.png"));
+            ImageIcon billete2Reporte = new ImageIcon(getClass().getResource("/iconos/billete2Reporte.png"));
+            ImageIcon generarReporte = new ImageIcon(getClass().getResource("/iconos/generarReporte.png"));
+            ImageIcon limpiarReporte = new ImageIcon(getClass().getResource("/iconos/limpiarReporte.png"));
 
             JLabel lblTitulo = new JLabel("Clientes con saldo entre rangos");
             lblTitulo.setForeground(new Color(255, 255, 255));
@@ -30,6 +35,7 @@ public class Saldo_rango_montos extends JPanel implements ActionListener {
             add(sep);
 
             JLabel lblMin = new JLabel("Monto mínimo:");
+            lblMin.setIcon(billeteReporte);//icono
             lblMin.setForeground(new Color(255, 255, 255));
             lblMin.setBounds(30, 90, 150, 25);
             add(lblMin);
@@ -39,6 +45,7 @@ public class Saldo_rango_montos extends JPanel implements ActionListener {
             add(txtMin);
 
             JLabel lblMax = new JLabel("Monto máximo:");
+            lblMax.setIcon(billete2Reporte);//icono
             lblMax.setForeground(new Color(255, 255, 255));
             lblMax.setBounds(30, 130, 150, 25);
             add(lblMax);
@@ -54,6 +61,7 @@ public class Saldo_rango_montos extends JPanel implements ActionListener {
             btnGenerar.setOpaque(true);//fondo de color
             btnGenerar.setBounds(570, 87, 120, 30);
             btnGenerar.addActionListener(this);
+            btnGenerar.setIcon(generarReporte);//icono
             add(btnGenerar);
 
             btnLimpiar = new JButton("Limpiar");
@@ -63,6 +71,7 @@ public class Saldo_rango_montos extends JPanel implements ActionListener {
             btnLimpiar.setOpaque(true);//fondo de color
             btnLimpiar.setBounds(730, 87, 120, 30);
             btnLimpiar.addActionListener(this);
+            btnLimpiar.setIcon(limpiarReporte);//icono
             add(btnLimpiar);
 
             JScrollPane scroll = new JScrollPane();

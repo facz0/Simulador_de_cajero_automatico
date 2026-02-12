@@ -13,6 +13,7 @@ import java.awt.Color;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import javax.swing.border.MatteBorder;
 
 public class Login_usuario extends JPanel implements ActionListener{
 
@@ -27,14 +28,15 @@ public class Login_usuario extends JPanel implements ActionListener{
 	 * Create the panel.
 	 */
 	public Login_usuario(VentanaPrincipal principal) {
-		setBackground(new Color(255, 255, 255));
+		setBackground(new Color(2, 64, 89));
 		this.ventanaPrincipal = principal;
 		setPreferredSize(new java.awt.Dimension(1000, 620));
 		setLayout(null);
 		
 		JPanel panel = new JPanel();
+		panel.setBorder(new MatteBorder(2, 2, 2, 2, (Color) new Color(255, 255, 255)));
 		panel.setBackground(new Color(2, 64, 89));
-		panel.setBounds(240, 74, 556, 491);
+		panel.setBounds(222, 74, 556, 491);
 		add(panel);
 		panel.setLayout(null);
 		
