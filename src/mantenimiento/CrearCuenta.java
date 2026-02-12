@@ -120,12 +120,17 @@ public class CrearCuenta extends JPanel implements ActionListener{
 	public void comboBoxMonedaActionPerformed(ActionEvent e) {}
 	
 	public void actionPerformedbtnCrear(ActionEvent e) {
-		String dniSelect = (String) comboBoxDNI.getSelectedItem();
-		Usuario user = AlmacenDatos.clientePorDni(dniSelect);
-		
 		try {
-			UsuarioService.crearCuenta(txtNumeroCuenta.getText(), user, moneda);
+			String dniSelect = (String) comboBoxDNI.getSelectedItem();
+			Usuario user = AlmacenDatos.clientePorDni(dniSelect);
+			
+			String monedaSelect = (String) comboBoxMoneda.getSelectedItem();
+			Moneda moneda = AlmacenDatos.monedaPorNombre(monedaSelect);
+			
+			CuentaService cuentaSrv = new CuentaService();
+			cuentaSrv.crearCuenta(txtNumeroCuenta.getText(), user, moneda);
 			JOptionPane.showMessageDialog(this, "Cuenta creada con éxito!");
+			setNumero();
 		} catch (Exception ex) {
 			JOptionPane.showMessageDialog(this, ex.getMessage());
 		}
