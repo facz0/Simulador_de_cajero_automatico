@@ -14,6 +14,7 @@ import javax.swing.JTextField;
 
 import datos.AlmacenDatos;
 import modelos.Usuario;
+import servicio.CuentaService;
 import servicio.UsuarioService;
 
 public class EliminarUsuario extends JPanel implements ActionListener{
@@ -97,7 +98,7 @@ public class EliminarUsuario extends JPanel implements ActionListener{
 			user.EliminarUsuario(dni);
 			JOptionPane.showMessageDialog(this, "Usuario Eliminado correctamente");
 			txtNombre.setText("");
-		
+			
 			if(comboBox.getItemCount() == 0) {txtNombre.setText("");}
 		} catch (Exception err){
 			JOptionPane.showMessageDialog(this, err.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
