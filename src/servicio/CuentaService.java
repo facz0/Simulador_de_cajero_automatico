@@ -36,4 +36,8 @@ public class CuentaService {
 		AlmacenDatos.listaCuentas.add(nuevaCuenta);
 	}
 	
+	public ArrayList<Cuenta> listarCuenta(){
+		return AlmacenDatos.listaCuentas;
+	}
+	
 }

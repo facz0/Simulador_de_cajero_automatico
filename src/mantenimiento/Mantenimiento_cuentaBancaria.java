@@ -23,6 +23,7 @@ public class Mantenimiento_cuentaBancaria extends JPanel implements ActionListen
 	private JButton btnVolver;
 	private JPanel panelPrincipal;
 	private CrearCuenta crearCuenta;
+	private ListarCuenta listarCuenta;
 
 	/**
 	 * Create the panel.
@@ -98,8 +99,9 @@ public class Mantenimiento_cuentaBancaria extends JPanel implements ActionListen
 		add(panelPrincipal);
 		
 		crearCuenta = new CrearCuenta();
+		listarCuenta = new ListarCuenta();
 		
-		//mostrarPanel(listarCuentas);
+		mostrarPanel(listarCuenta);
 		
 	}
 	
@@ -122,5 +124,13 @@ public class Mantenimiento_cuentaBancaria extends JPanel implements ActionListen
 		    crearCuenta.setNumero(); 
 		    mostrarPanel(crearCuenta);
 		}
+		if(e.getSource() == btnListar) {
+			actionPerformedbtnListar(e);
+		}
+	}
+	
+	private void actionPerformedbtnListar(ActionEvent e) {
+		listarCuenta.cargarDatos();
+		mostrarPanel(listarCuenta);
 	}
 }

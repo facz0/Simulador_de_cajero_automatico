@@ -97,12 +97,6 @@ public class CrearCuenta extends JPanel implements ActionListener{
 		if(e.getSource() == btnCrear) {
 			actionPerformedbtnCrear(e);
 		}
-		if(e.getSource() == comboBoxDNI) {
-			comboBoxDNIActionPerformed(e);
-		}
-		if(e.getSource() == comboBoxMoneda) {
-			comboBoxMonedaActionPerformed(e);
-		}
 	}
 	
 	public void setNumero() {
@@ -111,13 +105,6 @@ public class CrearCuenta extends JPanel implements ActionListener{
 	    txtNumeroCuenta.setText(proximoNumero);
 	    txtNumeroCuenta.setEditable(false);
 	}
-	
-	public void comboBoxDNIActionPerformed(ActionEvent e) {
-		String dniSelect = (String) comboBoxDNI.getSelectedItem();
-		Usuario user = AlmacenDatos.clientePorDni(dniSelect);
-	}
-	
-	public void comboBoxMonedaActionPerformed(ActionEvent e) {}
 	
 	public void actionPerformedbtnCrear(ActionEvent e) {
 		try {
@@ -135,6 +122,4 @@ public class CrearCuenta extends JPanel implements ActionListener{
 			JOptionPane.showMessageDialog(this, ex.getMessage());
 		}
 	}
-	
-	
 }

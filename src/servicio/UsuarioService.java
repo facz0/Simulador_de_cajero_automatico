@@ -45,9 +45,4 @@ public class UsuarioService {
 	public ArrayList<Usuario> listarUsuarios(){
 		return AlmacenDatos.listaUsuarios;
 	}
-	
-	public void validarDuplicado() {
-		
-	}
-	
 }
