@@ -1,17 +1,19 @@
-package gui;
+package mantenimiento;
 
 import java.awt.Color;
+import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+import javax.swing.JButton;
+import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JSeparator;
-import javax.swing.JLabel;
-import java.awt.Font;
-import javax.swing.JButton;
 import javax.swing.JTextArea;
 
-public class Mantenimiento_cuentaBancaria extends JPanel implements ActionListener{
+import gui.VentanaPrincipal;
+
+public class Mantenimiento_transaccion extends JPanel implements ActionListener{
 
 	private static final long serialVersionUID = 1L;
 	private VentanaPrincipal ventanaPrincipal;
@@ -21,12 +23,11 @@ public class Mantenimiento_cuentaBancaria extends JPanel implements ActionListen
 	private JButton btnEliminar;
 	private JButton btnVolver;
 	private JTextArea txtResultado;
-	
 
 	/**
 	 * Create the panel.
 	 */
-	public Mantenimiento_cuentaBancaria(VentanaPrincipal principal) {
+	public Mantenimiento_transaccion(VentanaPrincipal principal) {
 		setBackground(new Color(2, 64, 89));
 		setLayout(null);
 		this.ventanaPrincipal = principal;		
@@ -36,7 +37,7 @@ public class Mantenimiento_cuentaBancaria extends JPanel implements ActionListen
 		separator.setBounds(98, 83, 792, 20);
 		add(separator);
 		
-		JLabel lblNewLabel = new JLabel("Cuentas bancarias");
+		JLabel lblNewLabel = new JLabel("Transacciónes");
 		lblNewLabel.setForeground(new Color(255, 255, 255));
 		lblNewLabel.setFont(new Font("Tahoma", Font.PLAIN, 20));
 		lblNewLabel.setBounds(98, 38, 393, 34);
@@ -96,9 +97,7 @@ public class Mantenimiento_cuentaBancaria extends JPanel implements ActionListen
 		add(btnVolver);
 		btnVolver.setContentAreaFilled(false); 
 		btnVolver.setOpaque(true);
-		
 	}
-
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
@@ -107,4 +106,5 @@ public class Mantenimiento_cuentaBancaria extends JPanel implements ActionListen
 			ventanaPrincipal.Menu_mantenimiento();
 		}
 	}
+
 }

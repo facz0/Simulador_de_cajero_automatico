@@ -1,4 +1,4 @@
-package gui;
+package consultas_busquedas;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -11,6 +11,8 @@ import java.awt.Color;
 import java.awt.Font;
 import javax.swing.JButton;
 import javax.swing.JTextField;
+
+import gui.VentanaPrincipal;
 
 public class Ultimos_movimientos extends JPanel implements ActionListener{
 
