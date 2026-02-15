@@ -15,6 +15,13 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.border.MatteBorder;
 
+//DM
+import datos.AlmacenDatos;
+import modelos.Usuario;
+import modelos.Cuenta;
+import javax.swing.JOptionPane;
+
+
 public class Login_usuario extends JPanel implements ActionListener{
 
 	private static final long serialVersionUID = 1L;
@@ -97,9 +104,47 @@ public class Login_usuario extends JPanel implements ActionListener{
 		if(e.getSource() == btnVolver) {
 	        ventanaPrincipal.Panel_inicio();
 	    }
+		
+		
+		
+		//DM
+		
 		if(e.getSource() == btnIngresarLoginUser) {
-	        ventanaPrincipal.menu_usuario();
-	    }
+
+		    String dni = txtUserDni.getText().trim();
+		    String pass = new String(passwordUser.getPassword()).trim();
+
+		    if(dni.isEmpty() || pass.isEmpty()) {
+		        JOptionPane.showMessageDialog(this, "Ingrese DNI y clave.");
+		        return;
+		    }
+
+		    Usuario u = AlmacenDatos.clientePorDni(dni);
+		    if(u == null) {
+		        JOptionPane.showMessageDialog(this, "DNI no registrado.");
+		        return;
+		    }
+
+		    if(!u.getPassword().equals(pass)) {
+		        JOptionPane.showMessageDialog(this, "Clave incorrecta.");
+		        return;
+		    }
+
+		    Cuenta c = AlmacenDatos.cuentaPorDni(dni);
+		    if(c == null) {
+		        JOptionPane.showMessageDialog(this, "No hay cuenta asociada al DNI.");
+		        return;
+		    }
+
+		    // ✅ AQUÍ SE GUARDA LA SESIÓN
+		    ventanaPrincipal.setSesion(u, c);
+
+		    // ✅ ENTRA AL MENÚ
+		    ventanaPrincipal.menu_usuario();
+		}
+
+		
+		
 	}
 }
 

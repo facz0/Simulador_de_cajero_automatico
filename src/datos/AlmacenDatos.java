@@ -61,6 +61,18 @@ public class AlmacenDatos {
         listaCuentas.add(new Cuenta("CTA-1143549867", listaUsuarios.get(19), sol, 2750.80));
     }
     
+    
+    
+    //DM METODO
+    public static Cuenta cuentaPorDni(String dni) {
+        for(Cuenta c : listaCuentas) {
+            if(c.getUsuario().getDNI().equals(dni)) return c;
+        }
+        return null;
+    }
+
+    
+    
     public static Usuario clientePorDni(String dni) {
     	for(int i = 0; i < listaUsuarios.size(); i++) {
     		Usuario user = listaUsuarios.get(i);

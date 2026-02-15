@@ -3,6 +3,8 @@ package gui;
 import java.awt.BorderLayout;
 import java.awt.EventQueue;
 
+
+
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
@@ -22,6 +24,8 @@ import operaciones.Login_administrador;
 import operaciones.Login_usuario;
 import operaciones.Retiro_dinero;
 import reportes.Ventana_reportee;
+import modelos.Usuario;
+import modelos.Cuenta;
 
 public class VentanaPrincipal extends JFrame {
 
@@ -47,6 +51,9 @@ public class VentanaPrincipal extends JFrame {
 	private Mantenimiento_transaccion mantenimiento_transaccion;
 	private Mantenimiento_moneda mantenimiento_moneda;
 	private Mantenimiento_tipoCambio mantenimiento_tipoCambio;
+	// ===== dm =====
+	private Usuario usuarioActual;
+	private Cuenta cuentaActual;
 
 	/**
 	 * Launch the application.
@@ -93,6 +100,30 @@ public class VentanaPrincipal extends JFrame {
 		setLocationRelativeTo(null);
 		Panel_inicio();
 	}
+	
+	
+	
+	// ===== MÉTODOS DE SESIÓN  dm  ====
+	public void setSesion(Usuario u, Cuenta c) {
+	    this.usuarioActual = u;
+	    this.cuentaActual = c;
+	}
+
+	public Usuario getUsuarioActual() {
+	    return usuarioActual;
+	}
+
+	public Cuenta getCuentaActual() {
+	    return cuentaActual;
+	}
+
+	public void cerrarSesion() {
+	    usuarioActual = null;
+	    cuentaActual = null;
+	}
+
+	
+	
 	
 	public void Panel_inicio() {
 		cambiar_panel(panel_inicio);
