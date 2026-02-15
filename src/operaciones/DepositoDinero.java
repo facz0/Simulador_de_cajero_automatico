@@ -126,6 +126,7 @@ public class DepositoDinero extends JPanel implements ActionListener {
         add(btnVolver);
 
         txtSaldoActual = new JTextField();
+        txtSaldoActual.setEnabled(false);
         txtSaldoActual.setFont(new Font("Tahoma", Font.BOLD, 14));
         txtSaldoActual.setEditable(false);
         txtSaldoActual.setBounds(538, 307, 261, 30);
