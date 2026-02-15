@@ -5,10 +5,10 @@ public class Moneda {
 	private String nombre;
 	private double tipoCambio;
 	
-	public Moneda(String nombre, String simbolo, double tipoCambioVenta) {
-        this.nombre = nombre;
-        this.idMoneda = idMoneda;
-        this.tipoCambio = tipoCambioVenta;
+	public Moneda(String idMoneda, String nombre, double tipoCambio) {
+		this.idMoneda = idMoneda; //ejemplo $, S/.
+        this.nombre = nombre; //Soles, Dolares
+        this.tipoCambio = tipoCambio;
     }
 
 	public String getIdMoneda() {
@@ -34,6 +34,12 @@ public class Moneda {
 	public void setTipoCambio(double tipoCambio) {
 		this.tipoCambio = tipoCambio;
 	}
+
+	@Override
+	public String toString() {
+		return nombre;
+	}
+	
 	
 	
 }

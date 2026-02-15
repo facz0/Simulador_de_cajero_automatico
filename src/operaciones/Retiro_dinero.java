@@ -33,7 +33,7 @@ public class Retiro_dinero extends JPanel implements ActionListener{
 	 */
 	public Retiro_dinero(VentanaPrincipal principal) {
 		this.ventanaPrincipal = principal;
-		setBackground(new Color(240, 240, 240));
+		setBackground(new Color(255, 255, 255));
         setBorder(new EmptyBorder(10, 10, 10, 10));
         setPreferredSize(new Dimension(1000, 620));
 

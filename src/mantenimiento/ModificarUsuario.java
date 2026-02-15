@@ -141,7 +141,4 @@ public class ModificarUsuario extends JPanel implements ActionListener{
 			comboBox.addItem(user.getDNI());
 		}
 	}
-	
-	
-
 }

@@ -33,11 +33,12 @@ public class UsuarioService {
 	public void EliminarUsuario(String dni) throws Exception {
 		
 		Usuario user = AlmacenDatos.clientePorDni(dni);
+		CuentaService cuenta = new CuentaService();
+		cuenta.EliminarCuentaPorDni(dni);
 		
 		if(user == null) {
-			throw new Exception("El usuario con DNI " + " no existe.");
+			throw new Exception("El usuario con DNI " + " no existe.");	
 		}
-		
 		AlmacenDatos.listaUsuarios.remove(user);
 		
 	}
@@ -45,9 +46,4 @@ public class UsuarioService {
 	public ArrayList<Usuario> listarUsuarios(){
 		return AlmacenDatos.listaUsuarios;
 	}
-	
-	public void validarDuplicado() {
-		
-	}
-	
 }

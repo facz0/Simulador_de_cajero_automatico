@@ -7,6 +7,8 @@ import gui.VentanaPrincipal;
 
 import java.awt.*;
 import java.awt.event.*;
+import java.awt.Image;
+import javax.swing.ImageIcon;
 
 public class Ventana_reportee extends JPanel implements ItemListener, ActionListener {
 
@@ -29,14 +31,18 @@ public class Ventana_reportee extends JPanel implements ItemListener, ActionList
         this.ventanaPrincipal = principal;
         setPreferredSize(new Dimension(1000, 620));
         setBackground(new Color(245, 247, 250));
+        
+        ImageIcon volver = new ImageIcon(getClass().getResource("/iconos/Volver.png"));
+        ImageIcon reporte =new ImageIcon(getClass().getResource("/iconos/reporte.png"));//iamgnereporte
 
         JLabel lblTitulo = new JLabel("REPORTES");
         lblTitulo.setFont(new Font("Segoe UI", Font.BOLD, 20));
         lblTitulo.setBounds(430, 10, 200, 30);
         add(lblTitulo);
 
-        JLabel lblTipo = new JLabel("Tipo de reporte:");
-        lblTipo.setBounds(30, 60, 150, 25);
+        JLabel lblTipo = new JLabel("");
+        lblTipo.setBounds(198, 65, 206, 25);
+        lblTipo.setIcon(reporte);
         add(lblTipo);
 
         cboReportes = new JComboBox<>();
@@ -54,7 +60,7 @@ public class Ventana_reportee extends JPanel implements ItemListener, ActionList
         pnlContenedor.setBorder(BorderFactory.createLineBorder(new Color(180, 180, 180)));
         add(pnlContenedor);
         
-        btnSalir = new JButton("<---"); //esel boton salir, me dio frojera poner el icono :)
+        btnSalir = new JButton(" VOLVER");
         btnSalir.setForeground(new Color(255, 255, 255)); //blanquito
         btnSalir.setBackground(new Color(220, 53, 69)); // color deseado
         btnSalir.setContentAreaFilled(false); //fondo de color

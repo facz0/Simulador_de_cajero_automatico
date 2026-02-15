@@ -22,6 +22,10 @@ public class Mantenimiento_cuentaBancaria extends JPanel implements ActionListen
 	private JButton btnEliminar;
 	private JButton btnVolver;
 	private JPanel panelPrincipal;
+	private ModificarCuenta modificarCuenta;
+	private CrearCuenta crearCuenta;
+	private ListarCuenta listarCuenta;
+	private EliminarCuenta eliminarCuenta;
 
 	/**
 	 * Create the panel.
@@ -96,7 +100,22 @@ public class Mantenimiento_cuentaBancaria extends JPanel implements ActionListen
 		panelPrincipal.setBounds(278, 114, 612, 455);
 		add(panelPrincipal);
 		
+		crearCuenta = new CrearCuenta();
+		listarCuenta = new ListarCuenta();
+		modificarCuenta = new ModificarCuenta();
+		eliminarCuenta = new EliminarCuenta();
+		
+		mostrarPanel(listarCuenta);
+		
 	}
+	
+	private void mostrarPanel(JPanel panel) {
+        panelPrincipal.removeAll();
+        panel.setBounds(0, 0, 612, 455);
+        panelPrincipal.add(panel);
+        panelPrincipal.revalidate();
+        panelPrincipal.repaint();
+    }
 
 
 	@Override
@@ -105,5 +124,25 @@ public class Mantenimiento_cuentaBancaria extends JPanel implements ActionListen
 		if(e.getSource() == btnVolver) {
 			ventanaPrincipal.Menu_mantenimiento();
 		}
+		if(e.getSource() == btnCrear) {
+		    crearCuenta.setNumero(); 
+		    mostrarPanel(crearCuenta);
+		}
+		if(e.getSource() == btnListar) {
+			actionPerformedbtnListar(e);
+		}
+		if(e.getSource() == btnModificar) {
+			modificarCuenta.actualizar();
+			mostrarPanel(modificarCuenta);
+		}
+		if(e.getSource() == btnEliminar) {
+			eliminarCuenta.actualizar();
+			mostrarPanel(eliminarCuenta);
+		}
+	}
+	
+	private void actionPerformedbtnListar(ActionEvent e) {
+		listarCuenta.cargarDatos();
+		mostrarPanel(listarCuenta);
 	}
 }

@@ -4,12 +4,17 @@ public class Usuario {
 	private String DNI;
 	private String nombre;
 	private String clave;
+	public Object cuenta;
+	
 	
 	public Usuario(String DNI, String nombre, String clave) {
 		this.DNI = DNI;
 		this.nombre = nombre;
 		this.clave = clave;
+		
 	}
+
+	
 
 	public String getDNI() {
 		return DNI;
