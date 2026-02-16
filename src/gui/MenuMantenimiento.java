@@ -17,7 +17,6 @@ public class MenuMantenimiento extends JPanel implements ActionListener{
 	private JButton btnCuenta;
 	private JButton btnCliente;
 	private JButton btnMoneda;
-	private JButton btnTipoCambio;
 	private JButton btnSalir;
 	/**
 	 * Create the panel.
@@ -64,16 +63,6 @@ public class MenuMantenimiento extends JPanel implements ActionListener{
 		btnMoneda.setBounds(563, 198, 400, 75);
 		add(btnMoneda);
 		
-		btnTipoCambio = new JButton("TIPO DE CAMBIO ");
-		btnTipoCambio.addActionListener(this);
-		btnTipoCambio.setForeground(new Color(255, 255, 255));
-		btnTipoCambio.setFont(new Font("Tahoma", Font.BOLD, 21));
-		btnTipoCambio.setBackground(new Color(128, 191,33));
-		btnTipoCambio.setContentAreaFilled(false); 
-		btnTipoCambio.setOpaque(true);
-		btnTipoCambio.setBounds(563, 304, 400, 75);
-		add(btnTipoCambio);
-		
 		btnSalir = new JButton("SALIR");
 		btnSalir.addActionListener(this);
 		btnSalir.setForeground(new Color(255, 255, 255));
@@ -81,7 +70,7 @@ public class MenuMantenimiento extends JPanel implements ActionListener{
 		btnSalir.setBackground(new Color(2, 64, 89));
 		btnSalir.setContentAreaFilled(false); 
 		btnSalir.setOpaque(true);
-		btnSalir.setBounds(299, 414, 400, 75);
+		btnSalir.setBounds(563, 304, 400, 75);
 		add(btnSalir);
 	}
 	@Override
@@ -95,9 +84,6 @@ public class MenuMantenimiento extends JPanel implements ActionListener{
 		}
 		if(e.getSource()==btnMoneda) {
 			ventanaPrincipal.Mantenimiento_Moneda();
-		}
-		if(e.getSource()==btnTipoCambio) {
-			ventanaPrincipal.Mantenimiento_Tipo_de_cambio();
 		}
 		if(e.getSource()==btnSalir) {
 			ventanaPrincipal.Panel_inicio();

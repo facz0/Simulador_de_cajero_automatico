@@ -13,7 +13,7 @@ public class Cuenta {
 	
 	public Cuenta() {}
 	
-	public Cuenta(String NumeroCuenta, Usuario usuario, Moneda moneda, double saldo ) {
+	public Cuenta(String NumeroCuenta, Usuario usuario, Moneda moneda, double saldo, String estado) {
 		this.NumeroCuenta = NumeroCuenta;
 		this.usuario = usuario;
 		this.moneda = moneda;
