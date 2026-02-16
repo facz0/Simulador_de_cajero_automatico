@@ -4,6 +4,7 @@ import java.awt.Color;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
 
 import javax.swing.JButton;
 import javax.swing.JLabel;
@@ -16,6 +17,7 @@ import datos.AlmacenDatos;
 import modelos.Moneda;
 import modelos.Usuario;
 import servicio.CuentaService;
+import servicio.MonedaService;
 import servicio.UsuarioService;
 import javax.swing.JComboBox;
 
@@ -122,4 +124,14 @@ public class CrearCuenta extends JPanel implements ActionListener{
 			JOptionPane.showMessageDialog(this, ex.getMessage());
 		}
 	}
+	
+	public void cargarMoneda() {
+		comboBoxMoneda.removeAllItems();
+		MonedaService servicio = new MonedaService();
+		ArrayList<Moneda> listaActualizada = servicio.listarMoneda();
+		for(int i = 0; i < listaActualizada.size(); i++) {
+			Moneda moneda = listaActualizada.get(i);
+			comboBoxMoneda.addItem(moneda.getNombre());
+		}
+;	}
 }

@@ -30,7 +30,7 @@ public class CuentaService {
 		nuevaCuenta.setUsuario(usuario);
 		nuevaCuenta.setMoneda(moneda);
 		nuevaCuenta.setSaldo(0.00);
-		nuevaCuenta.setEstado("ACTIVA");
+		nuevaCuenta.setEstado("ACTIVO");
 		nuevaCuenta.setMovimientos(new ArrayList<Transaccion>());
 		
 		AlmacenDatos.listaCuentas.add(nuevaCuenta);

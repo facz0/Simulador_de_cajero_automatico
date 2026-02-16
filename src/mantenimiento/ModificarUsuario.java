@@ -115,12 +115,12 @@ public class ModificarUsuario extends JPanel implements ActionListener{
 			return;
 		}
 		
-		if(!nombre.matches("[a-zA-Z ]+")) {
+		if(!nombre.matches("^[a-zA-ZáéíóúÁÉÍÓÚñÑ ]+$")) {
 			JOptionPane.showMessageDialog(this, "El nombre solo debe contener letras.");
 			return;
 		}
 		
-		if(!clave.isEmpty() && !clave.matches("[0-9]{4}")) {
+		if(!clave.isEmpty() && !clave.matches("^[0-9]{4}$")) {
 			JOptionPane.showMessageDialog(this, "La clave solo debe tener 4 dígitos.");
 			return;
 		}

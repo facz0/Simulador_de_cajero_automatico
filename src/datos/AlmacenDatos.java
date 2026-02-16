@@ -14,7 +14,7 @@ public class AlmacenDatos {
     static {
     	
     	Moneda sol = new Moneda("S/.", "Soles", 1.00);
-    	Moneda dolar = new Moneda("$", "Dólares", 3.85);
+    	Moneda dolar = new Moneda("$", "Dolares", 3.85);
     	listaMonedas.add(sol);
     	listaMonedas.add(dolar);
     	
@@ -65,7 +65,7 @@ public class AlmacenDatos {
     	for(int i = 0; i < listaUsuarios.size(); i++) {
     		Usuario user = listaUsuarios.get(i);
     		if(user.getDNI().equals(dni)) {
-    			return user;
+    			return user;    			
     		}
     	}
     	return null;
@@ -84,7 +84,7 @@ public class AlmacenDatos {
     public static Moneda monedaPorNombre(String nombre) {
     	for(int i = 0; i < listaMonedas.size(); i++) {
     		Moneda moneda = listaMonedas.get(i);
-    		if(moneda.getNombre().equals(nombre)) {
+    		if(moneda.getNombre().equalsIgnoreCase(nombre.trim())) {
     			return moneda;
     		}
     	}

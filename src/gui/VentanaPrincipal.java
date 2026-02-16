@@ -13,7 +13,6 @@ import consultas_busquedas.Ultimos_movimientos;
 import mantenimiento.Mantenimiento_cliente;
 import mantenimiento.Mantenimiento_cuentaBancaria;
 import mantenimiento.Mantenimiento_moneda;
-import mantenimiento.Mantenimiento_tipoCambio;
 import mantenimiento.Mantenimiento_transaccion;
 import operaciones.CambioMoneda;
 import operaciones.Cambio_clave;
@@ -46,7 +45,6 @@ public class VentanaPrincipal extends JFrame {
 	private Mantenimiento_cliente mantenimiento_cliente;
 	private Mantenimiento_transaccion mantenimiento_transaccion;
 	private Mantenimiento_moneda mantenimiento_moneda;
-	private Mantenimiento_tipoCambio mantenimiento_tipoCambio;
 
 	/**
 	 * Launch the application.
@@ -86,7 +84,6 @@ public class VentanaPrincipal extends JFrame {
 		mantenimiento_cliente = new Mantenimiento_cliente(this);
 		mantenimiento_transaccion = new Mantenimiento_transaccion(this);
 		mantenimiento_moneda = new Mantenimiento_moneda(this);
-		mantenimiento_tipoCambio = new Mantenimiento_tipoCambio(this);
 		panel_inicio.setPreferredSize(new java.awt.Dimension(1000, 620));
 		setContentPane(panel_inicio);
 		pack();
@@ -161,10 +158,6 @@ public class VentanaPrincipal extends JFrame {
 	
 	public void Mantenimiento_Moneda() {
 		cambiar_panel(mantenimiento_moneda);
-	}
-	
-	public void Mantenimiento_Tipo_de_cambio() {
-		cambiar_panel(mantenimiento_tipoCambio);
 	}
 
 	
