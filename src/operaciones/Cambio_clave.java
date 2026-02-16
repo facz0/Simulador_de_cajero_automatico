@@ -16,6 +16,8 @@ import javax.swing.border.EmptyBorder;
 import gui.VentanaPrincipal;
 
 import java.awt.event.ActionEvent;
+import javax.swing.JOptionPane;
+import modelos.Usuario;
 
 public class Cambio_clave extends JPanel implements ActionListener{
 
@@ -26,117 +28,180 @@ public class Cambio_clave extends JPanel implements ActionListener{
 	 private JPasswordField txtConfirmarClave;
 	 private JButton btnVolver;
 	 private JButton btnCancelar;
+	 private JPanel cajaAzul;
+	 private JButton btnCambiar;
 
 	/**
 	 * Create the panel.
 	 */
 	public Cambio_clave(VentanaPrincipal principal) {
-		
-		setBackground(new Color(255, 255, 255));
-        setBorder(new EmptyBorder(10, 10, 10, 10));
-        setPreferredSize(new java.awt.Dimension(1000, 620));
-        this.ventanaPrincipal = principal;
-        setLayout(null); 
-        
-        JLabel lblTitulo = new JLabel("CAMBIO DE CLAVE");
-        lblTitulo.setForeground(new Color(2, 64, 89));
-        lblTitulo.setFont(new Font("Tahoma", Font.BOLD, 28));
-        lblTitulo.setHorizontalAlignment(SwingConstants.CENTER);
-        lblTitulo.setBounds(200, 30, 600, 40);
-        add(lblTitulo);
-        
-        JSeparator separator = new JSeparator();
-        separator.setBounds(200, 80, 600, 2);
-        add(separator);
-        
-        JLabel lblClaveActual = new JLabel("Clave Actual:");
-        lblClaveActual.setForeground(new Color(2, 64, 89));
-        lblClaveActual.setFont(new Font("Tahoma", Font.BOLD, 20));
-        lblClaveActual.setBounds(250, 130, 200, 30);
-        add(lblClaveActual);
+		this.ventanaPrincipal = principal;
 
-        txtClaveActual = new JPasswordField();
-        txtClaveActual.setFont(new Font("Tahoma", Font.PLAIN, 20));
-        txtClaveActual.setBounds(480, 130, 250, 35);
-        add(txtClaveActual);
+		// Fondo principal blanco
+		setBackground(Color.WHITE);
+		setBorder(new EmptyBorder(10, 10, 10, 10));
+		setPreferredSize(new java.awt.Dimension(1000, 620));
+		setLayout(null);
 
-        JLabel lblClaveNueva = new JLabel("Nueva Clave:");
-        lblClaveNueva.setForeground(new Color(2, 64, 89));
-        lblClaveNueva.setFont(new Font("Tahoma", Font.BOLD, 20));
-        lblClaveNueva.setBounds(250, 200, 200, 30);
-        add(lblClaveNueva);
+		// Título
+		JLabel lblTitulo = new JLabel("CAMBIO DE CLAVE");
+		lblTitulo.setForeground(new Color(2, 64, 89));
+		lblTitulo.setFont(new Font("Tahoma", Font.BOLD, 28));
+		lblTitulo.setHorizontalAlignment(SwingConstants.CENTER);
+		lblTitulo.setBounds(200, 20, 600, 40);
+		add(lblTitulo);
 
-        txtClaveNueva = new JPasswordField();
-        txtClaveNueva.setFont(new Font("Tahoma", Font.PLAIN, 20));
-        txtClaveNueva.setBounds(480, 200, 250, 35);
-        add(txtClaveNueva);
-
-        JLabel lblConfirmar = new JLabel("Confirmar Clave:");
-        lblConfirmar.setForeground(new Color(2, 64, 89));
-        lblConfirmar.setFont(new Font("Tahoma", Font.BOLD, 20));
-        lblConfirmar.setBounds(250, 270, 200, 30);
-        add(lblConfirmar);
-
-        txtConfirmarClave = new JPasswordField();
-        txtConfirmarClave.setFont(new Font("Tahoma", Font.PLAIN, 20));
-        txtConfirmarClave.setBounds(480, 270, 250, 35);
-        add(txtConfirmarClave);
-
-        Color verdeBoton = new Color(128, 191, 33);
-        
-     // BOTÓN VOLVER
-        btnVolver = new JButton("< Volver");
-		btnVolver.setForeground(new Color(255, 255, 255));
+		// Botón volver
+		btnVolver = new JButton("< Volver");
+		btnVolver.setForeground(Color.WHITE);
 		btnVolver.setBackground(new Color(128, 191, 33));
 		btnVolver.addActionListener(this);
 		btnVolver.setFont(new Font("Tahoma", Font.PLAIN, 15));
-		btnVolver.setBounds(10, 11, 97, 35);
-		add(btnVolver);
+		btnVolver.setBounds(10, 15, 110, 35);
 		btnVolver.setContentAreaFilled(false); 
 		btnVolver.setOpaque(true);
+		add(btnVolver);
+		
+		// Caja azul interna
+		cajaAzul = new JPanel();
+		cajaAzul.setBackground(new Color(2, 64, 89));
+		cajaAzul.setBounds(200, 100, 600, 420);
+		cajaAzul.setLayout(null);
+		add(cajaAzul);
 
-        // BOTÓN CAMBIAR CLAVE
-        JButton btnCambiar = new JButton("CAMBIAR CLAVE");
-        btnCambiar.setFont(new Font("Tahoma", Font.BOLD, 20));
-        btnCambiar.setBackground(verdeBoton); 
-        btnCambiar.setForeground(Color.WHITE); 
-        btnCambiar.setBounds(290, 420, 210, 50);
-        btnCambiar.setFocusPainted(false);
-        btnCambiar.setBorderPainted(false);    
-        btnCambiar.setOpaque(true);            
-        btnCambiar.setContentAreaFilled(true);
-        add(btnCambiar);
-        
-        // BOTÓN CANCELAR
-        btnCancelar = new JButton("CANCELAR");
-        btnCancelar.addActionListener(this);
-        btnCancelar.setFont(new Font("Tahoma", Font.BOLD, 20));
-        btnCancelar.setBackground(verdeBoton); 
-        btnCancelar.setForeground(Color.WHITE);
-        btnCancelar.setBounds(550, 420, 200, 50);
-        btnCancelar.setFocusPainted(false);
-        btnCancelar.setBorderPainted(false);    
-        btnCancelar.setOpaque(true);            
-        btnCancelar.setContentAreaFilled(true);
-        add(btnCancelar);
-        
-        JLabel lblNota = new JLabel("Nota: use solo 4 dígitos numéricos.");
-        lblNota.setHorizontalAlignment(SwingConstants.CENTER);
-        lblNota.setForeground(Color.GRAY);
-        lblNota.setFont(new Font("Tahoma", Font.ITALIC, 14));
-        lblNota.setBounds(200, 330, 600, 20);
-        add(lblNota);
+		JSeparator separator = new JSeparator();
+		separator.setBounds(50, 30, 500, 2);
+		cajaAzul.add(separator);
+
+		// Clave actual
+		JLabel lblClaveActual = new JLabel("Clave Actual:");
+		lblClaveActual.setForeground(Color.WHITE);
+		lblClaveActual.setFont(new Font("Tahoma", Font.BOLD, 18));
+		lblClaveActual.setBounds(60, 60, 200, 30);
+		cajaAzul.add(lblClaveActual);
+
+		txtClaveActual = new JPasswordField();
+		txtClaveActual.setFont(new Font("Tahoma", Font.PLAIN, 18));
+		txtClaveActual.setBounds(280, 60, 220, 35);
+		cajaAzul.add(txtClaveActual);
+
+		// Nueva clave
+		JLabel lblClaveNueva = new JLabel("Nueva Clave:");
+		lblClaveNueva.setForeground(Color.WHITE);
+		lblClaveNueva.setFont(new Font("Tahoma", Font.BOLD, 18));
+		lblClaveNueva.setBounds(60, 120, 200, 30);
+		cajaAzul.add(lblClaveNueva);
+
+		txtClaveNueva = new JPasswordField();
+		txtClaveNueva.setFont(new Font("Tahoma", Font.PLAIN, 18));
+		txtClaveNueva.setBounds(280, 120, 220, 35);
+		cajaAzul.add(txtClaveNueva);
+
+		// Confirmar clave
+		JLabel lblConfirmar = new JLabel("Confirmar Clave:");
+		lblConfirmar.setForeground(Color.WHITE);
+		lblConfirmar.setFont(new Font("Tahoma", Font.BOLD, 18));
+		lblConfirmar.setBounds(60, 180, 200, 30);
+		cajaAzul.add(lblConfirmar);
+
+		txtConfirmarClave = new JPasswordField();
+		txtConfirmarClave.setFont(new Font("Tahoma", Font.PLAIN, 18));
+		txtConfirmarClave.setBounds(280, 180, 220, 35);
+		cajaAzul.add(txtConfirmarClave);
+
+		Color verdeBoton = new Color(128, 191, 33);
+
+		// Botón cambiar clave (inactivo por ahora)
+		//DM
+		btnCambiar = new JButton("CAMBIAR CLAVE");
+		btnCambiar.addActionListener(this);
+
+		btnCambiar.setFont(new Font("Tahoma", Font.BOLD, 18));
+		btnCambiar.setBackground(verdeBoton);
+		btnCambiar.setForeground(Color.WHITE);
+		btnCambiar.setBounds(120, 260, 200, 45);
+		btnCambiar.setFocusPainted(false);
+		btnCambiar.setBorderPainted(false);
+		btnCambiar.setOpaque(true);
+		cajaAzul.add(btnCambiar);
+
+		// Botón cancelar
+		btnCancelar = new JButton("CANCELAR");
+		btnCancelar.addActionListener(this);
+		btnCancelar.setFont(new Font("Tahoma", Font.BOLD, 18));
+		btnCancelar.setBackground(verdeBoton);
+		btnCancelar.setForeground(Color.WHITE);
+		btnCancelar.setBounds(340, 260, 160, 45);
+		btnCancelar.setFocusPainted(false);
+		btnCancelar.setBorderPainted(false);
+		btnCancelar.setOpaque(true);
+		cajaAzul.add(btnCancelar);
+
+		JLabel lblNota = new JLabel("Nota: use solo 4 dígitos numéricos.");
+		lblNota.setHorizontalAlignment(SwingConstants.CENTER);
+		lblNota.setForeground(Color.LIGHT_GRAY);
+		lblNota.setFont(new Font("Tahoma", Font.ITALIC, 13));
+		lblNota.setBounds(50, 320, 500, 20);
+		cajaAzul.add(lblNota);
 	}
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		// TODO Auto-generated method stub
-		if(e.getSource() == btnVolver) {
-			ventanaPrincipal.menu_usuario();
-		}
-		if(e.getSource() == btnCancelar) {
-			ventanaPrincipal.menu_usuario();
-		}
+		if (e.getSource() == btnVolver) {
+	        ventanaPrincipal.menu_usuario();
+	    }
+	    if (e.getSource() == btnCambiar) {
+	        cambiarClave(); // ✅ aquí lo llamas
+	    }
+	    if (e.getSource() == btnCancelar) {
+	        ventanaPrincipal.menu_usuario();
+	    }
+	}
+	
+	private void cambiarClave() {
+
+	    Usuario u = ventanaPrincipal.getUsuarioActual();
+
+	    if (u == null) {
+	        JOptionPane.showMessageDialog(this, "No hay sesión activa. Inicie sesión nuevamente.");
+	        ventanaPrincipal.Panel_inicio();
+	        return;
+	    }
+
+	    String actual = new String(txtClaveActual.getPassword()).trim();
+	    String nueva  = new String(txtClaveNueva.getPassword()).trim();
+	    String conf   = new String(txtConfirmarClave.getPassword()).trim();
+
+	    if (actual.isEmpty() || nueva.isEmpty() || conf.isEmpty()) {
+	        JOptionPane.showMessageDialog(this, "Complete todos los campos.");
+	        return;
+	    }
+
+	    if (!u.getPassword().equals(actual)) {
+	        JOptionPane.showMessageDialog(this, "La clave actual es incorrecta.");
+	        return;
+	    }
+
+	    if (!nueva.matches("\\d{4}")) {
+	        JOptionPane.showMessageDialog(this, "La nueva clave debe tener 4 dígitos numéricos.");
+	        return;
+	    }
+
+	    if (!nueva.equals(conf)) {
+	        JOptionPane.showMessageDialog(this, "La confirmación no coincide.");
+	        return;
+	    }
+
+	    u.setPassword(nueva);
+
+	    JOptionPane.showMessageDialog(this, "✅ Clave cambiada con éxito.");
+
+	    txtClaveActual.setText("");
+	    txtClaveNueva.setText("");
+	    txtConfirmarClave.setText("");
+
+	    ventanaPrincipal.menu_usuario();
 	}
 
 }

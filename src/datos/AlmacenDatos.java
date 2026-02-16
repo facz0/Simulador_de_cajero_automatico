@@ -91,5 +91,14 @@ public class AlmacenDatos {
     	return null;
     }
     
+    public static Cuenta cuentaPorDni(String dni) {
+        for (int i = 0; i < listaCuentas.size(); i++) {
+            if (listaCuentas.get(i).getUsuario().getDNI().equals(dni)) {
+                return listaCuentas.get(i);
+            }
+        }
+        return null;
+    }
+    
 
 }
