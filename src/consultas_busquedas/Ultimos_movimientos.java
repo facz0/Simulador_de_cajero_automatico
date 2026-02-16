@@ -36,7 +36,7 @@ public class Ultimos_movimientos extends JPanel implements ActionListener {
 
 		JLabel lblTitulo = new JLabel("Últimos movimientos");
 		lblTitulo.setForeground(Color.WHITE);
-		lblTitulo.setFont(new Font("Tahoma", Font.BOLD, 21));
+		lblTitulo.setFont(new Font("Tahoma", Font.BOLD, 22));
 		lblTitulo.setBounds(399, 11, 272, 39);
 		add(lblTitulo);
 
