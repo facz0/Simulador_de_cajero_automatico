@@ -31,7 +31,7 @@ public class Login_administrador extends JPanel implements ActionListener{
 	 * @param ventanaPrincipal 
 	 */
 	public Login_administrador(VentanaPrincipal principal) {
-		setBackground(new Color(255, 255, 255));
+		setBackground(new Color(2, 64, 89));
 		this.ventanaPrincipal = principal;
 		this.tipoAcceso = "";
 		setPreferredSize(new java.awt.Dimension(1000, 620));
@@ -39,15 +39,15 @@ public class Login_administrador extends JPanel implements ActionListener{
 		
 		JPanel panel = new JPanel();
 		panel.setBackground(new Color(2, 64, 89));
-		panel.setBounds(240, 74, 556, 491);
+		panel.setBounds(198, 76, 556, 491);
 		add(panel);
 		panel.setLayout(null);
 		
-		lbltitulo = new JLabel("Ingresa tus credenciales para iniciar sesión");
+		lbltitulo = new JLabel("LOGIN REPORTES");
 		lbltitulo.setForeground(new Color(255, 255, 255));
-		lbltitulo.setBounds(80, 44, 391, 29);
+		lbltitulo.setBounds(233, 56, 391, 29);
 		panel.add(lbltitulo);
-		lbltitulo.setFont(new Font("Tahoma", Font.PLAIN, 20));
+		lbltitulo.setFont(new Font("Segoe UI", Font.BOLD, 20));
 		
 		JLabel lblDni = new JLabel("DNI:");
 		lblDni.setForeground(new Color(255, 255, 255));
@@ -57,7 +57,7 @@ public class Login_administrador extends JPanel implements ActionListener{
 		
 		txtAdminDni = new JTextField();
 		txtAdminDni.setFont(new Font("Tahoma", Font.PLAIN, 14));
-		txtAdminDni.setBounds(185, 171, 210, 29);
+		txtAdminDni.setBounds(185, 171, 279, 29);
 		panel.add(txtAdminDni);
 		txtAdminDni.setColumns(10);
 		
@@ -68,26 +68,26 @@ public class Login_administrador extends JPanel implements ActionListener{
 		panel.add(lblNewLabel);
 		
 		passwordAdmin = new JPasswordField();
-		passwordAdmin.setBounds(185, 281, 210, 29);
+		passwordAdmin.setBounds(185, 281, 279, 29);
 		panel.add(passwordAdmin);
 		
-		btnIngresarLoginAdmin = new JButton("Ingresar");
+		btnIngresarLoginAdmin = new JButton("INGRESAR");
 		btnIngresarLoginAdmin.setForeground(new Color(255, 255, 255));
 		btnIngresarLoginAdmin.setBackground(new Color(128, 191, 33));
 		btnIngresarLoginAdmin.addActionListener(this);
 		btnIngresarLoginAdmin.setFont(new Font("Tahoma", Font.PLAIN, 15));
-		btnIngresarLoginAdmin.setBounds(231, 367, 116, 36);
+		btnIngresarLoginAdmin.setBounds(348, 367, 116, 36);
 		panel.add(btnIngresarLoginAdmin);
 		btnIngresarLoginAdmin.setContentAreaFilled(false); 
 		btnIngresarLoginAdmin.setOpaque(true);
 		
 		btnVolver = new JButton("< VOLVER");
+		btnVolver.setBounds(187, 368, 127, 35);
+		panel.add(btnVolver);
 		btnVolver.setForeground(new Color(255, 255, 255));
-		btnVolver.setBackground(new Color(220, 53, 69)); // color deseado ROJO
+		btnVolver.setBackground(new Color(96, 125, 139)); // color deseado ROJO
 		btnVolver.addActionListener(this);
 		btnVolver.setFont(new Font("Tahoma", Font.PLAIN, 15));
-		btnVolver.setBounds(10, 11, 127, 35);
-		add(btnVolver);
 		btnVolver.setContentAreaFilled(false); 
 		btnVolver.setOpaque(true);
 	}
@@ -103,29 +103,44 @@ public class Login_administrador extends JPanel implements ActionListener{
 	
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		// TODO Auto-generated method stub
-		if(e.getSource() == btnVolver) {
+
+	    if (e.getSource() == btnVolver) {
 	        ventanaPrincipal.Panel_inicio();
+	        return;
 	    }
-		if (e.getSource() == btnIngresarLoginAdmin) {
+
+	    if (e.getSource() == btnIngresarLoginAdmin) {
+
 	        String usuario = txtAdminDni.getText();
 	        String password = new String(passwordAdmin.getPassword());
-	        
-	        if ("MANTENIMIENTO".equals(this.tipoAcceso)) {
-	        	if (usuario.equals("admin") && password.equals("admin123")) {
+
+	        // Validamos usando tu lógica de la otra clase
+	        boolean acceso = Metodo_login_administrador.validarLogin(
+	                tipoAcceso, usuario, password
+	        );
+
+	        if (acceso) {
+	            // Si es correcto, navegamos
+	            if ("MANTENIMIENTO".equals(tipoAcceso)) {
 	                ventanaPrincipal.Menu_mantenimiento();
-	            } else {
-	                System.out.println("ERROR: Credenciales de Mantenimiento incorrectas");
-	            }
-	        }
-	        
-	        else if ("REPORTES".equals(this.tipoAcceso)) {
-	            if (usuario.equals("admin") && password.equals("reporte123")) {
+	            } else if ("REPORTES".equals(tipoAcceso)) {
 	                ventanaPrincipal.Menu_reportes();
-	            } else {
-	                System.out.println("ERROR: Credenciales de Reportes incorrectas");
 	            }
+	        } else {
+	            // --- INTEGRACIÓN DE JOPTIONPANE ---
+	            javax.swing.JOptionPane.showMessageDialog(
+	                this, 
+	                "Usuario o contraseña incorrectos para el acceso a " + tipoAcceso, 
+	                "Error de Autenticación", 
+	                javax.swing.JOptionPane.ERROR_MESSAGE
+	            );
+
+	            // Limpiamos los campos para mayor comodidad del usuario
+	            txtAdminDni.setText("");
+	            passwordAdmin.setText("");
+	            txtAdminDni.requestFocus(); // Pone el cursor de nuevo en el DNI
 	        }
-		}
+	    }
 	}
-}
+	}
+
