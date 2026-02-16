@@ -22,7 +22,10 @@ public class Mantenimiento_moneda extends JPanel implements ActionListener{
 	private JButton btnModificar;
 	private JButton btnEliminar;
 	private JButton btnVolver;
-	private JTextArea txtResultado;
+	private JPanel panelPrincipal;
+	private ListarMoneda listarMoneda;
+	private CrearMoneda crearMoneda;
+	private ModificarMoneda modificarMoneda;
 
 	/**
 	 * Create the panel.
@@ -47,11 +50,12 @@ public class Mantenimiento_moneda extends JPanel implements ActionListener{
 		btnListar.setBounds(108, 151, 150, 42);
 		btnListar.setFont(new Font("Tahoma", Font.PLAIN, 17));
 		btnListar.setForeground(new Color(255, 255, 255));
-		btnListar.addActionListener(this);
+		
 		btnListar.setBackground(new Color(128, 191, 33));
 		add(btnListar);
 		btnListar.setContentAreaFilled(false); 
 		btnListar.setOpaque(true); 
+		btnListar.addActionListener(this);
 		
 		btnCrear = new JButton("CREAR");
 		btnCrear.setBounds(108, 238, 150, 42);
@@ -81,12 +85,7 @@ public class Mantenimiento_moneda extends JPanel implements ActionListener{
 		btnEliminar.setBackground(new Color(128, 191, 33));
 		add(btnEliminar);
 		btnEliminar.setContentAreaFilled(false); 
-		btnEliminar.setOpaque(true); 
-		
-		txtResultado = new JTextArea();
-		txtResultado.setEditable(false);
-		txtResultado.setBounds(352, 151, 523, 321);
-		add(txtResultado);
+		btnEliminar.setOpaque(true);
 		
 		btnVolver = new JButton("< Volver");
 		btnVolver.setForeground(new Color(255, 255, 255));
@@ -97,8 +96,25 @@ public class Mantenimiento_moneda extends JPanel implements ActionListener{
 		add(btnVolver);
 		btnVolver.setContentAreaFilled(false); 
 		btnVolver.setOpaque(true);
-
+		
+		panelPrincipal = new JPanel();
+		panelPrincipal.setBounds(278, 114, 612, 455);
+		add(panelPrincipal);
+		
+		listarMoneda = new ListarMoneda();
+		crearMoneda = new CrearMoneda();
+		modificarMoneda = new ModificarMoneda();
+		
+		mostrarPanel(listarMoneda);
 	}
+	
+	private void mostrarPanel(JPanel panel) {
+        panelPrincipal.removeAll();
+        panel.setBounds(0, 0, 612, 455);
+        panelPrincipal.add(panel);
+        panelPrincipal.revalidate();
+        panelPrincipal.repaint();
+    }
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
@@ -106,6 +122,25 @@ public class Mantenimiento_moneda extends JPanel implements ActionListener{
 		if(e.getSource() == btnVolver) {
 			ventanaPrincipal.Menu_mantenimiento();
 		}
+		if(e.getSource() == btnListar) {
+			actionPerformedbtnListar(e);
+		}
+		if(e.getSource() == btnCrear) {
+			actionPerformedbtnCrear(e);
+		}
+		if(e.getSource() == btnModificar) {
+			modificarMoneda.actualizar();
+			mostrarPanel(modificarMoneda);
+		}
 	}
-
+	
+	private void actionPerformedbtnListar(ActionEvent e) {
+		listarMoneda.cargarDatos();
+		mostrarPanel(listarMoneda);
+	}
+	
+	private void actionPerformedbtnCrear(ActionEvent e) {
+		mostrarPanel(crearMoneda);
+		crearMoneda.limpiarCampos();
+	}
 }

@@ -4,7 +4,7 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
 public class Transaccion {
-	public enum Tipo {Retiro, Deposito, Cambio_moneda, Transferencia}
+	public enum Tipo {Retiro, Deposito, Cambio_moneda}
 	
 	private static int contador;
 	

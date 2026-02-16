@@ -15,7 +15,6 @@ import modelos.Cuenta;
 import mantenimiento.Mantenimiento_cliente;
 import mantenimiento.Mantenimiento_cuentaBancaria;
 import mantenimiento.Mantenimiento_moneda;
-import mantenimiento.Mantenimiento_tipoCambio;
 import mantenimiento.Mantenimiento_transaccion;
 import operaciones.CambioMoneda;
 import operaciones.Cambio_clave;
@@ -48,12 +47,7 @@ public class VentanaPrincipal extends JFrame {
 	private Mantenimiento_transaccion mantenimiento_transaccion;
 	private Mantenimiento_moneda mantenimiento_moneda;
 	private Mantenimiento_tipoCambio mantenimiento_tipoCambio;
-	
-
-
 	private MisCuentas mis_cuentas;
-
-
 	private Cuenta cuentaSeleccionada;
 
 	/**
