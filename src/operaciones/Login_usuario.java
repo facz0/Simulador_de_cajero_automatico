@@ -1,5 +1,11 @@
 package operaciones;
 
+import servicio.AuthService;
+import servicio.Sesion;
+
+import modelos.Usuario;
+import javax.swing.JOptionPane;
+
 import javax.swing.JPanel;
 import javax.swing.JPasswordField;
 import javax.swing.JTextField;
@@ -97,9 +103,29 @@ public class Login_usuario extends JPanel implements ActionListener{
 		if(e.getSource() == btnVolver) {
 	        ventanaPrincipal.Panel_inicio();
 	    }
-		if(e.getSource() == btnIngresarLoginUser) {
-	        ventanaPrincipal.menu_usuario();
-	    }
-	}
+		if (e.getSource() == btnIngresarLoginUser) {
+
+		    String dni = txtUserDni.getText();
+		    String clave = new String(passwordUser.getPassword());
+
+		    AuthService auth = new AuthService();
+		    Usuario u = auth.autenticar(dni, clave);
+
+		    if (u == null) {
+		        JOptionPane.showMessageDialog(this, "Credenciales incorrectas.");
+		        return;
+		    }
+
+		    // ✅ Guardar sesión del usuario
+		    Sesion.iniciar(u);
+
+		    // ✅ Entrar al menú
+		    ventanaPrincipal.menu_usuario();
+		}
+
+		
+		}
+
+
 }
 

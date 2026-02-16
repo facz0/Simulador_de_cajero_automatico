@@ -27,9 +27,7 @@ public class Menu_usuario extends JPanel implements ActionListener {
 	private JButton btnRetiroDeDinero;
 	private JButton btnDepositoDeDinero;
 	private JButton btnCambiarMoneda;
-	private JButton btnConsultaDeSaldo;
-	private JButton btnltimosMovimientos;
-	private JButton btnConsultasDeOperaciones;
+	private JButton btnConsultas;
 	private JButton btnCancelar;
 
 	
@@ -130,54 +128,25 @@ public class Menu_usuario extends JPanel implements ActionListener {
 		btnCambiarMoneda.setFocusPainted(false);
 		btnCambiarMoneda.setContentAreaFilled(false);
 		btnCambiarMoneda.setBackground(new Color(128, 191, 33));
-		btnCambiarMoneda.setBounds(164, 436, 299, 50);
+		btnCambiarMoneda.setBounds(559, 193, 299, 50);
 		add(btnCambiarMoneda);
 		btnCambiarMoneda.setContentAreaFilled(false); 
 		btnCambiarMoneda.setOpaque(true);
 		btnCambiarMoneda.setIcon(cambioMoneda);
 		
-		btnConsultaDeSaldo = new JButton("Consulta de saldo");
-		btnConsultaDeSaldo.addActionListener(this);
-		btnConsultaDeSaldo.setOpaque(true);
-		btnConsultaDeSaldo.setForeground(Color.WHITE);
-		btnConsultaDeSaldo.setFont(new Font("Tahoma", Font.BOLD, 20));
-		btnConsultaDeSaldo.setFocusPainted(false);
-		btnConsultaDeSaldo.setContentAreaFilled(false);
-		btnConsultaDeSaldo.setBackground(new Color(128, 191, 33));
-		btnConsultaDeSaldo.setBounds(559, 193, 299, 50);
-		add(btnConsultaDeSaldo);
-		btnConsultaDeSaldo.setContentAreaFilled(false); 
-		btnConsultaDeSaldo.setOpaque(true);
-		btnConsultaDeSaldo.setIcon(consultaSaldo);
-		
-		btnltimosMovimientos = new JButton("Últimos movimientos");
-		btnltimosMovimientos.addActionListener(this);
-		btnltimosMovimientos.setOpaque(true);
-		btnltimosMovimientos.setForeground(Color.WHITE);
-		btnltimosMovimientos.setFont(new Font("Tahoma", Font.BOLD, 20));
-		btnltimosMovimientos.setFocusPainted(false);
-		btnltimosMovimientos.setContentAreaFilled(false);
-		btnltimosMovimientos.setBackground(new Color(128, 191, 33));
-		btnltimosMovimientos.setBounds(559, 276, 299, 50);
-		add(btnltimosMovimientos);
-		btnltimosMovimientos.setContentAreaFilled(false); 
-		btnltimosMovimientos.setOpaque(true);
-		btnltimosMovimientos.setIcon(consultaUltimo);
-		
-		
-		btnConsultasDeOperaciones = new JButton("Op. por rango de fecha");
-		btnConsultasDeOperaciones.addActionListener(this);
-		btnConsultasDeOperaciones.setOpaque(true);
-		btnConsultasDeOperaciones.setForeground(Color.WHITE);
-		btnConsultasDeOperaciones.setFont(new Font("Tahoma", Font.BOLD, 20));
-		btnConsultasDeOperaciones.setFocusPainted(false);
-		btnConsultasDeOperaciones.setContentAreaFilled(false);
-		btnConsultasDeOperaciones.setBackground(new Color(128, 191, 33));
-		btnConsultasDeOperaciones.setBounds(559, 354, 299, 50);
-		add(btnConsultasDeOperaciones);
-		btnConsultasDeOperaciones.setContentAreaFilled(false); 
-		btnConsultasDeOperaciones.setOpaque(true);
-		btnConsultasDeOperaciones.setIcon(consultaMovi);
+		btnConsultas = new JButton("Consultas");
+		btnConsultas.addActionListener(this);
+		btnConsultas.setOpaque(true);
+		btnConsultas.setForeground(Color.WHITE);
+		btnConsultas.setFont(new Font("Tahoma", Font.BOLD, 20));
+		btnConsultas.setFocusPainted(false);
+		btnConsultas.setContentAreaFilled(false);
+		btnConsultas.setBackground(new Color(128, 191, 33));
+		btnConsultas.setBounds(559, 276, 299, 50);
+		add(btnConsultas);
+		btnConsultas.setContentAreaFilled(false); 
+		btnConsultas.setOpaque(true);
+		btnConsultas.setIcon(consultaUltimo);
 		
 		btnCancelar = new JButton("CANCELAR");
 		btnCancelar.addActionListener(this);
@@ -187,7 +156,7 @@ public class Menu_usuario extends JPanel implements ActionListener {
 		btnCancelar.setFocusPainted(false);
 		btnCancelar.setContentAreaFilled(false);
 		btnCancelar.setBackground(new Color(3, 120, 166));
-		btnCancelar.setBounds(559, 436, 299, 50);
+		btnCancelar.setBounds(559, 355, 299, 50);
 		add(btnCancelar);
 		btnCancelar.setContentAreaFilled(false); 
 		btnCancelar.setOpaque(true);
@@ -204,17 +173,11 @@ public class Menu_usuario extends JPanel implements ActionListener {
 		if(e.getSource() == btnCambiarMoneda) {
 			ventanaPrincipal.Cambio_moneda();
 		}
-		if(e.getSource() == btnConsultaDeSaldo) {
-			ventanaPrincipal.Consultar_saldo();
-		}
 		if(e.getSource() == btnRetiroDeDinero) {
 			ventanaPrincipal.Retirar_dinero();
 		}
-		if(e.getSource() == btnltimosMovimientos) {
-			ventanaPrincipal.Ultimos_movimientos();
-		}
-		if(e.getSource() == btnConsultasDeOperaciones) {
-			ventanaPrincipal.Consultar_por_ranfo();
+		if(e.getSource() == btnConsultas) {
+			ventanaPrincipal.Mis_Cuentas();
 		}
 		if(e.getSource() == btnCancelar) {
 			ventanaPrincipal.Panel_inicio();

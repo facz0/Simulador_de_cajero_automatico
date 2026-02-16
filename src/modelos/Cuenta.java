@@ -70,6 +70,12 @@ public class Cuenta {
 		this.movimientos = movimientos;
 	}
 	
+	@Override
+	public String toString() {
+	    String simbolo = (moneda != null) ? moneda.getIdMoneda() : "";
+	    return NumeroCuenta + "  |  " + simbolo + "  Saldo: " + String.format("%.2f", saldo);
+	}
+
 }
 
 
