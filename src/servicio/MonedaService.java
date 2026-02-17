@@ -33,4 +33,12 @@ public class MonedaService {
 		moneda.setTipoCambio(tipo);
 	}
 	
+	public void EliminarMoneda(String nombre) throws Exception{
+		Moneda moneda = AlmacenDatos.monedaPorNombre(nombre);
+		if(moneda == null) {
+			throw new Exception ("La moneda " + moneda + " no existe");
+		}
+		AlmacenDatos.listaMonedas.remove(moneda);
+	}
+	
 }
