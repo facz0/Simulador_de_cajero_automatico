@@ -13,7 +13,8 @@ import modelos.Usuario;
 public class CuentaService {
 	
 	public String generarNextNumeroCuenta() {
-		return "CTA-" + "11" + (AlmacenDatos.listaCuentas.size() + 4335) + "9867";
+		AlmacenDatos.incrementadorCuenta++;
+		return "CTA-" + "11" + AlmacenDatos.incrementadorCuenta + "9867";
 	}
 
 	public void crearCuenta(String numeroCuenta, Usuario usuario, Moneda moneda) throws Exception{

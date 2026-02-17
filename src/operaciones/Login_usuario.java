@@ -130,7 +130,8 @@ public class Login_usuario extends JPanel implements ActionListener{
 		        JOptionPane.showMessageDialog(this, "Este usuario no tiene una cuenta activa.");
 		        return;
 		    }
-
+		    
+		    Sesion.fijar(u);
 		    ventanaPrincipal.setSesion(u, c); 
 
 		    txtUserDni.setText("");

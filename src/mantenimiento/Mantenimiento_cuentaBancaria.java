@@ -131,6 +131,7 @@ public class Mantenimiento_cuentaBancaria extends JPanel implements ActionListen
 		    mostrarPanel(crearCuenta);
 		}
 		if(e.getSource() == btnListar) {
+			listarCuenta.cargarDatos();
 			actionPerformedbtnListar(e);
 		}
 		if(e.getSource() == btnModificar) {

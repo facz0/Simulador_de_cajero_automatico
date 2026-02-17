@@ -204,7 +204,6 @@ public class DepositoDinero extends JPanel implements ActionListener {
         }
     }
 }
-
   
 
 	

@@ -149,6 +149,7 @@ public class VentanaPrincipal extends JFrame {
 	}
 
 	public void Depositar_dinero() {
+		//depositar_dinero.cargarDatos();
 		cambiar_panel(depositar_dinero);
 	}
 

@@ -10,6 +10,7 @@ public class AlmacenDatos {
 	public static ArrayList<Usuario> listaUsuarios = new ArrayList<>();
     public static ArrayList<Cuenta> listaCuentas = new ArrayList<>();
     public static ArrayList<Moneda> listaMonedas = new ArrayList<>();
+    public static int incrementadorCuenta = 4355;
     
     static {
     	

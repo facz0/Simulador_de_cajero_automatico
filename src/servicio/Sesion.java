@@ -4,17 +4,17 @@ import modelos.Usuario;
 
 public class Sesion {
 
-    private static Usuario usuarioActual;
-
-    public static void iniciar(Usuario u) {
-        usuarioActual = u;
+    private static Usuario usuarioLogueado;
+    
+    public static void fijar(Usuario u) {
+        usuarioLogueado = u;
+        
     }
-
     public static Usuario obtener() {
-        return usuarioActual;
+        return usuarioLogueado;
     }
-
+ 
     public static void cerrar() {
-        usuarioActual = null;
+        usuarioLogueado = null;
     }
 }
