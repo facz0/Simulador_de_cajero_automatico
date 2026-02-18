@@ -2,10 +2,12 @@ package operaciones;
 
 import java.awt.Color;
 import java.awt.Font;
+import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 import javax.swing.JButton;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JPasswordField;
 import javax.swing.JSeparator;
@@ -13,47 +15,44 @@ import javax.swing.SwingConstants;
 import javax.swing.border.EmptyBorder;
 
 import gui.VentanaPrincipal;
-
-import java.awt.event.ActionEvent;
-//DM
-import javax.swing.JOptionPane;
 import modelos.Usuario;
-
 
 public class Cambio_clave extends JPanel implements ActionListener {
 
 	private static final long serialVersionUID = 1L;
+
+	// DM atributo de clases
 	private VentanaPrincipal ventanaPrincipal;
 
 	private JPasswordField txtClaveActual;
 	private JPasswordField txtClaveNueva;
 	private JPasswordField txtConfirmarClave;
+
 	private JButton btnVolver;
 	private JButton btnCancelar;
-	private JPanel cajaAzul;
-     //DM	
 	private JButton btnCambiar;
 
+	private JPanel cajaAzul;
 
 	public Cambio_clave(VentanaPrincipal principal) {
 
 		this.ventanaPrincipal = principal;
 
-		// Fondo principal blanco
+		// CONFIGURACIÓN DEL CONTENEDOR
 		setBackground(Color.WHITE);
 		setBorder(new EmptyBorder(10, 10, 10, 10));
 		setPreferredSize(new java.awt.Dimension(1000, 620));
 		setLayout(null);
 
-		// Título
+		// ESTRUCTURAS DE ETIQUETAS
 		JLabel lblTitulo = new JLabel("CAMBIO DE CLAVE");
 		lblTitulo.setForeground(new Color(2, 64, 89));
 		lblTitulo.setFont(new Font("Tahoma", Font.BOLD, 28));
 		lblTitulo.setHorizontalAlignment(SwingConstants.CENTER);
-		lblTitulo.setBounds(200, 20, 600, 40);
+		lblTitulo.setBounds(200, 54, 600, 40);
 		add(lblTitulo);
 
-		// Botón volver
+		// ESTRUCTURAS DE BOTONES
 		btnVolver = new JButton("< Volver");
 		btnVolver.setForeground(Color.WHITE);
 		btnVolver.setBackground(new Color(128, 191, 33));
@@ -64,10 +63,10 @@ public class Cambio_clave extends JPanel implements ActionListener {
 		btnVolver.setOpaque(true);
 		add(btnVolver);
 
-		// Caja azul interna
+		// CONTENEDOR SECUNDARIO
 		cajaAzul = new JPanel();
 		cajaAzul.setBackground(new Color(2, 64, 89));
-		cajaAzul.setBounds(200, 100, 600, 420);
+		cajaAzul.setBounds(200, 127, 600, 420);
 		cajaAzul.setLayout(null);
 		add(cajaAzul);
 
@@ -75,7 +74,6 @@ public class Cambio_clave extends JPanel implements ActionListener {
 		separator.setBounds(50, 30, 500, 2);
 		cajaAzul.add(separator);
 
-		// Clave actual
 		JLabel lblClaveActual = new JLabel("Clave Actual:");
 		lblClaveActual.setForeground(Color.WHITE);
 		lblClaveActual.setFont(new Font("Tahoma", Font.BOLD, 18));
@@ -103,7 +101,7 @@ public class Cambio_clave extends JPanel implements ActionListener {
 		JLabel lblConfirmar = new JLabel("Confirmar Clave:");
 		lblConfirmar.setForeground(Color.WHITE);
 		lblConfirmar.setFont(new Font("Tahoma", Font.BOLD, 18));
-		lblConfirmar.setBounds(60, 180, 200, 30);
+		lblConfirmar.setBounds(60, 182, 200, 30);
 		cajaAzul.add(lblConfirmar);
 
 		txtConfirmarClave = new JPasswordField();
@@ -113,11 +111,9 @@ public class Cambio_clave extends JPanel implements ActionListener {
 
 		Color verdeBoton = new Color(128, 191, 33);
 
-		// Botón cambiar clave (inactivo por ahora)
-		//DM
+		// Botón de acción principal
 		btnCambiar = new JButton("CAMBIAR CLAVE");
 		btnCambiar.addActionListener(this);
-
 		btnCambiar.setFont(new Font("Tahoma", Font.BOLD, 18));
 		btnCambiar.setBackground(verdeBoton);
 		btnCambiar.setForeground(Color.WHITE);
@@ -147,67 +143,67 @@ public class Cambio_clave extends JPanel implements ActionListener {
 		cajaAzul.add(lblNota);
 	}
 
-	//DM
 	@Override
 	public void actionPerformed(ActionEvent e) {
-	    if (e.getSource() == btnVolver) {
-	        ventanaPrincipal.menu_usuario();
-	    }
 
-	    if (e.getSource() == btnCambiar) {
-	        cambiarClave(); // ✅ aquí lo llamas
-	    }
+		if (e.getSource() == btnVolver) {
+			ventanaPrincipal.menu_usuario();
+		}
 
-	    if (e.getSource() == btnCancelar) {
-	        ventanaPrincipal.menu_usuario();
-	    }
+		if (e.getSource() == btnCambiar) {
+			cambiarClave();
+		}
+
+		if (e.getSource() == btnCancelar) {
+			ventanaPrincipal.menu_usuario();
+		}
 	}
 
-	// ✅ AQUÍ VA EL MÉTODO (debajo del actionPerformed y antes de la última llave)
+	// dm met cambio clave
 	private void cambiarClave() {
 
-	    Usuario u = ventanaPrincipal.getUsuarioActual();
+		Usuario u = ventanaPrincipal.getUsuarioActual();
 
-	    if (u == null) {
-	        JOptionPane.showMessageDialog(this, "No hay sesión activa. Inicie sesión nuevamente.");
-	        ventanaPrincipal.Panel_inicio();
-	        return;
-	    }
+		if (u == null) {
+			JOptionPane.showMessageDialog(this, "No hay sesión activa. Inicie sesión nuevamente.");
+			ventanaPrincipal.Panel_inicio();
+			return;
+		}
 
-	    String actual = new String(txtClaveActual.getPassword()).trim();
-	    String nueva  = new String(txtClaveNueva.getPassword()).trim();
-	    String conf   = new String(txtConfirmarClave.getPassword()).trim();
+		String actual = new String(txtClaveActual.getPassword()).trim();
+		String nueva  = new String(txtClaveNueva.getPassword()).trim();
+		String conf   = new String(txtConfirmarClave.getPassword()).trim();
 
-	    if (actual.isEmpty() || nueva.isEmpty() || conf.isEmpty()) {
-	        JOptionPane.showMessageDialog(this, "Complete todos los campos.");
-	        return;
-	    }
+		// VALIDA  CAMPOS VACÍOS
+		if (actual.isEmpty() || nueva.isEmpty() || conf.isEmpty()) {
+			JOptionPane.showMessageDialog(this, "Complete todos los campos.");
+			return;
+		}
 
-	    if (!u.getPassword().equals(actual)) {
-	        JOptionPane.showMessageDialog(this, "La clave actual es incorrecta.");
-	        return;
-	    }
+		// COMPARACIÓN DE OBJETOS:
+		if (!u.getPassword().equals(actual)) {
+			JOptionPane.showMessageDialog(this, "La clave actual es incorrecta.");
+			return;
+		}
 
-	    if (!nueva.matches("\\d{4}")) {
-	        JOptionPane.showMessageDialog(this, "La nueva clave debe tener 4 dígitos numéricos.");
-	        return;
-	    }
+		if (!nueva.matches("\\d{4}")) {
+			JOptionPane.showMessageDialog(this, "La nueva clave debe tener 4 dígitos numéricos.");
+			return;
+		}
 
-	    if (!nueva.equals(conf)) {
-	        JOptionPane.showMessageDialog(this, "La confirmación no coincide.");
-	        return;
-	    }
+		if (!nueva.equals(conf)) {
+			JOptionPane.showMessageDialog(this, "La confirmación no coincide.");
+			return;
+		}
 
-	    u.setPassword(nueva);
+		u.setPassword(nueva);
 
-	    JOptionPane.showMessageDialog(this, "✅ Clave cambiada con éxito.");
+		JOptionPane.showMessageDialog(this, "✅ Clave cambiada con éxito.");
 
-	    txtClaveActual.setText("");
-	    txtClaveNueva.setText("");
-	    txtConfirmarClave.setText("");
+		txtClaveActual.setText("");
+		txtClaveNueva.setText("");
+		txtConfirmarClave.setText("");
 
-	    ventanaPrincipal.menu_usuario();
+		ventanaPrincipal.menu_usuario();
 	}
-
-	
-	}
+}

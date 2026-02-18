@@ -65,8 +65,11 @@ public class AlmacenDatos {
     
     //DM METODO
     public static Cuenta cuentaPorDni(String dni) {
-        for(Cuenta c : listaCuentas) {
-            if(c.getUsuario().getDNI().equals(dni)) return c;
+        for (int i = 0; i < listaCuentas.size(); i++) {
+            Cuenta c = listaCuentas.get(i);
+            if (c.getUsuario().getDNI().equals(dni)) {
+                return c;
+            }
         }
         return null;
     }
