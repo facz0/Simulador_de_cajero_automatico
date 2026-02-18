@@ -12,6 +12,7 @@ import javax.swing.JTextField;
 
 import gui.VentanaPrincipal;
 
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 
@@ -41,10 +42,14 @@ public class Login_usuario extends JPanel implements ActionListener{
 		setPreferredSize(new java.awt.Dimension(1000, 620));
 		setLayout(null);
 		
+		ImageIcon documentoIdentidad = new ImageIcon(getClass().getResource("/iconos/dni.png"));
+        ImageIcon volver = new ImageIcon(getClass().getResource("/iconos/Volver.png"));
+        ImageIcon ingresarLogin = new ImageIcon(getClass().getResource("/iconos/ingresar.png"));
+        ImageIcon contraseñaLogin = new ImageIcon(getClass().getResource("/iconos/contraseña.png"));
+		
 		JPanel panel = new JPanel();
-		panel.setBorder(new MatteBorder(2, 2, 2, 2, (Color) new Color(255, 255, 255)));
 		panel.setBackground(new Color(2, 64, 89));
-		panel.setBounds(222, 74, 556, 491);
+		panel.setBounds(178, 74, 556, 491);
 		add(panel);
 		panel.setLayout(null);
 		
@@ -58,6 +63,7 @@ public class Login_usuario extends JPanel implements ActionListener{
 		lblDni.setForeground(new Color(255, 255, 255));
 		lblDni.setBackground(new Color(255, 255, 255));
 		lblDni.setFont(new Font("Tahoma", Font.PLAIN, 18));
+		lblDni.setIcon(documentoIdentidad);
 		lblDni.setBounds(172, 142, 93, 13);
 		panel.add(lblDni);
 		

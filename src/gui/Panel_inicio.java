@@ -60,15 +60,15 @@ public class Panel_inicio extends JPanel implements ActionListener{
 		JLabel lblFrffefr = new JLabel("OPCIONES");
 		lblFrffefr.setForeground(new Color(255, 255, 255));
 		lblFrffefr.setFont(new Font("Tahoma", Font.BOLD, 24));
-		lblFrffefr.setBounds(201, 101, 143, 37);
+		lblFrffefr.setBounds(210, 87, 143, 37);
 		panel.add(lblFrffefr);
 		
 		btnMantenimiento = new JButton("MANTENIMIENTO");
 		btnMantenimiento.setForeground(new Color(255, 255, 255));
 		btnMantenimiento.setBackground(new Color(128, 191, 33));
 		btnMantenimiento.addActionListener(this);
-		btnMantenimiento.setFont(new Font("Tahoma", Font.PLAIN, 20));
-		btnMantenimiento.setBounds(155, 450, 227, 63);
+		btnMantenimiento.setFont(new Font("Tahoma", Font.BOLD, 20));
+		btnMantenimiento.setBounds(155, 450, 242, 63);
 		panel.add(btnMantenimiento);
 		btnMantenimiento.setContentAreaFilled(false); 
 		btnMantenimiento.setOpaque(true);
@@ -80,9 +80,9 @@ public class Panel_inicio extends JPanel implements ActionListener{
 		btnReportes.setForeground(new Color(255, 255, 255));
 		btnReportes.addActionListener(this);
 		btnReportes.setBackground(new Color(128, 191, 33));
-		btnReportes.setBounds(155, 311, 227, 63);
+		btnReportes.setBounds(155, 311, 242, 63);
 		panel.add(btnReportes);
-		btnReportes.setFont(new Font("Tahoma", Font.PLAIN, 20));
+		btnReportes.setFont(new Font("Tahoma", Font.BOLD, 20));
 		btnReportes.setContentAreaFilled(false); 
 		btnReportes.setOpaque(true); 
 		btnReportes.setIcon(reportes);
@@ -93,9 +93,9 @@ public class Panel_inicio extends JPanel implements ActionListener{
 		btnUsuario.setForeground(new Color(255, 255, 255));
 		btnUsuario.addActionListener(this);
 		btnUsuario.setBackground(new Color(128, 191, 33));
-		btnUsuario.setBounds(155, 176, 227, 63);
+		btnUsuario.setBounds(155, 176, 242, 63);
 		panel.add(btnUsuario);
-		btnUsuario.setFont(new Font("Tahoma", Font.PLAIN, 20));
+		btnUsuario.setFont(new Font("Tahoma", Font.BOLD, 20));
 		btnUsuario.setContentAreaFilled(false); 
 		btnUsuario.setOpaque(true);
 		btnUsuario.setIcon(user);
@@ -107,21 +107,21 @@ public class Panel_inicio extends JPanel implements ActionListener{
 		add(lblLogo);
 		
 		lblNewLabel = new JLabel("BIENVENIDO");
-		lblNewLabel.setFont(new Font("Tahoma", Font.PLAIN, 30));
+		lblNewLabel.setFont(new Font("Tahoma", Font.BOLD, 30));
 		lblNewLabel.setForeground(new Color(2, 64, 89));
-		lblNewLabel.setBounds(150, 79, 186, 54);
+		lblNewLabel.setBounds(131, 79, 210, 54);
 		add(lblNewLabel);
 		
 		lblBancoInstitucional = new JLabel("BANCO INSTITUCIONAL");
 		lblBancoInstitucional.setForeground(new Color(2, 64, 89));
-		lblBancoInstitucional.setFont(new Font("Tahoma", Font.PLAIN, 30));
-		lblBancoInstitucional.setBounds(78, 460, 329, 61);
+		lblBancoInstitucional.setFont(new Font("Tahoma", Font.BOLD, 30));
+		lblBancoInstitucional.setBounds(78, 460, 348, 61);
 		add(lblBancoInstitucional);
 		
 		lblCibertec = new JLabel("CIBERTEC");
 		lblCibertec.setForeground(new Color(2, 64, 89));
-		lblCibertec.setFont(new Font("Tahoma", Font.PLAIN, 30));
-		lblCibertec.setBounds(156, 519, 146, 61);
+		lblCibertec.setFont(new Font("Tahoma", Font.BOLD, 30));
+		lblCibertec.setBounds(156, 519, 162, 61);
 		add(lblCibertec);
 
 	}

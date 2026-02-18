@@ -13,8 +13,4 @@ public class Sesion {
     public static Usuario obtener() {
         return usuarioLogueado;
     }
- 
-    public static void cerrar() {
-        usuarioLogueado = null;
-    }
 }

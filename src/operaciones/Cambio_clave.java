@@ -166,8 +166,8 @@ public class Cambio_clave extends JPanel implements ActionListener{
 		}
 
 	    String actual = new String(txtClaveActual.getPassword()).trim();
-	    String nueva  = new String(txtClaveNueva.getPassword()).trim();
-	    String conf   = new String(txtConfirmarClave.getPassword()).trim();
+	    String nueva = new String(txtClaveNueva.getPassword()).trim();
+	    String conf = new String(txtConfirmarClave.getPassword()).trim();
 
 	    if (actual.isEmpty() || nueva.isEmpty() || conf.isEmpty()) {
 	        JOptionPane.showMessageDialog(this, "Complete todos los campos.");
@@ -178,6 +178,11 @@ public class Cambio_clave extends JPanel implements ActionListener{
 	        JOptionPane.showMessageDialog(this, "La clave actual es incorrecta.");
 	        return;
 	    }
+	    
+	    if (nueva.equals(actual)) {
+			JOptionPane.showMessageDialog(this, "La nueva clave no puede ser igual a la actual.");
+			return;
+		}
 
 	    if (!nueva.matches("\\d{4}")) {
 	        JOptionPane.showMessageDialog(this, "La nueva clave debe tener 4 dígitos numéricos.");

@@ -13,6 +13,7 @@ import java.awt.event.ActionListener;
 
 import javax.swing.JTextField;
 import javax.swing.JPasswordField;
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JSlider;
 import javax.swing.JMenuBar;
@@ -26,12 +27,24 @@ public class Login_administrador extends JPanel implements ActionListener{
 	private JButton btnIngresarLoginAdmin;
 	private String tipoAcceso;
     private JLabel lbltitulo;
+    private ImageIcon iconoReportes;
+    private ImageIcon iconoMantenimiento;
 	/**
 	 * Create the panel.
 	 * @param ventanaPrincipal 
 	 */
 	public Login_administrador(VentanaPrincipal principal) {
 		setBackground(new Color(2, 64, 89));
+		
+		//ICONOS
+        ImageIcon documentoIdentidad = new ImageIcon(getClass().getResource("/iconos/dni.png"));
+        ImageIcon volver = new ImageIcon(getClass().getResource("/iconos/Volver.png"));
+        ImageIcon ingresarLogin = new ImageIcon(getClass().getResource("/iconos/ingresar.png"));
+        ImageIcon contraseñaLogin = new ImageIcon(getClass().getResource("/iconos/contraseña.png"));
+        iconoReportes = new ImageIcon(getClass().getResource("/iconos/report.png"));
+        iconoMantenimiento = new ImageIcon(getClass().getResource("/iconos/mantenimiento.png"));
+        		
+        		
 		this.ventanaPrincipal = principal;
 		this.tipoAcceso = "";
 		setPreferredSize(new java.awt.Dimension(1000, 620));
@@ -39,13 +52,13 @@ public class Login_administrador extends JPanel implements ActionListener{
 		
 		JPanel panel = new JPanel();
 		panel.setBackground(new Color(2, 64, 89));
-		panel.setBounds(198, 76, 556, 491);
+		panel.setBounds(178, 74, 556, 491);
 		add(panel);
 		panel.setLayout(null);
 		
 		lbltitulo = new JLabel("LOGIN REPORTES");
 		lbltitulo.setForeground(new Color(255, 255, 255));
-		lbltitulo.setBounds(233, 56, 391, 29);
+		lbltitulo.setBounds(187, 55, 391, 29);
 		panel.add(lbltitulo);
 		lbltitulo.setFont(new Font("Segoe UI", Font.BOLD, 20));
 		
@@ -53,6 +66,7 @@ public class Login_administrador extends JPanel implements ActionListener{
 		lblDni.setForeground(new Color(255, 255, 255));
 		lblDni.setFont(new Font("Tahoma", Font.PLAIN, 18));
 		lblDni.setBounds(187, 142, 93, 13);
+		lblDni.setIcon(documentoIdentidad);
 		panel.add(lblDni);
 		
 		txtAdminDni = new JTextField();
@@ -65,6 +79,7 @@ public class Login_administrador extends JPanel implements ActionListener{
 		lblNewLabel.setForeground(new Color(255, 255, 255));
 		lblNewLabel.setFont(new Font("Tahoma", Font.PLAIN, 18));
 		lblNewLabel.setBounds(185, 241, 116, 29);
+		lblNewLabel.setIcon(contraseñaLogin);
 		panel.add(lblNewLabel);
 		
 		passwordAdmin = new JPasswordField();
@@ -76,28 +91,32 @@ public class Login_administrador extends JPanel implements ActionListener{
 		btnIngresarLoginAdmin.setBackground(new Color(128, 191, 33));
 		btnIngresarLoginAdmin.addActionListener(this);
 		btnIngresarLoginAdmin.setFont(new Font("Tahoma", Font.PLAIN, 15));
-		btnIngresarLoginAdmin.setBounds(348, 367, 116, 36);
+		btnIngresarLoginAdmin.setBounds(337, 367, 127, 36);
 		panel.add(btnIngresarLoginAdmin);
 		btnIngresarLoginAdmin.setContentAreaFilled(false); 
 		btnIngresarLoginAdmin.setOpaque(true);
+		btnIngresarLoginAdmin.setIcon(ingresarLogin);
 		
-		btnVolver = new JButton("< VOLVER");
-		btnVolver.setForeground(new Color(255, 255, 255));
-		btnVolver.setBounds(187, 368, 127, 35);
+		btnVolver = new JButton("VOLVER");
+		btnVolver.setBounds(185, 367, 127, 36);
 		panel.add(btnVolver);
+		btnVolver.setForeground(new Color(255, 255, 255));
 		btnVolver.setBackground(new Color(96, 125, 139)); // color deseado ROJO
 		btnVolver.addActionListener(this);
 		btnVolver.setFont(new Font("Tahoma", Font.PLAIN, 15));
 		btnVolver.setContentAreaFilled(false); 
 		btnVolver.setOpaque(true);
+		btnVolver.setIcon(volver);
 	}
 	
 	public void setModo(String modo) {
         this.tipoAcceso = modo;
         if (modo.equals("MANTENIMIENTO")) {
-            lbltitulo.setText("LOGIN MANTENIMIENTO");
+            lbltitulo.setText("LOGIN  MANTENIMIENTO");
+            lbltitulo.setIcon(iconoMantenimiento);
         } else {
-            lbltitulo.setText("LOGIN REPORTES");
+            lbltitulo.setText("LOGIN DE LOS REPORTES");
+            lbltitulo.setIcon(iconoReportes);
         }
     }
 	
@@ -110,12 +129,12 @@ public class Login_administrador extends JPanel implements ActionListener{
 	    }
 		
 		if (e.getSource() == btnIngresarLoginAdmin) {
-			
 	        String usuario = txtAdminDni.getText();
 	        String password = new String(passwordAdmin.getPassword());
+	        boolean acceso = Metodo_login_administrador.validarLogin(
+	                tipoAcceso, usuario, password
+	        );
 	        
-	        boolean acceso = Metodo_login_administrador.validarLogin(tipoAcceso, usuario, password);
-
 	        if (acceso) {
 	            if ("MANTENIMIENTO".equals(tipoAcceso)) {
 	                ventanaPrincipal.Menu_mantenimiento();

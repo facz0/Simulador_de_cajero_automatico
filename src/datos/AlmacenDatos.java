@@ -44,6 +44,7 @@ public class AlmacenDatos {
     	listaUsuarios.add(new Usuario("40404040", "Beatriz Torres", "8901"));
     	
     	listaCuentas.add(new Cuenta("CTA-1143359867", listaUsuarios.get(0), sol, 1250.50, "ACTIVO"));
+    	listaCuentas.add(new Cuenta("CTA-1143569867", listaUsuarios.get(0), dolar, 1250.50, "ACTIVO"));
         listaCuentas.add(new Cuenta("CTA-1143369867", listaUsuarios.get(1), dolar, 3400.00, "ACTIVO"));
         listaCuentas.add(new Cuenta("CTA-1143379867", listaUsuarios.get(2), sol, 890.20, "ACTIVO"));
         listaCuentas.add(new Cuenta("CTA-1143389867", listaUsuarios.get(3), sol, 5600.00, "ACTIVO"));
@@ -63,6 +64,7 @@ public class AlmacenDatos {
         listaCuentas.add(new Cuenta("CTA-1143529867", listaUsuarios.get(17), dolar, 10.50, "ACTIVO"));
         listaCuentas.add(new Cuenta("CTA-1143539867", listaUsuarios.get(18), sol, 440.00, "ACTIVO")); 
         listaCuentas.add(new Cuenta("CTA-1143549867", listaUsuarios.get(19), sol, 2750.80, "ACTIVO"));
+        listaCuentas.add(new Cuenta("CTA-1143559867", listaUsuarios.get(0), dolar, 1250.50, "ACTIVO"));
         
         for (int i = 0; i < listaCuentas.size(); i++) {
 

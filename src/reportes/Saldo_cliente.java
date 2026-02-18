@@ -22,7 +22,7 @@ public class Saldo_cliente extends JPanel implements ActionListener {
 
     public Saldo_cliente() {
     	
-    	setBackground(new Color(2, 64, 89));  //color del fondo azul
+    	setBackground(new Color(2, 64, 89)); 
         setLayout(null);
         
         ImageIcon usuarioReporte = new ImageIcon(getClass().getResource("/iconos/usuarioReporte.png"));
