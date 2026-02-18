@@ -1,15 +1,18 @@
 package datos;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 
 import modelos.Usuario;
 import modelos.Cuenta;
 import modelos.Moneda;
+import modelos.Transaccion;
 
 public class AlmacenDatos {
 	
 	public static ArrayList<Usuario> listaUsuarios = new ArrayList<>();
     public static ArrayList<Cuenta> listaCuentas = new ArrayList<>();
     public static ArrayList<Moneda> listaMonedas = new ArrayList<>();
+    public static ArrayList<Transaccion> listaTransacciones = new ArrayList<>();
     public static int incrementadorCuenta = 4355;
     
     static {
@@ -60,6 +63,32 @@ public class AlmacenDatos {
         listaCuentas.add(new Cuenta("CTA-1143529867", listaUsuarios.get(17), dolar, 10.50, "ACTIVO"));
         listaCuentas.add(new Cuenta("CTA-1143539867", listaUsuarios.get(18), sol, 440.00, "ACTIVO")); 
         listaCuentas.add(new Cuenta("CTA-1143549867", listaUsuarios.get(19), sol, 2750.80, "ACTIVO"));
+        
+        for (int i = 0; i < listaCuentas.size(); i++) {
+
+            Cuenta cuenta = listaCuentas.get(i);
+
+            Transaccion t1 = new Transaccion(cuenta.getNumeroCuenta(), Transaccion.Tipo.Deposito, 500.00);
+            t1.setFecha(LocalDateTime.now().minusDays(3)); 
+
+            Transaccion t2 = new Transaccion(cuenta.getNumeroCuenta(), Transaccion.Tipo.Retiro, 150.50);
+            t2.setFecha(LocalDateTime.now().minusDays(2)); 
+
+            Transaccion t3 = new Transaccion(cuenta.getNumeroCuenta(), Transaccion.Tipo.Transferencia, 200.00);
+            t3.setFecha(LocalDateTime.now().minusDays(1)); 
+
+            listaTransacciones.add(t1);
+            listaTransacciones.add(t2);
+            listaTransacciones.add(t3);
+
+            if (cuenta.getMovimientos() == null) {
+                cuenta.setMovimientos(new ArrayList<>());
+            }
+            
+            cuenta.getMovimientos().add(t1);
+            cuenta.getMovimientos().add(t2);
+            cuenta.getMovimientos().add(t3);
+        }
     }
     
     public static Usuario clientePorDni(String dni) {
@@ -94,8 +123,9 @@ public class AlmacenDatos {
     
     public static Cuenta cuentaPorDni(String dni) {
         for (int i = 0; i < listaCuentas.size(); i++) {
-            if (listaCuentas.get(i).getUsuario().getDNI().equals(dni)) {
-                return listaCuentas.get(i);
+        	Cuenta c = listaCuentas.get(i);
+        	if (c.getUsuario().getDNI().equals(dni)) {
+                return c;
             }
         }
         return null;

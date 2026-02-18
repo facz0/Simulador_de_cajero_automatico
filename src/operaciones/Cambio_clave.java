@@ -2,10 +2,12 @@ package operaciones;
 
 import java.awt.Color;
 import java.awt.Font;
+import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 import javax.swing.JButton;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JPasswordField;
 import javax.swing.JSeparator;
@@ -14,9 +16,6 @@ import javax.swing.UIManager;
 import javax.swing.border.EmptyBorder;
 
 import gui.VentanaPrincipal;
-
-import java.awt.event.ActionEvent;
-import javax.swing.JOptionPane;
 import modelos.Usuario;
 
 public class Cambio_clave extends JPanel implements ActionListener{
@@ -28,8 +27,8 @@ public class Cambio_clave extends JPanel implements ActionListener{
 	 private JPasswordField txtConfirmarClave;
 	 private JButton btnVolver;
 	 private JButton btnCancelar;
-	 private JPanel cajaAzul;
 	 private JButton btnCambiar;
+	 private JPanel cajaAzul;
 
 	/**
 	 * Create the panel.
@@ -48,7 +47,7 @@ public class Cambio_clave extends JPanel implements ActionListener{
 		lblTitulo.setForeground(new Color(2, 64, 89));
 		lblTitulo.setFont(new Font("Tahoma", Font.BOLD, 28));
 		lblTitulo.setHorizontalAlignment(SwingConstants.CENTER);
-		lblTitulo.setBounds(200, 20, 600, 40);
+		lblTitulo.setBounds(200, 54, 600, 40);
 		add(lblTitulo);
 
 		// Botón volver
@@ -65,7 +64,7 @@ public class Cambio_clave extends JPanel implements ActionListener{
 		// Caja azul interna
 		cajaAzul = new JPanel();
 		cajaAzul.setBackground(new Color(2, 64, 89));
-		cajaAzul.setBounds(200, 100, 600, 420);
+		cajaAzul.setBounds(200, 127, 600, 420);
 		cajaAzul.setLayout(null);
 		add(cajaAzul);
 
@@ -73,7 +72,6 @@ public class Cambio_clave extends JPanel implements ActionListener{
 		separator.setBounds(50, 30, 500, 2);
 		cajaAzul.add(separator);
 
-		// Clave actual
 		JLabel lblClaveActual = new JLabel("Clave Actual:");
 		lblClaveActual.setForeground(Color.WHITE);
 		lblClaveActual.setFont(new Font("Tahoma", Font.BOLD, 18));
@@ -101,7 +99,7 @@ public class Cambio_clave extends JPanel implements ActionListener{
 		JLabel lblConfirmar = new JLabel("Confirmar Clave:");
 		lblConfirmar.setForeground(Color.WHITE);
 		lblConfirmar.setFont(new Font("Tahoma", Font.BOLD, 18));
-		lblConfirmar.setBounds(60, 180, 200, 30);
+		lblConfirmar.setBounds(60, 182, 200, 30);
 		cajaAzul.add(lblConfirmar);
 
 		txtConfirmarClave = new JPasswordField();
@@ -110,12 +108,10 @@ public class Cambio_clave extends JPanel implements ActionListener{
 		cajaAzul.add(txtConfirmarClave);
 
 		Color verdeBoton = new Color(128, 191, 33);
-
-		// Botón cambiar clave (inactivo por ahora)
-		//DM
+		
+		// Botón de acción principal
 		btnCambiar = new JButton("CAMBIAR CLAVE");
 		btnCambiar.addActionListener(this);
-
 		btnCambiar.setFont(new Font("Tahoma", Font.BOLD, 18));
 		btnCambiar.setBackground(verdeBoton);
 		btnCambiar.setForeground(Color.WHITE);
@@ -149,11 +145,11 @@ public class Cambio_clave extends JPanel implements ActionListener{
 	public void actionPerformed(ActionEvent e) {
 		// TODO Auto-generated method stub
 		if (e.getSource() == btnVolver) {
-	        ventanaPrincipal.menu_usuario();
-	    }
-	    if (e.getSource() == btnCambiar) {
-	        cambiarClave(); // ✅ aquí lo llamas
-	    }
+			ventanaPrincipal.menu_usuario();
+		}
+		if (e.getSource() == btnCambiar) {
+			cambiarClave();
+		}
 	    if (e.getSource() == btnCancelar) {
 	        ventanaPrincipal.menu_usuario();
 	    }
@@ -162,12 +158,12 @@ public class Cambio_clave extends JPanel implements ActionListener{
 	private void cambiarClave() {
 
 	    Usuario u = ventanaPrincipal.getUsuarioActual();
-
+	    
 	    if (u == null) {
-	        JOptionPane.showMessageDialog(this, "No hay sesión activa. Inicie sesión nuevamente.");
-	        ventanaPrincipal.Panel_inicio();
-	        return;
-	    }
+			JOptionPane.showMessageDialog(this, "No hay sesión activa. Inicie sesión nuevamente.");
+			ventanaPrincipal.Panel_inicio();
+			return;
+		}
 
 	    String actual = new String(txtClaveActual.getPassword()).trim();
 	    String nueva  = new String(txtClaveNueva.getPassword()).trim();

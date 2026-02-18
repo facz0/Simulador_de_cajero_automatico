@@ -72,8 +72,7 @@ public class Cuenta {
 	
 	@Override
 	public String toString() {
-	    String simbolo = (moneda != null) ? moneda.getIdMoneda() : "";
-	    return NumeroCuenta + "  |  " + simbolo + "  Saldo: " + String.format("%.2f", saldo);
+	    return NumeroCuenta + "  |  " + moneda.getIdMoneda() + " " + moneda.getNombre();
 	}
 
 }

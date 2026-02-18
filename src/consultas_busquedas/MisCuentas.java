@@ -124,10 +124,8 @@ public class MisCuentas extends JPanel implements ActionListener {
 
 	private void cargarCuentas() {
 	    comboBox.removeAllItems();
-
 	    // ✅ usuario logueado
 	    Usuario usuarioActual = Sesion.obtener();
-
 
 	    if (usuarioActual == null) {
 	        JOptionPane.showMessageDialog(this, "No hay usuario logueado.");

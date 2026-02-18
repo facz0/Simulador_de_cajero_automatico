@@ -53,5 +53,12 @@ public class Transaccion {
         DateTimeFormatter formato = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm:ss");
         return fecha.format(formato);
     }
+
+	public void setFecha(LocalDateTime fecha) {
+		this.fecha = fecha;
+	}
+	
+	
+	
 }
 
