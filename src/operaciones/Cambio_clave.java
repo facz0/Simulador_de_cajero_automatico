@@ -21,7 +21,9 @@ public class Cambio_clave extends JPanel implements ActionListener {
 
 	private static final long serialVersionUID = 1L;
 
-	// DM atributo de clases
+	
+	//  VARIABLES / ATRIBUTOS
+
 	private VentanaPrincipal ventanaPrincipal;
 
 	private JPasswordField txtClaveActual;
@@ -34,6 +36,9 @@ public class Cambio_clave extends JPanel implements ActionListener {
 
 	private JPanel cajaAzul;
 
+	
+	// CONSTRUCTOR
+	
 	public Cambio_clave(VentanaPrincipal principal) {
 
 		this.ventanaPrincipal = principal;
@@ -43,6 +48,10 @@ public class Cambio_clave extends JPanel implements ActionListener {
 		setBorder(new EmptyBorder(10, 10, 10, 10));
 		setPreferredSize(new java.awt.Dimension(1000, 620));
 		setLayout(null);
+
+	
+		//  COMPONENTES UI
+	
 
 		// ESTRUCTURAS DE ETIQUETAS
 		JLabel lblTitulo = new JLabel("CAMBIO DE CLAVE");
@@ -56,7 +65,6 @@ public class Cambio_clave extends JPanel implements ActionListener {
 		btnVolver = new JButton("< Volver");
 		btnVolver.setForeground(Color.WHITE);
 		btnVolver.setBackground(new Color(128, 191, 33));
-		btnVolver.addActionListener(this);
 		btnVolver.setFont(new Font("Tahoma", Font.PLAIN, 15));
 		btnVolver.setBounds(10, 15, 110, 35);
 		btnVolver.setContentAreaFilled(false);
@@ -113,7 +121,6 @@ public class Cambio_clave extends JPanel implements ActionListener {
 
 		// Botón de acción principal
 		btnCambiar = new JButton("CAMBIAR CLAVE");
-		btnCambiar.addActionListener(this);
 		btnCambiar.setFont(new Font("Tahoma", Font.BOLD, 18));
 		btnCambiar.setBackground(verdeBoton);
 		btnCambiar.setForeground(Color.WHITE);
@@ -125,7 +132,6 @@ public class Cambio_clave extends JPanel implements ActionListener {
 
 		// Botón cancelar
 		btnCancelar = new JButton("CANCELAR");
-		btnCancelar.addActionListener(this);
 		btnCancelar.setFont(new Font("Tahoma", Font.BOLD, 18));
 		btnCancelar.setBackground(verdeBoton);
 		btnCancelar.setForeground(Color.WHITE);
@@ -141,7 +147,17 @@ public class Cambio_clave extends JPanel implements ActionListener {
 		lblNota.setFont(new Font("Tahoma", Font.ITALIC, 13));
 		lblNota.setBounds(50, 320, 500, 20);
 		cajaAzul.add(lblNota);
+
+	
+		//  LISTENERS
+	
+		btnVolver.addActionListener(this);
+		btnCambiar.addActionListener(this);
+		btnCancelar.addActionListener(this);
 	}
+
+	
+	//  ACCIONES / EVENTOS
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
@@ -159,7 +175,9 @@ public class Cambio_clave extends JPanel implements ActionListener {
 		}
 	}
 
-	// dm met cambio clave
+
+	//  MÉTODOS PRIVADOS (LÓGICA + VALIDACIONES)
+	
 	private void cambiarClave() {
 
 		Usuario u = ventanaPrincipal.getUsuarioActual();
@@ -171,18 +189,21 @@ public class Cambio_clave extends JPanel implements ActionListener {
 		}
 
 		String actual = new String(txtClaveActual.getPassword()).trim();
-		String nueva  = new String(txtClaveNueva.getPassword()).trim();
-		String conf   = new String(txtConfirmarClave.getPassword()).trim();
+		String nueva = new String(txtClaveNueva.getPassword()).trim();
+		String conf = new String(txtConfirmarClave.getPassword()).trim();
 
-		// VALIDA  CAMPOS VACÍOS
 		if (actual.isEmpty() || nueva.isEmpty() || conf.isEmpty()) {
 			JOptionPane.showMessageDialog(this, "Complete todos los campos.");
 			return;
 		}
 
-		// COMPARACIÓN DE OBJETOS:
 		if (!u.getPassword().equals(actual)) {
 			JOptionPane.showMessageDialog(this, "La clave actual es incorrecta.");
+			return;
+		}
+
+		if (nueva.equals(actual)) {
+			JOptionPane.showMessageDialog(this, "La nueva clave no puede ser igual a la actual.");
 			return;
 		}
 
@@ -207,3 +228,4 @@ public class Cambio_clave extends JPanel implements ActionListener {
 		ventanaPrincipal.menu_usuario();
 	}
 }
+

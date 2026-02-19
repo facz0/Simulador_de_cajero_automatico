@@ -21,17 +21,27 @@ public class Retiro_dinero extends JPanel {
 
 	private static final long serialVersionUID = 1L;
 
+	//  CONSTANTES
+	
+	private static final double TIPO_CAMBIO_USD_A_SOL = 3.80;
+
+	
+	// VARIABLES / ATRIBUTOS
+	
 	private VentanaPrincipal ventanaPrincipal;
 	private CuentaService cuentaService = new CuentaService();
 
 	private JComboBox<String> comboMoneda;
-	private JTextField textField_2;
-	private JTextField textField_1;
+	private JTextField textField_2; 
+	private JTextField textField_1; 
 
 	private JButton btn20, btn50, btn100, btn200, btn500, btn1000;
 	private JButton btnRetirar, btnLimpiar, btnCancelar;
 	private JButton btnVolver;
 
+	
+	//  CONSTRUCTOR
+	
 	public Retiro_dinero(VentanaPrincipal principal) {
 
 		this.ventanaPrincipal = principal;
@@ -39,12 +49,15 @@ public class Retiro_dinero extends JPanel {
 		setLayout(null);
 		setBackground(Color.WHITE);
 
+		
+		//  COMPONENTES UI
+		
+
 		// BOTON VOLVER
 		btnVolver = new JButton("< VOLVER");
 		btnVolver.setBounds(10, 11, 138, 34);
 		btnVolver.setFont(new Font("Tahoma", Font.BOLD, 16));
 		aplicarEstiloPrincipal(btnVolver, new Color(0, 153, 0), Color.WHITE);
-		btnVolver.addActionListener(e -> ventanaPrincipal.menu_usuario());
 		add(btnVolver);
 
 		// Panel azul central
@@ -54,7 +67,7 @@ public class Retiro_dinero extends JPanel {
 		cajaAzul.setLayout(null);
 		add(cajaAzul);
 
-		// botobes
+		// Etiquetas
 		JLabel lblMoneda = new JLabel("MONEDA");
 		lblMoneda.setFont(new Font("Tahoma", Font.BOLD, 20));
 		lblMoneda.setForeground(Color.WHITE);
@@ -80,10 +93,10 @@ public class Retiro_dinero extends JPanel {
 		cajaAzul.add(comboMoneda);
 
 		textField_2 = new JTextField();
-		textField_2.setForeground(new Color(154, 205, 50));
+		textField_2.setForeground(new Color(0, 0, 0));
 		textField_2.setEditable(false);
 		textField_2.setBounds(403, 125, 180, 35);
-		textField_2.setFont(new Font("Tahoma", Font.BOLD, 16));
+		textField_2.setFont(new Font("Arial Black", Font.BOLD, 20));
 		cajaAzul.add(textField_2);
 
 		textField_1 = new JTextField();
@@ -100,15 +113,13 @@ public class Retiro_dinero extends JPanel {
 		btnRetirar.setBounds(49, 386, 159, 40);
 		btnRetirar.setFont(new Font("Tahoma", Font.BOLD, 20));
 		aplicarEstiloPrincipal(btnRetirar, new Color(128, 191, 33), Color.WHITE);
-		btnRetirar.addActionListener(e -> ejecutarRetiro());
 		cajaAzul.add(btnRetirar);
 
 		btnLimpiar = new JButton("LIMPIAR");
 		btnLimpiar.setForeground(new Color(255, 215, 0));
 		btnLimpiar.setBounds(288, 387, 151, 39);
 		btnLimpiar.setFont(new Font("Tahoma", Font.BOLD, 20));
-		aplicarEstiloPrincipal(btnLimpiar, new Color(255, 193, 7), Color.BLACK);
-		btnLimpiar.addActionListener(e -> limpiarCampos());
+		aplicarEstiloPrincipal(btnLimpiar, new Color(255, 193, 7), Color.white);
 		cajaAzul.add(btnLimpiar);
 
 		btnCancelar = new JButton("CANCELAR");
@@ -116,7 +127,6 @@ public class Retiro_dinero extends JPanel {
 		btnCancelar.setBounds(501, 387, 167, 39);
 		btnCancelar.setFont(new Font("Tahoma", Font.BOLD, 20));
 		aplicarEstiloPrincipal(btnCancelar, new Color(220, 53, 69), Color.WHITE);
-		btnCancelar.addActionListener(e -> ventanaPrincipal.menu_usuario());
 		cajaAzul.add(btnCancelar);
 
 		// TITULO
@@ -127,42 +137,109 @@ public class Retiro_dinero extends JPanel {
 		lblTitulo.setForeground(new Color(2, 64, 89));
 		add(lblTitulo);
 
+		
+		//  LISTENERS / ACCIONES
+		
+		btnVolver.addActionListener(e -> ventanaPrincipal.menu_usuario());
+
+		btnRetirar.addActionListener(e -> ejecutarRetiro());
+
+		btnLimpiar.addActionListener(e -> limpiarCampos());
+
+		btnCancelar.addActionListener(e -> ventanaPrincipal.menu_usuario());
+
+		comboMoneda.addActionListener(e -> actualizarInterfaz());
+
+		
+		//  ESTADO INICIAL
+	
 		actualizarInterfaz();
 	}
 
-	private void ejecutarRetiro() {
 
-		try {
-
-			Cuenta cuenta = ventanaPrincipal.getCuentaActual();
-			if (cuenta == null) {
-				JOptionPane.showMessageDialog(this, "Error: Sesión no encontrada.");
-				return;
-			}
-
-			double monto = Double.parseDouble(textField_1.getText());
-
-			cuentaService.retirarDinero(cuenta, monto);
-
-			JOptionPane.showMessageDialog(this,
-					"Retiro exitoso.\nSu nuevo saldo es: " + String.format(Locale.US, "%.2f", cuenta.getSaldo()));
-
-			actualizarInterfaz();
-			textField_1.setText("");
-
-		} catch (NumberFormatException ex) {
-			JOptionPane.showMessageDialog(this, "Por favor, ingrese un monto válido.");
-		} catch (Exception ex) {
-			JOptionPane.showMessageDialog(this, ex.getMessage());
-		}
-	}
-
-	// formato para 2 decimales.
+	//  MÉTODOS PÚBLICOS
+	
 	public void actualizarInterfaz() {
 
 		if (ventanaPrincipal.getCuentaActual() != null) {
 			double saldoActual = ventanaPrincipal.getCuentaActual().getSaldo();
 			textField_2.setText(String.format(Locale.US, "%.2f", saldoActual));
+		}
+	}
+
+	
+	// MÉTODOS PRIVADOS (LÓGICA + VALIDACIONES)
+
+
+	private void ejecutarRetiro() {
+
+		Cuenta cuenta = ventanaPrincipal.getCuentaActual();
+		if (cuenta == null) {
+			JOptionPane.showMessageDialog(this, "Error: Sesión no encontrada.");
+			return;
+		}
+
+		String textoMonto = textField_1.getText().trim();
+		if (textoMonto.isEmpty()) {
+			JOptionPane.showMessageDialog(this, "Ingrese un monto para retirar.");
+			return;
+		}
+
+		double montoIngresado;
+		try {
+			montoIngresado = Double.parseDouble(textoMonto);
+		} catch (NumberFormatException ex) {
+			JOptionPane.showMessageDialog(this, "Por favor, ingrese un monto válido (solo números).");
+			return;
+		}
+
+		if (montoIngresado <= 0) {
+			JOptionPane.showMessageDialog(this, "El monto debe ser mayor que 0.");
+			return;
+		}
+
+		// moneda elegida
+		String moneda = (String) comboMoneda.getSelectedItem();
+
+		double montoADescontarEnSoles;
+
+		if ("Dólares".equals(moneda)) {
+
+			// USD -> soles
+			montoADescontarEnSoles = montoIngresado * TIPO_CAMBIO_USD_A_SOL;
+
+		} else {
+
+			montoADescontarEnSoles = montoIngresado;
+		}
+
+		if (montoADescontarEnSoles > cuenta.getSaldo()) {
+			JOptionPane.showMessageDialog(this,
+					"Saldo insuficiente.\nNecesitas: S/ " + String.format(Locale.US, "%.2f", montoADescontarEnSoles)
+							+ "\nTienes: S/ " + String.format(Locale.US, "%.2f", cuenta.getSaldo()));
+			return;
+		}
+
+		try {
+			cuentaService.retirarDinero(cuenta, montoADescontarEnSoles);
+
+			if ("Dólares".equals(moneda)) {
+				JOptionPane.showMessageDialog(this,
+						"✅ Retiro exitoso: $ " + String.format(Locale.US, "%.2f", montoIngresado)
+								+ "\nSe descontó de tu cuenta: S/ "
+								+ String.format(Locale.US, "%.2f", montoADescontarEnSoles)
+								+ "\nNuevo saldo: S/ " + String.format(Locale.US, "%.2f", cuenta.getSaldo()));
+			} else {
+				JOptionPane.showMessageDialog(this,
+						"✅ Retiro exitoso: S/ " + String.format(Locale.US, "%.2f", montoIngresado)
+								+ "\nNuevo saldo: S/ " + String.format(Locale.US, "%.2f", cuenta.getSaldo()));
+			}
+
+			actualizarInterfaz();
+			textField_1.setText("");
+
+		} catch (Exception ex) {
+			JOptionPane.showMessageDialog(this, ex.getMessage());
 		}
 	}
 
@@ -189,7 +266,6 @@ public class Retiro_dinero extends JPanel {
 			botones[i].setFont(new Font("Tahoma", Font.BOLD, 14));
 
 			String valor = botones[i].getText();
-
 			botones[i].addActionListener(e -> textField_1.setText(valor));
 			p.add(botones[i]);
 
@@ -204,13 +280,17 @@ public class Retiro_dinero extends JPanel {
 
 	private void aplicarEstiloPrincipal(JButton b, Color fondo, Color texto) {
 
-		b.setUI(new BasicButtonUI());
-		b.setBackground(new Color(154, 205, 50));
-		b.setForeground(texto);
-		b.setOpaque(true);
-		b.setBorderPainted(false);
-		b.setFocusPainted(false);
-	}
-}
+	    b.setUI(new BasicButtonUI());
 
+	    b.setBackground(new Color(176, 237, 63));      // ✅ ahora sí usa el color que le mandas
+	    b.setForeground(texto);
+
+	    b.setOpaque(true);
+	    b.setBorderPainted(false);
+	    b.setFocusPainted(false);
+
+	    b.setFont(new Font("Tahoma", Font.BOLD, 20));
+	}
+
+}
 
