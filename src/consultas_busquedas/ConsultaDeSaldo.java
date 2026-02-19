@@ -3,18 +3,20 @@ package consultas_busquedas;
 import javax.swing.JPanel;
 import javax.swing.JLabel;
 import javax.swing.JButton;
-import javax.swing.JTextArea;
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+
 import javax.swing.JScrollPane;
+import javax.swing.JTable;
+import javax.swing.table.DefaultTableModel;
 
 import gui.VentanaPrincipal;
 import modelos.Cuenta;
-import servicio.Consultas;
-
 import javax.swing.border.LineBorder;
+
+import servicio.Consultas;
 
 public class ConsultaDeSaldo extends JPanel implements ActionListener {
 
@@ -23,7 +25,8 @@ public class ConsultaDeSaldo extends JPanel implements ActionListener {
 
 	private JButton btnVolver;
 	private JButton btnConsultar;
-	private JTextArea textArea;
+	private JTable tabla;
+	private DefaultTableModel modelo;
 
 	public ConsultaDeSaldo(VentanaPrincipal principal) {
 		setBorder(new LineBorder(new Color(0, 0, 0), 3));
@@ -55,12 +58,13 @@ public class ConsultaDeSaldo extends JPanel implements ActionListener {
 		panel.setLayout(null);
 		add(panel);
 
-		JScrollPane scrollPane = new JScrollPane();
+	
+		modelo = new DefaultTableModel(new Object[] { "Nro Cuenta", "Moneda", "Saldo" }, 0);
+		tabla = new JTable(modelo);
+
+		JScrollPane scrollPane = new JScrollPane(tabla);
 		scrollPane.setBounds(281, 53, 418, 339);
 		panel.add(scrollPane);
-
-		textArea = new JTextArea();
-		scrollPane.setViewportView(textArea);
 
 		btnConsultar = new JButton("CONSULTAR");
 		btnConsultar.setBounds(94, 204, 129, 38);
@@ -83,7 +87,14 @@ public class ConsultaDeSaldo extends JPanel implements ActionListener {
 
 		if (e.getSource() == btnConsultar) {
 			Cuenta c = ventanaPrincipal.getCuentaSeleccionada();
-			textArea.setText(Consultas.consultarSaldo(c));
+
+			// limpiar
+			modelo.setRowCount(0);
+
+			// cargar 1 fila
+			for (Object[] fila : Consultas.saldoFila(c)) {
+				modelo.addRow(fila);
+			}
 		}
 	}
 }

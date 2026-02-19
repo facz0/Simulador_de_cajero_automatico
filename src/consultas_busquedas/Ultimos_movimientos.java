@@ -9,14 +9,15 @@ import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
-import javax.swing.JSeparator;
-import javax.swing.JTextArea;
 
 import gui.VentanaPrincipal;
 import modelos.Cuenta;
-import servicio.Consultas;
 
 import javax.swing.border.LineBorder;
+import javax.swing.JTable;
+import javax.swing.table.DefaultTableModel;
+
+import servicio.Consultas;
 
 public class Ultimos_movimientos extends JPanel implements ActionListener {
 
@@ -25,7 +26,9 @@ public class Ultimos_movimientos extends JPanel implements ActionListener {
 
 	private JButton btnListar;
 	private JButton btnVolver;
-	private JTextArea textArea;
+	private JTable tabla;
+	private DefaultTableModel modelo;
+
 	private JPanel panel;
 
 	public Ultimos_movimientos(VentanaPrincipal principal) {
@@ -36,7 +39,7 @@ public class Ultimos_movimientos extends JPanel implements ActionListener {
 
 		JLabel lblTitulo = new JLabel("Últimos movimientos");
 		lblTitulo.setForeground(Color.WHITE);
-		lblTitulo.setFont(new Font("Tahoma", Font.BOLD, 22));
+		lblTitulo.setFont(new Font("Tahoma", Font.PLAIN, 20));
 		lblTitulo.setBounds(399, 11, 272, 39);
 		add(lblTitulo);
 
@@ -50,12 +53,12 @@ public class Ultimos_movimientos extends JPanel implements ActionListener {
 		btnListar.addActionListener(this);
 		add(btnListar);
 
-		JScrollPane scrollPane = new JScrollPane();
+		modelo = new DefaultTableModel(new Object[] { "Fecha", "Tipo", "Monto" }, 0);
+		tabla = new JTable(modelo);
+
+		JScrollPane scrollPane = new JScrollPane(tabla);
 		scrollPane.setBounds(224, 191, 555, 329);
 		add(scrollPane);
-
-		textArea = new JTextArea();
-		scrollPane.setViewportView(textArea);
 
 		btnVolver = new JButton("< Volver");
 		btnVolver.setForeground(Color.WHITE);
@@ -66,7 +69,7 @@ public class Ultimos_movimientos extends JPanel implements ActionListener {
 		btnVolver.setContentAreaFilled(false);
 		btnVolver.setOpaque(true);
 		add(btnVolver);
-		
+
 		panel = new JPanel();
 		panel.setBorder(new LineBorder(new Color(255, 255, 255), 3));
 		panel.setBackground(new Color(2, 64, 89));
@@ -84,7 +87,12 @@ public class Ultimos_movimientos extends JPanel implements ActionListener {
 
 		if (e.getSource() == btnListar) {
 			Cuenta c = ventanaPrincipal.getCuentaSeleccionada();
-			textArea.setText(Consultas.ultimosMovimientos(c, 5));
+
+			modelo.setRowCount(0);
+
+			for (Object[] fila : Consultas.ultimosMovimientosFilas(c, 5)) {
+				modelo.addRow(fila);
+			}
 		}
 	}
 }

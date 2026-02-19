@@ -3,11 +3,9 @@ package consultas_busquedas;
 import javax.swing.JPanel;
 import javax.swing.JLabel;
 import javax.swing.JTextField;
-
 import gui.VentanaPrincipal;
 
 import javax.swing.JButton;
-import javax.swing.JTextArea;
 import javax.swing.JScrollPane;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
@@ -15,9 +13,12 @@ import java.awt.event.ActionListener;
 import java.awt.Color;
 
 import modelos.Cuenta;
-import servicio.Consultas;
-
 import javax.swing.border.LineBorder;
+
+import javax.swing.JTable;
+import javax.swing.table.DefaultTableModel;
+
+import servicio.Consultas;
 
 public class Consultas_Rango extends JPanel implements ActionListener {
 
@@ -28,7 +29,8 @@ public class Consultas_Rango extends JPanel implements ActionListener {
 	private JTextField txtDesde;
 	private JTextField txtHasta;
 	private JButton btnProcesar;
-	private JTextArea textArea;
+	private JTable tabla;
+	private DefaultTableModel modelo;
 
 	public Consultas_Rango(VentanaPrincipal principal) {
 		setBackground(new Color(2, 64, 89));
@@ -49,12 +51,13 @@ public class Consultas_Rango extends JPanel implements ActionListener {
 		panel.setLayout(null);
 		add(panel);
 
-		JScrollPane scrollPane = new JScrollPane();
+	
+		modelo = new DefaultTableModel(new Object[] { "Fecha", "Tipo", "Monto" }, 0);
+		tabla = new JTable(modelo);
+
+		JScrollPane scrollPane = new JScrollPane(tabla);
 		scrollPane.setBounds(297, 47, 403, 333);
 		panel.add(scrollPane);
-
-		textArea = new JTextArea();
-		scrollPane.setViewportView(textArea);
 
 		btnProcesar = new JButton("PROCESAR");
 		btnProcesar.setBounds(45, 249, 125, 39);
@@ -107,7 +110,12 @@ public class Consultas_Rango extends JPanel implements ActionListener {
 
 		if (e.getSource() == btnProcesar) {
 			Cuenta c = ventanaPrincipal.getCuentaSeleccionada();
-			textArea.setText(Consultas.movimientosPorRango(c, txtDesde.getText(), txtHasta.getText()));
+
+			modelo.setRowCount(0);
+
+			for (Object[] fila : Consultas.movimientosPorRangoFilas(c, txtDesde.getText(), txtHasta.getText())) {
+				modelo.addRow(fila);
+			}
 		}
 	}
 }
