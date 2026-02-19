@@ -4,7 +4,7 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
 public class Transaccion {
-	public enum Tipo {Retiro, Deposito, Cambio_moneda}
+	public enum Tipo {Retiro, Deposito, Cambio_moneda, Transferencia}
 	
 	private static int contador;
 	
@@ -53,5 +53,12 @@ public class Transaccion {
         DateTimeFormatter formato = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm:ss");
         return fecha.format(formato);
     }
+
+	public void setFecha(LocalDateTime fecha) {
+		this.fecha = fecha;
+	}
+	
+	
+	
 }
 

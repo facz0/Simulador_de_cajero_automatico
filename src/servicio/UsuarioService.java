@@ -37,7 +37,7 @@ public class UsuarioService {
 		cuenta.EliminarCuentaPorDni(dni);
 		
 		if(user == null) {
-			throw new Exception("El usuario con DNI " + " no existe.");	
+			throw new Exception("El usuario con DNI " +dni+ " no existe.");	
 		}
 		AlmacenDatos.listaUsuarios.remove(user);
 		

@@ -7,6 +7,9 @@ import java.awt.Font;
 import java.awt.Image;
 
 import javax.swing.SwingConstants;
+
+import operaciones.DepositoDinero;
+
 import java.awt.Color;
 
 import javax.swing.ImageIcon;
@@ -29,6 +32,7 @@ public class Menu_usuario extends JPanel implements ActionListener {
 	private JButton btnCambiarMoneda;
 	private JButton btnConsultas;
 	private JButton btnCancelar;
+	private DepositoDinero depositarDinero;
 
 	
 	
@@ -161,13 +165,16 @@ public class Menu_usuario extends JPanel implements ActionListener {
 		btnCancelar.setContentAreaFilled(false); 
 		btnCancelar.setOpaque(true);
 		btnCancelar.setIcon(cancelar);
-
+		
+		depositarDinero = new DepositoDinero(principal);
+		
 	}
 	public void actionPerformed(ActionEvent e) {
 		if (e.getSource() == btnCambiarClave) {
 			ventanaPrincipal.Cambiar_clave();
 		}
 		if(e.getSource() == btnDepositoDeDinero) {
+			//depositarDinero.cargarDatos();
 			ventanaPrincipal.Depositar_dinero();
 		}
 		if(e.getSource() == btnCambiarMoneda) {

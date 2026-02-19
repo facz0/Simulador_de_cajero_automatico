@@ -138,6 +138,7 @@ public class ModificarMoneda extends JPanel implements ActionListener{
 			}
 			MonedaService service = new MonedaService();
 			service.ModificarMoneda(simbolo, nombre, cambio);
+			JOptionPane.showMessageDialog(this, "Moneda modificada de manera correcta");
 		} catch (NumberFormatException err) {
 			JOptionPane.showMessageDialog(this, "El tipo de cambio debe ser un número (ejemplo: 3.85)");
 		} catch (Exception er) {

@@ -23,6 +23,8 @@ import operaciones.Login_administrador;
 import operaciones.Login_usuario;
 import operaciones.Retiro_dinero;
 import reportes.Ventana_reportee;
+import modelos.Usuario;
+
 
 public class VentanaPrincipal extends JFrame {
 
@@ -46,15 +48,10 @@ public class VentanaPrincipal extends JFrame {
 	private Mantenimiento_cliente mantenimiento_cliente;
 	private Mantenimiento_transaccion mantenimiento_transaccion;
 	private Mantenimiento_moneda mantenimiento_moneda;
-
-	
-
-
 	private MisCuentas mis_cuentas;
-
-
 	private Cuenta cuentaSeleccionada;
-
+	private Usuario usuarioActual;
+	private Cuenta cuentaActual;
 
 	/**
 	 * Launch the application.
@@ -95,11 +92,8 @@ public class VentanaPrincipal extends JFrame {
 		mantenimiento_cliente = new Mantenimiento_cliente(this);
 		mantenimiento_transaccion = new Mantenimiento_transaccion(this);
 		mantenimiento_moneda = new Mantenimiento_moneda(this);
-
-
 		// [CAMBIO] Instanciar MisCuentas
 		mis_cuentas = new MisCuentas(this);
-
 
 		panel_inicio.setPreferredSize(new java.awt.Dimension(1000, 620));
 		setContentPane(panel_inicio);
@@ -107,45 +101,29 @@ public class VentanaPrincipal extends JFrame {
 		setLocationRelativeTo(null);
 		Panel_inicio();
 	}
-
-	// ==========================
-	// [CAMBIO] Getter/Setter cuenta seleccionada
-	// ==========================
+	
+	//MÉTODOS DE SESIÓN
+	public void setSesion(Usuario u, Cuenta c) {
+	    this.usuarioActual = u;
+	    this.cuentaActual = c;
+	}
+	public Usuario getUsuarioActual() {
+	    return usuarioActual;
+	}
+	public Cuenta getCuentaActual() {
+	    return cuentaActual;
+	}
+	
+	//uso de sesión actual para CONSULTAS
 	public void setCuentaSeleccionada(Cuenta cuenta) {
 		this.cuentaSeleccionada = cuenta;
 	}
-
+	//obtencion de datos de la sesión para CONSULTAS
 	public Cuenta getCuentaSeleccionada() {
 		return this.cuentaSeleccionada;
 	}
-
-	// ==========================
-	// [CAMBIO] Entrada al módulo de consultas
-	// ==========================
-	public void Mis_Cuentas() {
-		 mis_cuentas.refrescar();  
-		cambiar_panel(mis_cuentas);
-	}
-
-	// ==========================
-	// [CAMBIO] Navegación con cuenta fija (sin romper métodos existentes)
-	// ==========================
-	public void irConsultaSaldo(Cuenta cuenta) {
-		setCuentaSeleccionada(cuenta);
-		Consultar_saldo(); // reutiliza tu método
-	}
-
-	public void irUltimosMovimientos(Cuenta cuenta) {
-		setCuentaSeleccionada(cuenta);
-		Ultimos_movimientos(); // reutiliza tu método
-	}
-
-	public void irConsultaRango(Cuenta cuenta) {
-		setCuentaSeleccionada(cuenta);
-		Consultar_por_ranfo(); // reutiliza tu método
-	}
-
-
+	
+	//NAVEGACIÓN HACIA VENTANAS
 	public void Panel_inicio() {
 		cambiar_panel(panel_inicio);
 	}
@@ -172,6 +150,7 @@ public class VentanaPrincipal extends JFrame {
 	}
 
 	public void Depositar_dinero() {
+		//depositar_dinero.cargarDatos();
 		cambiar_panel(depositar_dinero);
 	}
 
@@ -215,8 +194,27 @@ public class VentanaPrincipal extends JFrame {
 		cambiar_panel(mantenimiento_moneda);
 	}
 
+	public void Mis_Cuentas() {
+		 mis_cuentas.refrescar();  
+		cambiar_panel(mis_cuentas);
+	}
+	
+	public void irConsultaSaldo(Cuenta cuenta) {
+		setCuentaSeleccionada(cuenta);
+		Consultar_saldo();
+	}
 
+	public void irUltimosMovimientos(Cuenta cuenta) {
+		setCuentaSeleccionada(cuenta);
+		Ultimos_movimientos();
+	}
 
+	public void irConsultaRango(Cuenta cuenta) {
+		setCuentaSeleccionada(cuenta);
+		Consultar_por_ranfo();
+	}
+
+	
 	public void cambiar_panel(JPanel panel) {
 		setContentPane(panel);
 		revalidate();

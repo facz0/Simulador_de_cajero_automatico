@@ -1,6 +1,7 @@
 package servicio;
 
 import java.util.ArrayList;
+import java.util.Locale;
 
 import javax.swing.JOptionPane;
 
@@ -13,7 +14,8 @@ import modelos.Usuario;
 public class CuentaService {
 	
 	public String generarNextNumeroCuenta() {
-		return "CTA-" + "11" + (AlmacenDatos.listaCuentas.size() + 4335) + "9867";
+		AlmacenDatos.incrementadorCuenta++;
+		return "CTA-" + "11" + AlmacenDatos.incrementadorCuenta + "9867";
 	}
 
 	public void crearCuenta(String numeroCuenta, Usuario usuario, Moneda moneda) throws Exception{
@@ -38,6 +40,33 @@ public class CuentaService {
 	
 	public ArrayList<Cuenta> listarCuenta(){
 		return AlmacenDatos.listaCuentas;
+	}
+	
+	public void retirarDinero(Cuenta cuenta, double monto) throws Exception {
+		if (cuenta == null) {
+			throw new Exception("Error: No se ha detectado una cuenta activa.");
+		}
+		
+		if (monto <= 0) {
+			throw new Exception("Error: El monto a retirar debe ser mayor a cero.");
+		}
+		
+		if (cuenta.getSaldo() < monto) {
+			String saldoFormat = String.format(Locale.US, "%.2f", cuenta.getSaldo());
+			throw new Exception("Saldo insuficiente. Tu saldo actual es: " + saldoFormat);
+		}
+		
+		double nuevoSaldo = cuenta.getSaldo() - monto;
+		cuenta.setSaldo(nuevoSaldo);
+		
+		Transaccion movimiento = new Transaccion(
+				cuenta.getNumeroCuenta(), 
+				Transaccion.Tipo.Retiro, 
+				monto
+			);
+		
+		TransaccionService servicio = new TransaccionService();
+		servicio.registrarTransaccion(cuenta, movimiento);
 	}
 	
 	public void ModificarCuenta(String numeroCuenta, double saldo, String estado) throws Exception{

@@ -5,166 +5,225 @@ import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.Locale;
 
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JSeparator;
 import javax.swing.JTextField;
 import javax.swing.SwingConstants;
 import javax.swing.UIManager; // Necesario para el estilo visual
 import javax.swing.border.EmptyBorder;
+import javax.swing.plaf.basic.BasicButtonUI;
 
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
 import gui.VentanaPrincipal;
+import modelos.Cuenta;
+import servicio.CuentaService;
 
 public class Retiro_dinero extends JPanel implements ActionListener{
 
 	private static final long serialVersionUID = 1L;
+
 	private VentanaPrincipal ventanaPrincipal;
-	private JTextField txtMontoRetirar;
-    private JComboBox<String> comboMoneda;
-    private JLabel lblSimboloMoneda;
-    private JButton btnVolver;
+	private CuentaService cuentaService = new CuentaService();
 
-	/**
-	 * Create the panel.
-	 */
+	private JComboBox<String> comboMoneda;
+	private JTextField textField_2;
+	private JTextField txtMontoRetiro;
+
+	private JButton btn20, btn50, btn100, btn200, btn500, btn1000;
+	private JButton btnRetirar, btnLimpiar, btnCancelar;
+	private JButton btnVolver;
+	
 	public Retiro_dinero(VentanaPrincipal principal) {
+		
 		this.ventanaPrincipal = principal;
-		setBackground(new Color(255, 255, 255));
-        setBorder(new EmptyBorder(10, 10, 10, 10));
-        setPreferredSize(new Dimension(1000, 620));
 
-        // --- DEFINICIÓN DE COLORES ---
-        Color azulMontos = new Color(2, 64, 89);
-        Color verdeBoton = new Color(128, 191, 33);
-        Color azulDesplegable = new Color(3, 120, 166);
-        setLayout(null);
+		setLayout(null);
+		setBackground(Color.WHITE);
+		setPreferredSize(new java.awt.Dimension(1000, 620));
 
-        JLabel lblTitulo = new JLabel("RETIRO DE DINERO");
-        lblTitulo.setBounds(200, 30, 600, 40);
-        lblTitulo.setFont(new Font("Tahoma", Font.BOLD, 28));
-        lblTitulo.setHorizontalAlignment(SwingConstants.CENTER);
-        add(lblTitulo);
+		// BOTON VOLVER
+		btnVolver = new JButton("< VOLVER");
+		btnVolver.setBounds(10, 11, 138, 34);
+		btnVolver.setFont(new Font("Tahoma", Font.BOLD, 16));
+		aplicarEstiloPrincipal(btnVolver, new Color(0, 153, 0), Color.WHITE);
+		btnVolver.addActionListener(e -> ventanaPrincipal.menu_usuario());
+		add(btnVolver);
 
-        JSeparator separator = new JSeparator();
-        separator.setBounds(200, 80, 600, 2);
-        add(separator);
+		// Panel azul central
+		JPanel cajaAzul = new JPanel();
+		cajaAzul.setBounds(101, 118, 746, 466);
+		cajaAzul.setBackground(new Color(2, 64, 89));
+		cajaAzul.setLayout(null);
+		add(cajaAzul);
 
-        JLabel lblSeleccionMoneda = new JLabel("Seleccionar Moneda:");
-        lblSeleccionMoneda.setBounds(200, 100, 180, 30);
-        lblSeleccionMoneda.setFont(new Font("Tahoma", Font.BOLD, 16));
-        add(lblSeleccionMoneda);
+		// botobes
+		JLabel lblMoneda = new JLabel("MONEDA");
+		lblMoneda.setFont(new Font("Tahoma", Font.BOLD, 20));
+		lblMoneda.setForeground(Color.WHITE);
+		lblMoneda.setBounds(183, 70, 120, 25);
+		cajaAzul.add(lblMoneda);
 
-        comboMoneda = new JComboBox<>();
-        comboMoneda.setBounds(400, 100, 200, 30);
-        comboMoneda.setModel(new DefaultComboBoxModel<>(new String[] {"Soles (PEN)", "Dólares (USD)"}));
-        comboMoneda.setFont(new Font("Tahoma", Font.BOLD, 16));
-        comboMoneda.setBackground(Color.WHITE); // Cambiado a blanco para mejor lectura
-        add(comboMoneda);
+		JLabel lblSaldo = new JLabel("SALDO ACTUAL");
+		lblSaldo.setForeground(Color.WHITE);
+		lblSaldo.setFont(new Font("Tahoma", Font.BOLD, 20));
+		lblSaldo.setBounds(183, 135, 200, 25);
+		cajaAzul.add(lblSaldo);
 
-        JLabel lblSaldoDisponible = new JLabel("Saldo Disponible:");
-        lblSaldoDisponible.setBounds(200, 150, 200, 30);
-        lblSaldoDisponible.setFont(new Font("Tahoma", Font.BOLD, 20));
-        add(lblSaldoDisponible);
+		JLabel lblMonto = new JLabel("MONTO A RETIRAR");
+		lblMonto.setForeground(Color.WHITE);
+		lblMonto.setFont(new Font("Tahoma", Font.BOLD, 20));
+		lblMonto.setBounds(183, 192, 250, 25);
+		cajaAzul.add(lblMonto);
 
-        lblSimboloMoneda = new JLabel("S/.");
-        lblSimboloMoneda.setBounds(400, 150, 50, 30);
-        lblSimboloMoneda.setFont(new Font("Tahoma", Font.BOLD, 22));
-        lblSimboloMoneda.setForeground(new Color(0, 128, 0));
-        add(lblSimboloMoneda);
+		// COMPONENTES
+		comboMoneda = new JComboBox<>(new String[] { "Soles", "Dólares" });
+		comboMoneda.setFont(new Font("Tahoma", Font.BOLD, 15));
+		comboMoneda.setBounds(403, 63, 180, 32);
+		cajaAzul.add(comboMoneda);
 
-        JLabel lblSaldoMonto = new JLabel("1,500.00");
-        lblSaldoMonto.setBounds(450, 150, 200, 30);
-        lblSaldoMonto.setFont(new Font("Tahoma", Font.BOLD, 22));
-        lblSaldoMonto.setForeground(new Color(0, 128, 0));
-        add(lblSaldoMonto);
+		textField_2 = new JTextField();
+		textField_2.setForeground(new Color(154, 205, 50));
+		textField_2.setEditable(false);
+		textField_2.setBounds(403, 125, 180, 35);
+		textField_2.setFont(new Font("Tahoma", Font.BOLD, 16));
+		cajaAzul.add(textField_2);
 
-        JLabel lblMontoRetirar = new JLabel("Monto a Retirar:");
-        lblMontoRetirar.setBounds(200, 210, 180, 30);
-        lblMontoRetirar.setFont(new Font("Tahoma", Font.PLAIN, 20));
-        add(lblMontoRetirar);
-
-        JLabel lblSimboloRetiro = new JLabel("S/.");
-        lblSimboloRetiro.setBounds(380, 210, 40, 30);
-        lblSimboloRetiro.setFont(new Font("Tahoma", Font.PLAIN, 20));
-        add(lblSimboloRetiro);
-
-        txtMontoRetirar = new JTextField();
-        txtMontoRetirar.setBounds(420, 210, 180, 35);
-        txtMontoRetirar.setFont(new Font("Tahoma", Font.PLAIN, 20));
-        add(txtMontoRetirar);
-
-        // --- BOTONES DE MONTOS (Azules) ---
-        // Se aplicó setBorderPainted(false) para evitar el borde gris en ejecución
-        crearBotonMonto("S/. 20", 150, 280, azulMontos);
-        crearBotonMonto("S/. 50", 400, 280, azulMontos);
-        crearBotonMonto("S/. 100", 650, 280, azulMontos);
-        crearBotonMonto("S/. 200", 150, 350, azulMontos);
-        crearBotonMonto("S/. 500", 400, 350, azulMontos);
-        crearBotonMonto("S/. 1000", 650, 350, azulMontos);
-
-        // --- BOTONES DE ACCIÓN (Verdes) ---
-        btnVolver = new JButton("VOLVER");
-        btnVolver.addActionListener(this);
-        btnVolver.setBounds(20, 30, 100, 35);
-        configurarBotonVerde(btnVolver, 20, 30, 100, 35, verdeBoton);
-        add(btnVolver);
-
-        JButton btnLimpiar = new JButton("LIMPIAR");
-        btnLimpiar.setBounds(0, 0, 0, 0);
-        configurarBotonVerde(btnLimpiar, 400, 420, 200, 50, verdeBoton);
-        add(btnLimpiar);
-
-        JButton btnRetirar = new JButton("RETIRAR");
-        btnRetirar.setBounds(0, 0, 0, 0);
-        configurarBotonVerde(btnRetirar, 300, 500, 150, 50, verdeBoton);
-        add(btnRetirar);
-
-        JButton btnCancelar = new JButton("CANCELAR");
-        btnCancelar.setBounds(0, 0, 0, 0);
-        configurarBotonVerde(btnCancelar, 550, 500, 150, 50, verdeBoton);
-        add(btnCancelar);
-
-        JLabel lblTipoCambio = new JLabel("Tipo de cambio: 1 USD = 3.85 PEN");
-        lblTipoCambio.setBounds(650, 105, 250, 20);
-        lblTipoCambio.setFont(new Font("Tahoma", Font.ITALIC, 12));
-        lblTipoCambio.setForeground(Color.GRAY);
-        add(lblTipoCambio);
-    }
-
-    // Métodos auxiliares para evitar repetir código y reducir errores en el Outline
-    private void crearBotonMonto(String texto, int x, int y, Color color) {
-        JButton btn = new JButton(texto);
-        btn.setBounds(150, 280, 200, 50);
-        btn.setFont(new Font("Tahoma", Font.BOLD, 16));
-        btn.setBackground(color);
-        btn.setForeground(Color.WHITE);
-        btn.setOpaque(true);
-        btn.setBorderPainted(false);
-        btn.setFocusPainted(false);
-        btn.setContentAreaFilled(true);
-        add(btn);
-    }
-
-    private void configurarBotonVerde(JButton btn, int x, int y, int w, int h, Color color) {
-        btn.setFont(new Font("Tahoma", Font.BOLD, 16));
-        btn.setBackground(color);
-        btn.setForeground(Color.WHITE);
-        btn.setOpaque(true);
-        btn.setBorderPainted(false);
-        btn.setFocusPainted(false);
-        btn.setContentAreaFilled(true);
-    }
-
+		txtMontoRetiro = new JTextField();
+		txtMontoRetiro.setBounds(403, 185, 180, 32);
+		txtMontoRetiro.setFont(new Font("Tahoma", Font.BOLD, 16));
+		cajaAzul.add(txtMontoRetiro);
+		
+		// ==== BOTONES RÁPIDOS =====
+	    configurarBotonesRapidos(cajaAzul);
+        
+	    // BOTONES PRINCIPALES
+	    btnRetirar = new JButton("RETIRAR");
+	    btnRetirar.setForeground(new Color(112, 128, 144));
+	    btnRetirar.setBounds(49, 386, 159, 40);
+	    btnRetirar.setFont(new Font("Tahoma", Font.BOLD, 20));
+	    aplicarEstiloPrincipal(btnRetirar, new Color(128, 191, 33), Color.WHITE);
+	    btnRetirar.addActionListener(e -> ejecutarRetiro());
+	    cajaAzul.add(btnRetirar);
+        
+	    btnLimpiar = new JButton("LIMPIAR");
+	    btnLimpiar.setForeground(new Color(255, 215, 0));
+	    btnLimpiar.setBounds(288, 387, 151, 39);
+	    btnLimpiar.setFont(new Font("Tahoma", Font.BOLD, 20));
+	    aplicarEstiloPrincipal(btnLimpiar, new Color(255, 193, 7), Color.BLACK);
+	    btnLimpiar.addActionListener(e -> limpiarCampos());
+	    cajaAzul.add(btnLimpiar);
+        
+	    btnCancelar = new JButton("CANCELAR");
+	    btnCancelar.setForeground(new Color(178, 34, 34));
+	    btnCancelar.setBounds(501, 387, 167, 39);
+	    btnCancelar.setFont(new Font("Tahoma", Font.BOLD, 20));
+	    aplicarEstiloPrincipal(btnCancelar, new Color(220, 53, 69), Color.WHITE);
+	    btnCancelar.addActionListener(e -> ventanaPrincipal.menu_usuario());
+	    cajaAzul.add(btnCancelar);
+        
+	    // TITULO
+	    JLabel lblTitulo = new JLabel("RETIRO DE DINERO");
+	    lblTitulo.setBounds(174, 55, 600, 40);
+	    lblTitulo.setFont(new Font("Tahoma", Font.BOLD, 28));
+	    lblTitulo.setHorizontalAlignment(SwingConstants.CENTER);
+	    lblTitulo.setForeground(new Color(2, 64, 89));
+	    add(lblTitulo);
+        
+	    actualizarInterfaz();
+		
+	}
+	
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		// TODO Auto-generated method stub
-		if (e.getSource() == btnVolver) {
-			ventanaPrincipal.menu_usuario();
-		}
+		
 	}
 
+	//MÉTODOS DE LÓGICA
+	private void ejecutarRetiro() {
+		try {
+			Cuenta cuenta = ventanaPrincipal.getCuentaActual();
+			if (cuenta == null) {
+				JOptionPane.showMessageDialog(this, "Error: Sesión no encontrada.");
+				return;
+			}
+
+			double monto = Double.parseDouble(txtMontoRetiro.getText());
+
+			cuentaService.retirarDinero(cuenta, monto);
+
+			JOptionPane.showMessageDialog(this,
+					"Retiro exitoso.\nSu nuevo saldo es: " + String.format(Locale.US, "%.2f", cuenta.getSaldo()));
+
+			actualizarInterfaz();
+			txtMontoRetiro.setText("");
+
+		} catch (NumberFormatException ex) {
+			JOptionPane.showMessageDialog(this, "Por favor, ingrese un monto válido.");
+		} catch (Exception ex) {
+			JOptionPane.showMessageDialog(this, ex.getMessage());
+		}
+	}
+	
+	public void actualizarInterfaz() {
+
+		if (ventanaPrincipal.getCuentaActual() != null) {
+			double saldoActual = ventanaPrincipal.getCuentaActual().getSaldo();
+			textField_2.setText(String.format(Locale.US, "%.2f", saldoActual));
+		}
+	}
+	
+	private void limpiarCampos() {
+		txtMontoRetiro.setText("");
+		actualizarInterfaz();
+	}
+	
+	
+	//METODOS DE ESTILO DE BOTONES
+	private void configurarBotonesRapidos(JPanel p) {
+		btn20 = new JButton("20");
+		btn50 = new JButton("50");
+		btn100 = new JButton("100");
+		btn200 = new JButton("200");
+		btn500 = new JButton("500");
+		btn1000 = new JButton("1000");
+
+		JButton[] botones = { btn20, btn50, btn100, btn200, btn500, btn1000 };
+		int x = 143, y = 250;
+
+		for (int i = 0; i < botones.length; i++) {
+
+			botones[i].setBounds(x, y, 90, 35);
+			botones[i].setFont(new Font("Tahoma", Font.BOLD, 14));
+
+			String valor = botones[i].getText();
+
+			botones[i].addActionListener(e -> txtMontoRetiro.setText(valor));
+			p.add(botones[i]);
+
+			x += 170;
+
+			if (i == 2) {
+				x = 143;
+				y = 300;
+			}
+		}
+	}
+	
+	private void aplicarEstiloPrincipal(JButton b, Color fondo, Color texto) {
+		b.setUI(new BasicButtonUI());
+		b.setBackground(new Color(154, 205, 50));
+		b.setForeground(texto);
+		b.setOpaque(true);
+		b.setBorderPainted(false);
+		b.setFocusPainted(false);
+	}
 }

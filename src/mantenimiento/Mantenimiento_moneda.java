@@ -26,6 +26,7 @@ public class Mantenimiento_moneda extends JPanel implements ActionListener{
 	private ListarMoneda listarMoneda;
 	private CrearMoneda crearMoneda;
 	private ModificarMoneda modificarMoneda;
+	private EliminarMoneda eliminarMoneda;
 
 	/**
 	 * Create the panel.
@@ -104,6 +105,7 @@ public class Mantenimiento_moneda extends JPanel implements ActionListener{
 		listarMoneda = new ListarMoneda();
 		crearMoneda = new CrearMoneda();
 		modificarMoneda = new ModificarMoneda();
+		eliminarMoneda = new EliminarMoneda();
 		
 		mostrarPanel(listarMoneda);
 	}
@@ -131,6 +133,10 @@ public class Mantenimiento_moneda extends JPanel implements ActionListener{
 		if(e.getSource() == btnModificar) {
 			modificarMoneda.actualizar();
 			mostrarPanel(modificarMoneda);
+		}
+		if(e.getSource() == btnEliminar) {
+			eliminarMoneda.actualizar();
+			mostrarPanel(eliminarMoneda);
 		}
 	}
 	

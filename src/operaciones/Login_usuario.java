@@ -2,7 +2,7 @@ package operaciones;
 
 import servicio.AuthService;
 import servicio.Sesion;
-
+import modelos.Cuenta;
 import modelos.Usuario;
 import javax.swing.JOptionPane;
 
@@ -20,6 +20,8 @@ import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.border.MatteBorder;
+
+import datos.AlmacenDatos;
 
 public class Login_usuario extends JPanel implements ActionListener{
 
@@ -104,27 +106,42 @@ public class Login_usuario extends JPanel implements ActionListener{
 	        ventanaPrincipal.Panel_inicio();
 	    }
 		if (e.getSource() == btnIngresarLoginUser) {
+		    String dni = txtUserDni.getText().trim();
+		    String pass = new String(passwordUser.getPassword()).trim();
 
-		    String dni = txtUserDni.getText();
-		    String clave = new String(passwordUser.getPassword());
-
-		    AuthService auth = new AuthService();
-		    Usuario u = auth.autenticar(dni, clave);
-
-		    if (u == null) {
-		        JOptionPane.showMessageDialog(this, "Credenciales incorrectas.");
+		    if (dni.isEmpty() || pass.isEmpty()) {
+		        JOptionPane.showMessageDialog(this, "Ingrese DNI y clave.");
 		        return;
 		    }
 
-		    // ✅ Guardar sesión del usuario
-		    Sesion.iniciar(u);
+		    Usuario u = AlmacenDatos.clientePorDni(dni);
+		    if (u == null) {
+		        JOptionPane.showMessageDialog(this, "El DNI no está registrado.");
+		        return;
+		    }
 
-		    // ✅ Entrar al menú
+		    if (!u.getPassword().equals(pass)) {
+		        JOptionPane.showMessageDialog(this, "Contraseña incorrecta.");
+		        return;
+		    }
+
+		    Cuenta c = AlmacenDatos.cuentaPorDni(dni);
+		    if (c == null) {
+		        JOptionPane.showMessageDialog(this, "Este usuario no tiene una cuenta activa.");
+		        return;
+		    }
+		    
+		    Sesion.fijar(u);
+		    ventanaPrincipal.setSesion(u, c); 
+
+		    txtUserDni.setText("");
+		    passwordUser.setText("");
+
 		    ventanaPrincipal.menu_usuario();
 		}
 
 		
-		}
+	}
 
 
 }

@@ -30,23 +30,20 @@ public class Ventana_reportee extends JPanel implements ItemListener, ActionList
         setBorder(new EmptyBorder(10, 10, 10, 10));
         this.ventanaPrincipal = principal;
         setPreferredSize(new Dimension(1000, 620));
-        setBackground(new Color(245, 247, 250));
+        setBackground(new Color(21, 58, 76));
         
         ImageIcon volver = new ImageIcon(getClass().getResource("/iconos/Volver.png"));
         ImageIcon reporte =new ImageIcon(getClass().getResource("/iconos/reporte.png"));//iamgnereporte
 
-        JLabel lblTitulo = new JLabel("REPORTES");
+        JLabel lblTitulo = new JLabel("TIPO DE REPORTES");
+        lblTitulo.setForeground(new Color(255, 255, 255));
         lblTitulo.setFont(new Font("Segoe UI", Font.BOLD, 20));
-        lblTitulo.setBounds(430, 10, 200, 30);
+        lblTitulo.setBounds(197, 60, 253, 30);
+        lblTitulo.setIcon(reporte);
         add(lblTitulo);
 
-        JLabel lblTipo = new JLabel("");
-        lblTipo.setBounds(198, 65, 206, 25);
-        lblTipo.setIcon(reporte);
-        add(lblTipo);
-
         cboReportes = new JComboBox<>();
-        cboReportes.setBounds(220, 60, 320, 30);
+        cboReportes.setBounds(422, 60, 320, 30);
         cboReportes.addItem("Saldo de cliente");
         cboReportes.addItem("Clientes con saldo entre rango de montos");
         cboReportes.addItem("Transacciones por rango de fecha");
@@ -66,7 +63,8 @@ public class Ventana_reportee extends JPanel implements ItemListener, ActionList
         btnSalir.setContentAreaFilled(false); //fondo de color
         btnSalir.setOpaque(true);//fondo de color
         btnSalir.addActionListener(this);
-        btnSalir.setBounds(30, 19, 89, 23);
+        btnSalir.setBounds(30, 29, 109, 30);
+        btnSalir.setIcon(volver);
         add(btnSalir);
 
         // Crear subpaneles

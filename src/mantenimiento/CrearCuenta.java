@@ -14,6 +14,7 @@ import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 
 import datos.AlmacenDatos;
+import modelos.Cuenta;
 import modelos.Moneda;
 import modelos.Usuario;
 import servicio.CuentaService;
@@ -133,5 +134,15 @@ public class CrearCuenta extends JPanel implements ActionListener{
 			Moneda moneda = listaActualizada.get(i);
 			comboBoxMoneda.addItem(moneda.getNombre());
 		}
-;	}
+	}
+	
+	public void cargarDni() {
+		comboBoxDNI.removeAllItems();
+		UsuarioService service = new UsuarioService();
+		ArrayList<Usuario> listaActualizada = service.listarUsuarios();
+		for(int i = 0; i < listaActualizada.size(); i++) {
+			Usuario user = listaActualizada.get(i);
+			comboBoxDNI.addItem(user.getDNI());
+		}
+	}
 }
