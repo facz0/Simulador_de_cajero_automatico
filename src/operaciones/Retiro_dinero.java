@@ -102,7 +102,7 @@ public class Retiro_dinero extends JPanel implements ActionListener{
 
 		// COMPONENTES
 		comboMoneda = new JComboBox();
-		comboMoneda.setBounds(536, 189, 249, 32);
+		comboMoneda.setBounds(477, 189, 308, 32);
 		comboMoneda.setFont(new Font("Tahoma", Font.BOLD, 15));
 		comboMoneda.setMaximumRowCount(5);
 		for(int i = 0; i < AlmacenDatos.listaMonedas.size(); i++) {
@@ -114,20 +114,20 @@ public class Retiro_dinero extends JPanel implements ActionListener{
 		
 		comboCuenta = new JComboBox();
 	    comboCuenta.setMaximumRowCount(5);
-	    comboCuenta.setFont(new Font("Tahoma", Font.BOLD, 15));
-	    comboCuenta.setBounds(536, 133, 249, 32);
+	    comboCuenta.setFont(new Font("Tahoma", Font.BOLD, 13));
+	    comboCuenta.setBounds(477, 133, 308, 32);
 	    add(comboCuenta);
 		
 		txtSaldo = new JTextField();
 		txtSaldo.setBackground(new Color(230, 250, 251));
 		txtSaldo.setForeground(new Color(154, 205, 50));
 		txtSaldo.setEditable(false);
-		txtSaldo.setBounds(536, 251, 249, 32);
+		txtSaldo.setBounds(477, 251, 308, 32);
 		txtSaldo.setFont(new Font("Tahoma", Font.BOLD, 16));
 		add(txtSaldo);
 
 		txtMontoRetiro = new JTextField();
-		txtMontoRetiro.setBounds(536, 308, 249, 32);
+		txtMontoRetiro.setBounds(477, 308, 308, 32);
 		txtMontoRetiro.setFont(new Font("Tahoma", Font.BOLD, 16));
 		add(txtMontoRetiro);
 	    
