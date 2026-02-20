@@ -64,7 +64,6 @@ public class AlmacenDatos {
         listaCuentas.add(new Cuenta("CTA-1143529867", listaUsuarios.get(17), dolar, 10.50, "ACTIVO"));
         listaCuentas.add(new Cuenta("CTA-1143539867", listaUsuarios.get(18), sol, 440.00, "ACTIVO")); 
         listaCuentas.add(new Cuenta("CTA-1143549867", listaUsuarios.get(19), sol, 2750.80, "ACTIVO"));
-        listaCuentas.add(new Cuenta("CTA-1143559867", listaUsuarios.get(0), dolar, 1250.50, "ACTIVO"));
         
         for (int i = 0; i < listaCuentas.size(); i++) {
 
