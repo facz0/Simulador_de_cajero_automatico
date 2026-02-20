@@ -17,6 +17,7 @@ import modelos.Cuenta;
 import javax.swing.border.LineBorder;
 
 import servicio.Consultas;
+import java.util.ArrayList;
 
 public class ConsultaDeSaldo extends JPanel implements ActionListener {
 
@@ -25,6 +26,7 @@ public class ConsultaDeSaldo extends JPanel implements ActionListener {
 
 	private JButton btnVolver;
 	private JButton btnConsultar;
+
 	private JTable tabla;
 	private DefaultTableModel modelo;
 
@@ -58,8 +60,10 @@ public class ConsultaDeSaldo extends JPanel implements ActionListener {
 		panel.setLayout(null);
 		add(panel);
 
-	
-		modelo = new DefaultTableModel(new Object[] { "Nro Cuenta", "Moneda", "Saldo" }, 0);
+		modelo = new DefaultTableModel(new Object[] { "Nro Cuenta", "Moneda", "Saldo" }, 0) {
+			private static final long serialVersionUID = 1L;
+			@Override public boolean isCellEditable(int row, int column) { return false; }
+		};
 		tabla = new JTable(modelo);
 
 		JScrollPane scrollPane = new JScrollPane(tabla);
@@ -88,11 +92,11 @@ public class ConsultaDeSaldo extends JPanel implements ActionListener {
 		if (e.getSource() == btnConsultar) {
 			Cuenta c = ventanaPrincipal.getCuentaSeleccionada();
 
-			// limpiar
 			modelo.setRowCount(0);
 
-			// cargar 1 fila
-			for (Object[] fila : Consultas.saldoFila(c)) {
+			ArrayList<Object[]> filas = Consultas.saldoFila(c);
+			for (int i = 0; i < filas.size(); i++) {
+				Object[] fila = filas.get(i);
 				modelo.addRow(fila);
 			}
 		}

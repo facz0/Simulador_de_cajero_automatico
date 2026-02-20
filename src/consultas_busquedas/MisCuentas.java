@@ -5,10 +5,6 @@ import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-import modelos.Usuario;
-import servicio.Sesion;
-
-
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JLabel;
@@ -18,6 +14,9 @@ import javax.swing.JPanel;
 import datos.AlmacenDatos;
 import gui.VentanaPrincipal;
 import modelos.Cuenta;
+import modelos.Usuario;
+import servicio.Sesion;
+
 import javax.swing.border.LineBorder;
 
 public class MisCuentas extends JPanel implements ActionListener {
@@ -33,11 +32,11 @@ public class MisCuentas extends JPanel implements ActionListener {
 	private JButton btnUltimosMovimientos;
 
 	private Cuenta cuentaSeleccionada;
-	
-	public void refrescar() {
-	    cargarCuentas();
-	}
 
+	// Refrescar lista cuando entras al módulo
+	public void refrescar() {
+		cargarCuentas();
+	}
 
 	public MisCuentas(VentanaPrincipal principal) {
 		setBackground(new Color(2, 64, 89));
@@ -80,13 +79,9 @@ public class MisCuentas extends JPanel implements ActionListener {
 		lblSeleccion.setBounds(287, 52, 215, 32);
 		panel.add(lblSeleccion);
 
-		comboBox = new JComboBox<>();
+		comboBox = new JComboBox<Cuenta>();
 		comboBox.setBounds(117, 95, 532, 22);
 		panel.add(comboBox);
-
-		// ✅ cargar cuentas (por ahora: todas)
-		//cargarCuentas();
-		
 
 		btnConsultaSaldo = new JButton("CONSULTAR SALDO");
 		btnConsultaSaldo.setForeground(Color.WHITE);
@@ -123,20 +118,32 @@ public class MisCuentas extends JPanel implements ActionListener {
 	}
 
 	private void cargarCuentas() {
-	    comboBox.removeAllItems();
-	    // ✅ usuario logueado
-	    Usuario usuarioActual = Sesion.obtener();
+		comboBox.removeAllItems();
 
-	    if (usuarioActual == null) {
-	        JOptionPane.showMessageDialog(this, "No hay usuario logueado.");
-	        return;
-	    }
+		// usuario logueado desde Sesion
+		Usuario usuarioActual = Sesion.obtener();
 
-	    for (Cuenta c : AlmacenDatos.listaCuentas) {
-	        if (c.getUsuario() != null && c.getUsuario().getDNI().equals(usuarioActual.getDNI())) {
-	            comboBox.addItem(c);
-	        }
-	    }
+		if (usuarioActual == null) {
+			JOptionPane.showMessageDialog(this, "No hay usuario logueado.");
+			return;
+		}
+
+		for (int i = 0; i < AlmacenDatos.listaCuentas.size(); i++) {
+
+			Cuenta c = AlmacenDatos.listaCuentas.get(i);
+
+			if (c != null && c.getUsuario() != null && c.getUsuario().getDNI() != null) {
+
+				if (c.getUsuario().getDNI().equals(usuarioActual.getDNI())) {
+					comboBox.addItem(c);
+				}
+			}
+		}
+
+		// seleccionar automáticamente la primera cuenta
+		if (comboBox.getItemCount() > 0) {
+			comboBox.setSelectedIndex(0);
+		}
 	}
 
 	@Override
@@ -148,22 +155,25 @@ public class MisCuentas extends JPanel implements ActionListener {
 		}
 
 		cuentaSeleccionada = (Cuenta) comboBox.getSelectedItem();
+
 		if (cuentaSeleccionada == null) {
 			JOptionPane.showMessageDialog(this, "Seleccione una cuenta primero.");
 			return;
 		}
 
-		// ✅ OPCIÓN 1: SOLO IFs
 		if (e.getSource() == btnConsultaSaldo) {
 			ventanaPrincipal.irConsultaSaldo(cuentaSeleccionada);
+			return;
 		}
 
 		if (e.getSource() == btnUltimosMovimientos) {
 			ventanaPrincipal.irUltimosMovimientos(cuentaSeleccionada);
+			return;
 		}
 
 		if (e.getSource() == btnConsultasRango) {
 			ventanaPrincipal.irConsultaRango(cuentaSeleccionada);
+			return;
 		}
 	}
 }

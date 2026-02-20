@@ -3,6 +3,7 @@ package consultas_busquedas;
 import javax.swing.JPanel;
 import javax.swing.JLabel;
 import javax.swing.JTextField;
+
 import gui.VentanaPrincipal;
 
 import javax.swing.JButton;
@@ -19,6 +20,7 @@ import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 
 import servicio.Consultas;
+import java.util.ArrayList;
 
 public class Consultas_Rango extends JPanel implements ActionListener {
 
@@ -29,6 +31,7 @@ public class Consultas_Rango extends JPanel implements ActionListener {
 	private JTextField txtDesde;
 	private JTextField txtHasta;
 	private JButton btnProcesar;
+
 	private JTable tabla;
 	private DefaultTableModel modelo;
 
@@ -51,8 +54,10 @@ public class Consultas_Rango extends JPanel implements ActionListener {
 		panel.setLayout(null);
 		add(panel);
 
-	
-		modelo = new DefaultTableModel(new Object[] { "Fecha", "Tipo", "Monto" }, 0);
+		modelo = new DefaultTableModel(new Object[] { "Fecha", "Tipo", "Monto" }, 0) {
+			private static final long serialVersionUID = 1L;
+			@Override public boolean isCellEditable(int row, int column) { return false; }
+		};
 		tabla = new JTable(modelo);
 
 		JScrollPane scrollPane = new JScrollPane(tabla);
@@ -113,7 +118,10 @@ public class Consultas_Rango extends JPanel implements ActionListener {
 
 			modelo.setRowCount(0);
 
-			for (Object[] fila : Consultas.movimientosPorRangoFilas(c, txtDesde.getText(), txtHasta.getText())) {
+			ArrayList<Object[]> filas = Consultas.movimientosPorRangoFilas(c, txtDesde.getText(), txtHasta.getText());
+
+			for (int i = 0; i < filas.size(); i++) {
+				Object[] fila = filas.get(i);
 				modelo.addRow(fila);
 			}
 		}

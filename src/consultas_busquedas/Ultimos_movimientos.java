@@ -18,6 +18,7 @@ import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 
 import servicio.Consultas;
+import java.util.ArrayList;
 
 public class Ultimos_movimientos extends JPanel implements ActionListener {
 
@@ -26,6 +27,7 @@ public class Ultimos_movimientos extends JPanel implements ActionListener {
 
 	private JButton btnListar;
 	private JButton btnVolver;
+
 	private JTable tabla;
 	private DefaultTableModel modelo;
 
@@ -53,7 +55,10 @@ public class Ultimos_movimientos extends JPanel implements ActionListener {
 		btnListar.addActionListener(this);
 		add(btnListar);
 
-		modelo = new DefaultTableModel(new Object[] { "Fecha", "Tipo", "Monto" }, 0);
+		modelo = new DefaultTableModel(new Object[] { "Fecha", "Tipo", "Monto" }, 0) {
+			private static final long serialVersionUID = 1L;
+			@Override public boolean isCellEditable(int row, int column) { return false; }
+		};
 		tabla = new JTable(modelo);
 
 		JScrollPane scrollPane = new JScrollPane(tabla);
@@ -90,7 +95,10 @@ public class Ultimos_movimientos extends JPanel implements ActionListener {
 
 			modelo.setRowCount(0);
 
-			for (Object[] fila : Consultas.ultimosMovimientosFilas(c, 5)) {
+			ArrayList<Object[]> filas = Consultas.ultimosMovimientosFilas(c, 5);
+
+			for (int i = 0; i < filas.size(); i++) {
+				Object[] fila = filas.get(i);
 				modelo.addRow(fila);
 			}
 		}
