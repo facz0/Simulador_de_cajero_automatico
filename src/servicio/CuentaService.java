@@ -96,4 +96,15 @@ public class CuentaService {
 		AlmacenDatos.listaCuentas.removeIf(cuenta -> cuenta.getUsuario().getDNI().equals(dni));
 	}
 	
+	public ArrayList<Cuenta> listarCuentasPorUsuario(Usuario usuario){
+		ArrayList<Cuenta> lista = new ArrayList<>();
+		if (usuario == null) return lista;
+		for(int i = 0; i < AlmacenDatos.listaCuentas.size(); i++) {
+			Cuenta cuenta = AlmacenDatos.listaCuentas.get(i);
+			if(cuenta.getUsuario() != null && cuenta.getUsuario().getDNI().equals(usuario.getDNI())){
+				lista.add(cuenta);
+			}
+		}
+		return lista;
+	}
 }

@@ -52,6 +52,7 @@ public class VentanaPrincipal extends JFrame {
 	private Cuenta cuentaSeleccionada;
 	private Usuario usuarioActual;
 	private Cuenta cuentaActual;
+	private Ultimos_movimientos movimientos;
 
 	/**
 	 * Launch the application.
@@ -93,6 +94,7 @@ public class VentanaPrincipal extends JFrame {
 		mantenimiento_transaccion = new Mantenimiento_transaccion(this);
 		mantenimiento_moneda = new Mantenimiento_moneda(this);
 		mis_cuentas = new MisCuentas(this);
+		movimientos = new Ultimos_movimientos(this);
 
 		panel_inicio.setPreferredSize(new java.awt.Dimension(1000, 620));
 		setContentPane(panel_inicio);
@@ -166,6 +168,7 @@ public class VentanaPrincipal extends JFrame {
 	}
 
 	public void Retirar_dinero() {
+		retiro_dinero.CargarCuenta();
 		cambiar_panel(retiro_dinero);
 	}
 
@@ -174,6 +177,7 @@ public class VentanaPrincipal extends JFrame {
 	}
 
 	public void Ultimos_movimientos() {
+		ultimos_movimientos.cargarDatos();
 		cambiar_panel(ultimos_movimientos);
 	}
 

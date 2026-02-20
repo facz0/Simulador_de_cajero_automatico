@@ -12,12 +12,21 @@ import javax.swing.JScrollPane;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
 import java.awt.Color;
 
 import modelos.Cuenta;
+import modelos.Transaccion;
+import modelos.Usuario;
 import servicio.Consultas;
+import servicio.Sesion;
+import servicio.TransaccionService;
 
 import javax.swing.border.LineBorder;
+import javax.swing.JTable;
+import javax.swing.table.DefaultTableModel;
+
+import servicio.Consultas;
 
 public class Consultas_Rango extends JPanel implements ActionListener {
 
@@ -29,6 +38,9 @@ public class Consultas_Rango extends JPanel implements ActionListener {
 	private JTextField txtHasta;
 	private JButton btnProcesar;
 	private JTextArea textArea;
+	private JTable tabla;
+	private DefaultTableModel modelo;
+	private JScrollPane scrollPane;
 
 	public Consultas_Rango(VentanaPrincipal principal) {
 		setBackground(new Color(2, 64, 89));
@@ -49,12 +61,14 @@ public class Consultas_Rango extends JPanel implements ActionListener {
 		panel.setLayout(null);
 		add(panel);
 
-		JScrollPane scrollPane = new JScrollPane();
-		scrollPane.setBounds(297, 47, 403, 333);
-		panel.add(scrollPane);
-
-		textArea = new JTextArea();
-		scrollPane.setViewportView(textArea);
+		String[] columnas = {"Fecha", "Tipo", "Monto"};
+		modelo = new DefaultTableModel(null, columnas) {
+			@Override
+			public boolean isCellEditable(int row, int column) { //hacer no editable las celdas
+				return false;
+			}
+		};
+		cargarDatos();
 
 		btnProcesar = new JButton("PROCESAR");
 		btnProcesar.setBounds(45, 249, 125, 39);
@@ -85,6 +99,15 @@ public class Consultas_Rango extends JPanel implements ActionListener {
 		txtHasta = new JTextField("DD/MM/AAAA");
 		txtHasta.setBounds(45, 174, 120, 20);
 		panel.add(txtHasta);
+		
+				textArea = new JTextArea();
+				textArea.setBounds(217, 30, 401, 331);
+				panel.add(textArea);
+				
+				tabla = new JTable(modelo);
+				scrollPane = new JScrollPane(tabla);
+				scrollPane.setBounds(217, 30, 403, 333);
+				panel.add(scrollPane);
 
 		btnVolver = new JButton("< Volver");
 		btnVolver.setForeground(Color.WHITE);
@@ -107,7 +130,29 @@ public class Consultas_Rango extends JPanel implements ActionListener {
 
 		if (e.getSource() == btnProcesar) {
 			Cuenta c = ventanaPrincipal.getCuentaSeleccionada();
-			textArea.setText(Consultas.movimientosPorRango(c, txtDesde.getText(), txtHasta.getText()));
+			modelo.setRowCount(0);
+			ArrayList<Object[]> listaMovimientos = (ArrayList<Object[]>) Consultas.movimientosPorRangoFilas(c, txtDesde.getText(), txtHasta.getText());
+			for (int i = 0; i < listaMovimientos.size(); i++) {
+				Object[] fila = listaMovimientos.get(i);
+				modelo.addRow(fila);
+			}
 		}
+	}
+	
+	public void cargarDatos() {
+		modelo.setRowCount(0);
+		TransaccionService service = new TransaccionService();
+		ArrayList<Transaccion> listaMovimientos = service.listarTransacciones();
+		
+		for(int i = 0; i < listaMovimientos.size(); i++) {
+			Transaccion t = listaMovimientos.get(i);
+			Object[] fila = {
+					t.getFechaFormateada(),
+					t.getTipo(),
+					t.getMonto()
+			};
+			modelo.addRow(fila);
+		}
+		
 	}
 }
