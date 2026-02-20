@@ -13,6 +13,7 @@ import java.awt.event.ActionListener;
 import gui.VentanaPrincipal;
 import datos.AlmacenDatos;
 import modelos.Moneda;
+import servicio.MetodosCambioMoneda;
 
 public class CambioMoneda extends JPanel implements ActionListener {
 
@@ -30,54 +31,12 @@ public class CambioMoneda extends JPanel implements ActionListener {
     private JButton btnConvertir;
     private JButton btnCancelar;
 
-    // METODO CAMBIO DE DINERO
-    private void cargarMonedasEnCombos() {
-        cbDe.removeAllItems();
-        cbA.removeAllItems();
+    private MetodosCambioMoneda mcm = new MetodosCambioMoneda();
 
-        for (int i = 0; i < AlmacenDatos.listaMonedas.size(); i++) {
-            Moneda m = AlmacenDatos.listaMonedas.get(i);
-            String item = m.getNombre(); 
-            cbDe.addItem(item);
-            cbA.addItem(item);
-        }
-        if (cbDe.getItemCount() > 0) cbDe.setSelectedIndex(0);
-        if (cbA.getItemCount() > 0) cbA.setSelectedIndex(0);
-    }
-    public void addNotify() {
-        super.addNotify();
-        if (cbDe != null && cbA != null) {
-            cargarMonedasEnCombos();
-        }
-    }
-    private double obtenerValorMoneda(Moneda m) {
-        try {
-            return (double) m.getClass().getMethod("getValor").invoke(m);
-        } catch (Exception e1) {
-            try {
-                return (double) m.getClass().getMethod("getTipoCambio").invoke(m);
-            } catch (Exception e2) {
-                try {
-                    return (double) m.getClass().getMethod("getCambio").invoke(m);
-                } catch (Exception e3) {
-                    throw new RuntimeException("No se encontró el getter del valor en Moneda (ej: getValor o getTipoCambio).");
-                }
-            }
-        }
-    }
-
-    // METODO CONVERTIR - formula
-    private double convertir(double monto, Moneda de, Moneda a) {
-        double valorDe = obtenerValorMoneda(de);
-        double valorA = obtenerValorMoneda(a);
-
-        if (valorA == 0) return 0;
-
-        return monto * (valorDe / valorA);
-    }
     public CambioMoneda(VentanaPrincipal principal) {
         setBackground(new Color(255, 255, 255));
         this.ventanaPrincipal = principal;
+
         setPreferredSize(new java.awt.Dimension(1000, 620));
         setLayout(null);
 
@@ -147,7 +106,28 @@ public class CambioMoneda extends JPanel implements ActionListener {
         btnCancelar.setOpaque(true);
         btnCancelar.addActionListener(this);
         add(btnCancelar);
-        
+        // Carga monedas en combos
+        cargarMonedasEnCombos();
+    }
+
+    // Carga las monedas desde almace de datos
+    private void cargarMonedasEnCombos() {
+        cbDe.removeAllItems();
+        cbA.removeAllItems();
+
+        for (int i = 0; i < AlmacenDatos.listaMonedas.size(); i++) {
+            Moneda m = AlmacenDatos.listaMonedas.get(i);
+            cbDe.addItem(m.getNombre());
+            cbA.addItem(m.getNombre());
+        }
+
+        if (cbDe.getItemCount() > 0) cbDe.setSelectedIndex(0);
+        if (cbA.getItemCount() > 0) cbA.setSelectedIndex(0);
+    }
+
+    public void addNotify() {
+        super.addNotify();
+        // Si el admin agrega monedas aquí se recarga automático!
         cargarMonedasEnCombos();
     }
 
@@ -156,44 +136,45 @@ public class CambioMoneda extends JPanel implements ActionListener {
         if (e.getSource() == btnCancelar) {
             txtCantidad.setText("");
             txtResultado.setText("");
+            ventanaPrincipal.menu_usuario();
             return;
         }
 
         if (e.getSource() == btnConvertir) {
-
             try {
                 double monto = Double.parseDouble(txtCantidad.getText().trim());
 
-                if (monto <= 0) {
-                    JOptionPane.showMessageDialog(this, "Ingrese una cantidad válida.");
-                    return;
-                }
-
                 String nombreDe = (String) cbDe.getSelectedItem();
-                String nombreA = (String) cbA.getSelectedItem();
+                String nombreA  = (String) cbA.getSelectedItem();
 
                 if (nombreDe == null || nombreA == null) {
                     JOptionPane.showMessageDialog(this, "Seleccione monedas.");
+                    txtResultado.setText("");
                     return;
                 }
 
                 Moneda de = AlmacenDatos.monedaPorNombre(nombreDe);
-                Moneda a = AlmacenDatos.monedaPorNombre(nombreA);
+                Moneda a  = AlmacenDatos.monedaPorNombre(nombreA);
 
                 if (de == null || a == null) {
                     JOptionPane.showMessageDialog(this, "No se encontró la moneda.");
+                    txtResultado.setText("");
                     return;
                 }
 
-                double resultado = convertir(monto, de, a);
+                double resultado = mcm.convertir(monto, de, a);
+
                 txtResultado.setText(String.format("%.2f", resultado));
 
             } catch (NumberFormatException ex) {
                 JOptionPane.showMessageDialog(this, "Ingrese un número válido.");
-            } catch (RuntimeException ex) {
+                txtCantidad.setText("");
+                txtResultado.setText("");
+                txtCantidad.requestFocus();
+            } catch (Exception ex) {
                 JOptionPane.showMessageDialog(this, ex.getMessage());
+                txtResultado.setText("");
             }
         }
     }
 }
-
