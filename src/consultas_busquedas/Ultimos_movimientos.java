@@ -1,78 +1,108 @@
 package consultas_busquedas;
 
+import java.awt.Color;
+import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-import javax.swing.JPanel;
-import javax.swing.JSeparator;
-import javax.swing.JLabel;
-
-import java.awt.Color;
-import java.awt.Font;
+import javax.swing.BorderFactory;
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
-import javax.swing.JTextField;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+import javax.swing.JScrollPane;
+import javax.swing.JSeparator;
+import javax.swing.JTextArea;
 
 import gui.VentanaPrincipal;
+import modelos.Cuenta;
+import servicio.Consultas;
 
-public class Ultimos_movimientos extends JPanel implements ActionListener{
+import javax.swing.border.LineBorder;
+
+public class Ultimos_movimientos extends JPanel implements ActionListener {
 
 	private static final long serialVersionUID = 1L;
 	private VentanaPrincipal ventanaPrincipal;
-	private JTextField textField;
+
+	private JButton btnListar;
 	private JButton btnVolver;
+	private JTextArea textArea;
+	private JPanel panel;
+	private JLabel lblLinea;
 
-
-	/**
-	 * Create the panel.
-	 */
 	public Ultimos_movimientos(VentanaPrincipal principal) {
 		setBackground(new Color(2, 64, 89));
-		this.ventanaPrincipal = principal;		
+		this.ventanaPrincipal = principal;
 		setPreferredSize(new java.awt.Dimension(1000, 620));
 		setLayout(null);
 		
-		JSeparator separator = new JSeparator();
-		separator.setBounds(69, 74, 858, 14);
-		add(separator);
-		
-		JLabel lblNewLabel = new JLabel("Últimos movimientos");
-		lblNewLabel.setForeground(new Color(255, 255, 255));
-		lblNewLabel.setFont(new Font("Tahoma", Font.PLAIN, 20));
-		lblNewLabel.setBounds(69, 35, 380, 28);
-		add(lblNewLabel);
-		
-		JButton btnListar = new JButton("LISTAR");
-		btnListar.setFont(new Font("Tahoma", Font.PLAIN, 20));
-		btnListar.setBounds(387, 99, 232, 45);
-		btnListar.setForeground(new Color(255, 255, 255));
+		//ICONOS
+        ImageIcon titulo = new ImageIcon(getClass().getResource("/iconos/tituloGrangeMoviento.png"));
+        ImageIcon listar = new ImageIcon(getClass().getResource("/iconos/listarReporte.png"));
+        ImageIcon volver = new ImageIcon(getClass().getResource("/iconos/volver.png"));
+        
+        
+		JLabel lblTitulo = new JLabel("ÚLTIMOS MOVIMIENTOS");
+		lblTitulo.setForeground(Color.WHITE);
+		lblTitulo.setFont(new Font("Tahoma",Font.BOLD, 25));
+		lblTitulo.setBounds(328, 66, 359, 39);
+		lblTitulo.setIcon(titulo);
+		add(lblTitulo);
+
+		btnListar = new JButton("LISTAR");
+		btnListar.setFont(new Font("Tahoma", Font.BOLD, 20));
+		btnListar.setBounds(547, 513, 232, 45);
+		btnListar.setForeground(Color.WHITE);
 		btnListar.setBackground(new Color(128, 191, 33));
-		add(btnListar);
-		btnListar.setContentAreaFilled(false); 
+		btnListar.setContentAreaFilled(false);
 		btnListar.setOpaque(true);
-		
-		textField = new JTextField();
-		textField.setBounds(224, 191, 555, 329);
-		add(textField);
-		textField.setColumns(10);
-		
-		btnVolver = new JButton("< Volver");
-		btnVolver.setForeground(new Color(255, 255, 255));
-		btnVolver.setBackground(new Color(128, 191, 33));
+		btnListar.addActionListener(this);
+		btnListar.setIcon(listar);
+		add(btnListar);
+
+		JScrollPane scrollPane = new JScrollPane();
+		scrollPane.setBounds(224, 148, 555, 328);
+		add(scrollPane);
+
+		textArea = new JTextArea();
+		scrollPane.setViewportView(textArea);
+
+		btnVolver = new JButton("VOLVER");
+		btnVolver.setForeground(Color.WHITE);
+		btnVolver.setBackground(new Color(192, 57, 43));
 		btnVolver.addActionListener(this);
-		btnVolver.setFont(new Font("Tahoma", Font.PLAIN, 15));
-		btnVolver.setBounds(69, 561, 97, 35);
-		add(btnVolver);
-		btnVolver.setContentAreaFilled(false); 
+		btnVolver.setFont(new Font("Tahoma", Font.BOLD, 20));
+		btnVolver.setBounds(229, 513, 232, 45);
+		btnVolver.setContentAreaFilled(false);
 		btnVolver.setOpaque(true);
-
-
+		btnVolver.setIcon(volver);
+		add(btnVolver);
+		
+		panel = new JPanel();
+		panel.setBackground(new Color(2, 64, 89));
+		panel.setBounds(131, 133, 761, 360);
+		add(panel);
+		
+		lblLinea = new JLabel("");
+		lblLinea.setForeground(new Color(255, 255, 255));
+		lblLinea.setBounds(224, 108, 555, 14);
+		// Línea solo abajo
+		lblLinea.setBorder(BorderFactory.createMatteBorder(0, 0, 2, 0, Color.WHITE));
+		add(lblLinea);
 	}
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		// TODO Auto-generated method stub
-		if(e.getSource() == btnVolver) {
-			ventanaPrincipal.menu_usuario();
+
+		if (e.getSource() == btnVolver) {
+			ventanaPrincipal.Mis_Cuentas();
+			return;
+		}
+
+		if (e.getSource() == btnListar) {
+			Cuenta c = ventanaPrincipal.getCuentaSeleccionada();
+			textArea.setText(Consultas.ultimosMovimientos(c, 5));
 		}
 	}
 }

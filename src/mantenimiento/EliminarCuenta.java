@@ -73,6 +73,7 @@ public class EliminarCuenta extends JPanel implements ActionListener{
 			comboBoxNcuentaActionPerformed(e);
 		}
 		if(e.getSource() == btnEliminar) {
+			actualizar();
 			actionPerformedbtnEliminar(e);
 		}
 		
@@ -110,6 +111,7 @@ public class EliminarCuenta extends JPanel implements ActionListener{
 			Cuenta cuenta = AlmacenDatos.listaCuentas.get(i);
 			comboBoxNcuenta.addItem(cuenta.getNumeroCuenta());
 		}
+		this.txtUsuario.setText("");
 	}
 
 }

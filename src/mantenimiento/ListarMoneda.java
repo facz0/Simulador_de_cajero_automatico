@@ -36,7 +36,7 @@ public class ListarMoneda extends JPanel {
 		
 		tableMonedas = new JTable(modelo);
 		scrollPane = new JScrollPane(tableMonedas);
-		scrollPane.setBounds(0, 0, 612, 455);
+		scrollPane.setBounds(0, -1, 612, 455);
 		add(scrollPane);
 		cargarDatos();
 	}

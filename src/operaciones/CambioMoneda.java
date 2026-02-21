@@ -16,6 +16,7 @@ import java.awt.Color;
 import javax.swing.JTextField;
 import javax.swing.JComboBox;
 import javax.swing.DefaultComboBoxModel;
+import javax.swing.ImageIcon;
 
 public class CambioMoneda extends JPanel implements ActionListener{
 
@@ -39,38 +40,53 @@ public class CambioMoneda extends JPanel implements ActionListener{
 	 * Create the panel.
 	 */
 	public CambioMoneda(VentanaPrincipal principal) {
-		setBackground(new Color(255, 255, 255));
+		setBackground(new Color(2, 64, 89));
 		this.ventanaPrincipal = principal;
 		setPreferredSize(new java.awt.Dimension(1000, 620));
 		setLayout(null);
 		
+		//ICONOS
+        ImageIcon titulo = new ImageIcon(getClass().getResource("/iconos/tituloMoneda.png"));
+        ImageIcon salir = new ImageIcon(getClass().getResource("/iconos/salirReporte.png"));
+        ImageIcon cantidad = new ImageIcon(getClass().getResource("/iconos/billete2Reporte.png"));
+        ImageIcon moneda = new ImageIcon(getClass().getResource("/iconos/moneda.png"));
+        ImageIcon monedas = new ImageIcon(getClass().getResource("/iconos/monedas.png"));
+        ImageIcon convertir = new ImageIcon(getClass().getResource("/iconos/generarReporte.png"));
+        
+        
+		
 		lblTitulo = new JLabel("CAMBIO DE MONEDA");
-		lblTitulo.setForeground(new Color(2, 64, 89));
+		
+		lblTitulo.setForeground(new Color(255, 255, 255));
 		lblTitulo.setHorizontalAlignment(SwingConstants.CENTER);
 		lblTitulo.setFont(new Font("Tahoma", Font.BOLD, 28));
-		lblTitulo.setBounds(210, 11, 600, 40);
+		lblTitulo.setBounds(210, 85, 600, 40);
+		lblTitulo.setIcon(titulo);
 		add(lblTitulo);
 		
 		separator = new JSeparator();
-		separator.setBounds(210, 61, 600, 2);
+		separator.setBounds(210, 144, 600, 2);
 		add(separator);
 		
 		lblClaveActual = new JLabel("CANTIDAD A CONVERTIR:");
-		lblClaveActual.setForeground(new Color(2, 64, 89));
+		lblClaveActual.setForeground(new Color(255, 255, 255));
 		lblClaveActual.setFont(new Font("Tahoma", Font.BOLD, 20));
-		lblClaveActual.setBounds(210, 106, 269, 30);
+		lblClaveActual.setBounds(210, 185, 293, 30);
+		lblClaveActual.setIcon(cantidad);
 		add(lblClaveActual);
 		
 		lblClaveNueva = new JLabel("DE:");
 		lblClaveNueva.setFont(new Font("Tahoma", Font.BOLD, 20));
-		lblClaveNueva.setBounds(210, 177, 200, 30);
-		lblClaveNueva.setForeground(new Color(2, 64, 89));
+		lblClaveNueva.setBounds(210, 250, 200, 30);
+		lblClaveNueva.setForeground(new Color(255, 255, 255));
+		lblClaveNueva.setIcon(moneda);
 		add(lblClaveNueva);
 		
 		lblConfirmar = new JLabel("A:");
 		lblConfirmar.setFont(new Font("Tahoma", Font.BOLD, 20));
-		lblConfirmar.setBounds(210, 247, 200, 30);
-		lblConfirmar.setForeground(new Color(2, 64, 89));
+		lblConfirmar.setBounds(210, 302, 200, 30);
+		lblConfirmar.setForeground(new Color(255, 255, 255));
+		lblConfirmar.setIcon(monedas);
 		add(lblConfirmar);
 		
 		btnCambiar = new JButton("CONVERTIR");
@@ -78,56 +94,58 @@ public class CambioMoneda extends JPanel implements ActionListener{
 		btnCambiar.setFont(new Font("Tahoma", Font.BOLD, 20));
 		btnCambiar.setFocusPainted(false);
 		btnCambiar.setBackground(new Color(128, 191, 33));
-		btnCambiar.setBounds(210, 444, 210, 50);
+		btnCambiar.setBounds(600, 505, 210, 50);
 		add(btnCambiar);
 		btnCambiar.setContentAreaFilled(false); 
+		btnCambiar.setIcon(convertir);
 		btnCambiar.setOpaque(true);
 		
-		btnCancelar = new JButton("CANCELAR");
+		btnCancelar = new JButton("SALIR");
 		btnCancelar.addActionListener(this);
 		btnCancelar.setForeground(Color.WHITE);
 		btnCancelar.setFont(new Font("Tahoma", Font.BOLD, 20));
 		btnCancelar.setFocusPainted(false);
-		btnCancelar.setBackground(new Color(3, 120, 166));
-		btnCancelar.setBounds(610, 444, 200, 50);
+		btnCancelar.setBackground(new Color(96, 125, 139));
+		btnCancelar.setBounds(210, 505, 210, 50);
 		add(btnCancelar);
 		btnCancelar.setContentAreaFilled(false); 
+		btnCancelar.setIcon(salir);
 		btnCancelar.setOpaque(true);
 		
 		lblNota = new JLabel("Tipo de cambio:             Dólar  3.30      Euro 3.99      Soles 1.00");
 		lblNota.setHorizontalAlignment(SwingConstants.CENTER);
-		lblNota.setForeground(new Color(128, 128, 128));
+		lblNota.setForeground(new Color(255, 255, 255));
 		lblNota.setFont(new Font("Tahoma", Font.ITALIC, 15));
-		lblNota.setBounds(231, 312, 492, 20);
+		lblNota.setBounds(229, 364, 492, 20);
 		add(lblNota);
 		
 		textField = new JTextField();
 		textField.setFont(new Font("Tahoma", Font.BOLD, 16));
 		textField.setColumns(10);
-		textField.setBounds(560, 108, 250, 30);
+		textField.setBounds(560, 187, 250, 30);
 		add(textField);
 		
 		comboBox = new JComboBox();
 		comboBox.setModel(new DefaultComboBoxModel(new String[] {"    SOLES - PEN", "    DÓLARES - USD", "    EUROS - EUR"}));
-		comboBox.setBounds(684, 181, 126, 30);
+		comboBox.setBounds(684, 250, 126, 30);
 		add(comboBox);
 		
 		comboBox_1 = new JComboBox();
 		comboBox_1.setModel(new DefaultComboBoxModel(new String[] {"    SOLES - PEN", "    DÓLARES - USD", "    EUROS - EUR"}));
-		comboBox_1.setBounds(684, 251, 126, 30);
+		comboBox_1.setBounds(684, 306, 126, 30);
 		add(comboBox_1);
 		
 		lblResultado = new JLabel("RESULTADO:");
 		lblResultado.setFont(new Font("Tahoma", Font.BOLD, 20));
-		lblResultado.setForeground(new Color(2, 64, 89));
-		lblResultado.setBounds(260, 366, 200, 30);
+		lblResultado.setForeground(new Color(255, 255, 255));
+		lblResultado.setBounds(260, 418, 200, 30);
 		add(lblResultado);
 		
 		lblEur = new JLabel(" 37.59 EUR");
 		lblEur.setHorizontalAlignment(SwingConstants.CENTER);
-		lblEur.setForeground(Color.GRAY);
+		lblEur.setForeground(new Color(255, 255, 255));
 		lblEur.setFont(new Font("Tahoma", Font.BOLD, 16));
-		lblEur.setBounds(510, 366, 250, 20);
+		lblEur.setBounds(513, 425, 250, 20);
 		add(lblEur);
 
 	}

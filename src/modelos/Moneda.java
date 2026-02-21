@@ -5,6 +5,8 @@ public class Moneda {
 	private String nombre;
 	private double tipoCambio;
 	
+	public Moneda() {}
+	
 	public Moneda(String idMoneda, String nombre, double tipoCambio) {
 		this.idMoneda = idMoneda; //ejemplo $, S/.
         this.nombre = nombre; //Soles, Dolares

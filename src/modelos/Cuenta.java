@@ -70,6 +70,11 @@ public class Cuenta {
 		this.movimientos = movimientos;
 	}
 	
+	@Override
+	public String toString() {
+	    return NumeroCuenta + "  |  " + moneda.getIdMoneda() + " " + moneda.getNombre();
+	}
+
 }
 
 
