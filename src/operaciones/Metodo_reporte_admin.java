@@ -3,6 +3,7 @@ package operaciones;
 import datos.AlmacenDatos;
 import modelos.Usuario;
 import modelos.Cuenta;
+import modelos.Transaccion;
 
 public class Metodo_reporte_admin {
 
@@ -84,5 +85,15 @@ public class Metodo_reporte_admin {
     }
 
     return resultado; // si no hay cuentas, devuelve un arreglo vacío
-}
+    }
+    
+    //* Este método recibe una transacción y busca la cuenta completa
+    //* permitiendo acceder luego al Usuario y a la Moneda.
+    //
+   public static Cuenta obtenerCuentaDeTransaccion(Transaccion t) {
+       if (t == null) return null;
+       
+       // Usamos el método que ya tienes en AlmacenDatos para buscar por número
+       return AlmacenDatos.cuentaPorNumero(t.getNumeroCuenta());
+   }
 }

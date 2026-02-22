@@ -12,7 +12,6 @@ public class Transaccion {
 	private LocalDateTime fecha;
 	private Tipo tipo;
 	private double monto;
-	//private String descripcion;
 	private String numeroCuenta;
 	
 	public Transaccion(String numeroCuenta, Tipo tipo, double monto) {
@@ -22,7 +21,6 @@ public class Transaccion {
 		this.numeroCuenta = numeroCuenta;
 		this.tipo = tipo;
 		this.monto = monto;
-		//this.descripcion = descripcion;
 	}
 
 	public static int getContador() {
@@ -56,6 +54,17 @@ public class Transaccion {
 
 	public void setFecha(LocalDateTime fecha) {
 		this.fecha = fecha;
+	}
+	
+	public String getSoloFechaFormateada() {
+	    DateTimeFormatter formato = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+	    return fecha.format(formato);
+	}
+	
+	
+	public String getHoraFormateada() {
+	    DateTimeFormatter formato = DateTimeFormatter.ofPattern("HH:mm:ss");
+	    return fecha.format(formato);
 	}
 	
 	

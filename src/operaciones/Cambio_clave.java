@@ -5,6 +5,7 @@ import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
@@ -35,31 +36,30 @@ public class Cambio_clave extends JPanel implements ActionListener{
 	 */
 	public Cambio_clave(VentanaPrincipal principal) {
 		this.ventanaPrincipal = principal;
-
+		
+		
+		//ICONOS
+        ImageIcon salir = new ImageIcon(getClass().getResource("/iconos/salirReporte.png"));
+        ImageIcon contraseña = new ImageIcon(getClass().getResource("/iconos/contra.png"));
+        ImageIcon clave = new ImageIcon(getClass().getResource("/iconos/cambioClave.png"));
+        ImageIcon clave2 = new ImageIcon(getClass().getResource("/iconos/Clavetitulo.png"));
+        
 		// Fondo principal blanco
-		setBackground(Color.WHITE);
+		setBackground(new Color(2, 64, 89));
 		setBorder(new EmptyBorder(10, 10, 10, 10));
 		setPreferredSize(new java.awt.Dimension(1000, 620));
 		setLayout(null);
 
 		// Título
 		JLabel lblTitulo = new JLabel("CAMBIO DE CLAVE");
-		lblTitulo.setForeground(new Color(2, 64, 89));
+		lblTitulo.setForeground(new Color(255, 255, 255));
 		lblTitulo.setFont(new Font("Tahoma", Font.BOLD, 28));
 		lblTitulo.setHorizontalAlignment(SwingConstants.CENTER);
-		lblTitulo.setBounds(200, 54, 600, 40);
+		lblTitulo.setBounds(200, 76, 600, 40);
+		lblTitulo.setIcon(contraseña);
 		add(lblTitulo);
 
-		// Botón volver
-		btnVolver = new JButton("< Volver");
-		btnVolver.setForeground(Color.WHITE);
-		btnVolver.setBackground(new Color(128, 191, 33));
-		btnVolver.addActionListener(this);
-		btnVolver.setFont(new Font("Tahoma", Font.PLAIN, 15));
-		btnVolver.setBounds(10, 15, 110, 35);
-		btnVolver.setContentAreaFilled(false); 
-		btnVolver.setOpaque(true);
-		add(btnVolver);
+		
 		
 		// Caja azul interna
 		cajaAzul = new JPanel();
@@ -75,71 +75,81 @@ public class Cambio_clave extends JPanel implements ActionListener{
 		JLabel lblClaveActual = new JLabel("Clave Actual:");
 		lblClaveActual.setForeground(Color.WHITE);
 		lblClaveActual.setFont(new Font("Tahoma", Font.BOLD, 18));
-		lblClaveActual.setBounds(60, 60, 200, 30);
+		lblClaveActual.setBounds(50, 60, 200, 30);
+		lblClaveActual.setIcon(clave);
 		cajaAzul.add(lblClaveActual);
 
 		txtClaveActual = new JPasswordField();
 		txtClaveActual.setFont(new Font("Tahoma", Font.PLAIN, 18));
-		txtClaveActual.setBounds(280, 60, 220, 35);
+		txtClaveActual.setBounds(330, 58, 220, 35);
 		cajaAzul.add(txtClaveActual);
 
 		// Nueva clave
 		JLabel lblClaveNueva = new JLabel("Nueva Clave:");
 		lblClaveNueva.setForeground(Color.WHITE);
 		lblClaveNueva.setFont(new Font("Tahoma", Font.BOLD, 18));
-		lblClaveNueva.setBounds(60, 120, 200, 30);
+		lblClaveNueva.setBounds(50, 120, 200, 30);
+		lblClaveNueva.setIcon(clave);
 		cajaAzul.add(lblClaveNueva);
 
 		txtClaveNueva = new JPasswordField();
 		txtClaveNueva.setFont(new Font("Tahoma", Font.PLAIN, 18));
-		txtClaveNueva.setBounds(280, 120, 220, 35);
+		txtClaveNueva.setBounds(330, 118, 220, 35);
 		cajaAzul.add(txtClaveNueva);
 
 		// Confirmar clave
 		JLabel lblConfirmar = new JLabel("Confirmar Clave:");
 		lblConfirmar.setForeground(Color.WHITE);
 		lblConfirmar.setFont(new Font("Tahoma", Font.BOLD, 18));
-		lblConfirmar.setBounds(60, 182, 200, 30);
+		lblConfirmar.setBounds(50, 182, 200, 30);
+		lblConfirmar.setIcon(clave);
 		cajaAzul.add(lblConfirmar);
 
 		txtConfirmarClave = new JPasswordField();
 		txtConfirmarClave.setFont(new Font("Tahoma", Font.PLAIN, 18));
-		txtConfirmarClave.setBounds(280, 180, 220, 35);
+		txtConfirmarClave.setBounds(330, 180, 220, 35);
 		cajaAzul.add(txtConfirmarClave);
 
 		Color verdeBoton = new Color(128, 191, 33);
 		
 		// Botón de acción principal
-		btnCambiar = new JButton("CAMBIAR CLAVE");
+		btnCambiar = new JButton("CAMBIAR");
 		btnCambiar.addActionListener(this);
 		btnCambiar.setFont(new Font("Tahoma", Font.BOLD, 18));
 		btnCambiar.setBackground(verdeBoton);
 		btnCambiar.setForeground(Color.WHITE);
-		btnCambiar.setBounds(120, 260, 200, 45);
+		btnCambiar.setBounds(330, 271, 220, 45);
 		btnCambiar.setFocusPainted(false);
 		btnCambiar.setBorderPainted(false);
 		btnCambiar.setOpaque(true);
+		btnCambiar.setIcon(clave2);
 		cajaAzul.add(btnCambiar);
 
 		// Botón cancelar
-		btnCancelar = new JButton("CANCELAR");
+		btnCancelar = new JButton("SALIR");
 		btnCancelar.addActionListener(this);
 		btnCancelar.setFont(new Font("Tahoma", Font.BOLD, 18));
-		btnCancelar.setBackground(verdeBoton);
+		btnCancelar.setBackground(new Color(96, 125, 139));
 		btnCancelar.setForeground(Color.WHITE);
-		btnCancelar.setBounds(340, 260, 160, 45);
+		btnCancelar.setBounds(50, 271, 220, 45);
 		btnCancelar.setFocusPainted(false);
 		btnCancelar.setBorderPainted(false);
 		btnCancelar.setOpaque(true);
+		btnCancelar.setIcon(salir);
 		cajaAzul.add(btnCancelar);
 
 		JLabel lblNota = new JLabel("Nota: use solo 4 dígitos numéricos.");
 		lblNota.setHorizontalAlignment(SwingConstants.CENTER);
 		lblNota.setForeground(Color.LIGHT_GRAY);
 		lblNota.setFont(new Font("Tahoma", Font.ITALIC, 13));
-		lblNota.setBounds(50, 320, 500, 20);
+		lblNota.setBounds(35, 369, 500, 20);
 		cajaAzul.add(lblNota);
 	}
+	
+	
+	
+	
+	
 
 	@Override
 	public void actionPerformed(ActionEvent e) {

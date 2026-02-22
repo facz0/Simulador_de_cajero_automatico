@@ -14,7 +14,8 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import java.awt.Color;
-
+import javax.swing.BorderFactory;
+import javax.swing.ImageIcon;
 import modelos.Cuenta;
 import modelos.Transaccion;
 import modelos.Usuario;
@@ -41,23 +42,30 @@ public class Consultas_Rango extends JPanel implements ActionListener {
 	private JTable tabla;
 	private DefaultTableModel modelo;
 	private JScrollPane scrollPane;
+	private JLabel lblLinea;
 
 	public Consultas_Rango(VentanaPrincipal principal) {
 		setBackground(new Color(2, 64, 89));
 		this.ventanaPrincipal = principal;
 		setPreferredSize(new java.awt.Dimension(1000, 620));
 		setLayout(null);
+		
+		//ICONOS
+        ImageIcon titulo = new ImageIcon(getClass().getResource("/iconos/tituloGrangeMoviento.png"));
+        ImageIcon volver = new ImageIcon(getClass().getResource("/iconos/volver.png"));
+        ImageIcon fecha = new ImageIcon(getClass().getResource("/iconos/calendarioReporte.png"));
+        ImageIcon procesar = new ImageIcon(getClass().getResource("/iconos/generarReporte.png"));
 
 		JLabel lblTitulo = new JLabel("CONSULTA DE OPERACIONES ");
 		lblTitulo.setForeground(new Color(255, 255, 255));
-		lblTitulo.setFont(new Font("Tahoma", Font.BOLD, 21));
-		lblTitulo.setBounds(356, 15, 332, 45);
+		lblTitulo.setFont(new Font("Tahoma", Font.BOLD, 25));
+		lblTitulo.setBounds(311, 61, 422, 45);
+		lblTitulo.setIcon(titulo);
 		add(lblTitulo);
 
 		JPanel panel = new JPanel();
-		panel.setBorder(new LineBorder(new Color(255, 255, 255), 3));
 		panel.setBackground(new Color(2, 64, 89));
-		panel.setBounds(122, 85, 769, 426);
+		panel.setBounds(126, 117, 769, 470);
 		panel.setLayout(null);
 		add(panel);
 
@@ -71,53 +79,60 @@ public class Consultas_Rango extends JPanel implements ActionListener {
 		cargarDatos();
 
 		btnProcesar = new JButton("PROCESAR");
-		btnProcesar.setBounds(45, 249, 125, 39);
+		btnProcesar.setBounds(519, 380, 181, 39);
 		btnProcesar.setFont(new Font("Tahoma", Font.BOLD, 15));
 		btnProcesar.setBackground(new Color(128, 191, 33));
 		btnProcesar.setContentAreaFilled(false);
 		btnProcesar.setOpaque(true);
 		btnProcesar.setForeground(Color.WHITE);
 		btnProcesar.addActionListener(this);
+		btnProcesar.setIcon(procesar);
 		panel.add(btnProcesar);
 
 		JLabel lblDesde = new JLabel("DESDE:");
 		lblDesde.setBounds(45, 43, 86, 35);
 		lblDesde.setForeground(Color.WHITE);
 		lblDesde.setFont(new Font("Tahoma", Font.BOLD, 15));
+		lblDesde.setIcon(fecha);
 		panel.add(lblDesde);
 
 		txtDesde = new JTextField("DD/MM/AAAA");
-		txtDesde.setBounds(45, 77, 120, 20);
+		txtDesde.setBounds(45, 83, 156, 41);
 		panel.add(txtDesde);
 
 		JLabel lblHasta = new JLabel("HASTA:");
 		lblHasta.setBounds(45, 135, 86, 35);
 		lblHasta.setForeground(Color.WHITE);
 		lblHasta.setFont(new Font("Tahoma", Font.BOLD, 15));
+		lblHasta.setIcon(fecha);
 		panel.add(lblHasta);
+				
+		tabla = new JTable(modelo);
+		scrollPane = new JScrollPane(tabla);
+		scrollPane.setBounds(297, 56, 403, 297);
+		panel.add(scrollPane);
+		
+		lblLinea = new JLabel("");
+		lblLinea.setBounds(0, 0, 769, 14);
+		panel.add(lblLinea);
+		lblLinea.setForeground(new Color(255, 255, 255));
+		// Línea solo abajo 
+		lblLinea.setBorder(BorderFactory.createMatteBorder(0, 0, 2, 0, Color.WHITE));
 
 		txtHasta = new JTextField("DD/MM/AAAA");
-		txtHasta.setBounds(45, 174, 120, 20);
+		txtHasta.setBounds(45, 176, 156, 40);
 		panel.add(txtHasta);
 		
-				textArea = new JTextArea();
-				textArea.setBounds(217, 30, 401, 331);
-				panel.add(textArea);
-				
-				tabla = new JTable(modelo);
-				scrollPane = new JScrollPane(tabla);
-				scrollPane.setBounds(217, 30, 403, 333);
-				panel.add(scrollPane);
-
-		btnVolver = new JButton("< Volver");
-		btnVolver.setForeground(Color.WHITE);
-		btnVolver.setBackground(new Color(128, 191, 33));
-		btnVolver.addActionListener(this);
-		btnVolver.setFont(new Font("Tahoma", Font.PLAIN, 15));
-		btnVolver.setBounds(10, 11, 97, 35);
-		btnVolver.setContentAreaFilled(false);
-		btnVolver.setOpaque(true);
-		add(btnVolver);
+				btnVolver = new JButton("VOLVER");
+				btnVolver.setBounds(192, 380, 181, 39);
+				panel.add(btnVolver);
+				btnVolver.setForeground(Color.WHITE);
+				btnVolver.setBackground(new Color(192, 57, 43));
+				btnVolver.addActionListener(this);
+				btnVolver.setFont(new Font("Tahoma", Font.BOLD, 15));
+				btnVolver.setContentAreaFilled(false);
+				btnVolver.setOpaque(true);
+				btnVolver.setIcon(volver);
 	}
 
 	@Override
@@ -141,8 +156,20 @@ public class Consultas_Rango extends JPanel implements ActionListener {
 	
 	public void cargarDatos() {
 		modelo.setRowCount(0);
+		Usuario usuarioActual = Sesion.obtener();
+		if (usuarioActual == null) {
+	        return; 
+	    }
+		Cuenta cuentaSeleccionada = ventanaPrincipal.getCuentaSeleccionada();
+		if (cuentaSeleccionada == null) {
+	        return;
+	    }
+		String numeroDeCuentaString = cuentaSeleccionada.getNumeroCuenta();
 		TransaccionService service = new TransaccionService();
-		ArrayList<Transaccion> listaMovimientos = service.listarTransacciones();
+		ArrayList<Transaccion> listaMovimientos = service.listarPorCuenta(numeroDeCuentaString);
+		if (listaMovimientos == null) {
+	        return; 
+	    }
 		
 		for(int i = 0; i < listaMovimientos.size(); i++) {
 			Transaccion t = listaMovimientos.get(i);

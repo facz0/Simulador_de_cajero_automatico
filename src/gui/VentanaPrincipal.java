@@ -15,7 +15,7 @@ import modelos.Cuenta;
 import mantenimiento.Mantenimiento_cliente;
 import mantenimiento.Mantenimiento_cuentaBancaria;
 import mantenimiento.Mantenimiento_moneda;
-import mantenimiento.Mantenimiento_transaccion;
+//import mantenimiento.Mantenimiento_transaccion;
 import operaciones.CambioMoneda;
 import operaciones.Cambio_clave;
 import operaciones.DepositoDinero;
@@ -30,7 +30,6 @@ public class VentanaPrincipal extends JFrame {
 
 	private static final long serialVersionUID = 1L;
 
-	//Declarar los paneles como atributos
 	private Panel_inicio panel_inicio;
 	private Login_administrador login_administrador;
 	private Login_usuario login_usuario;
@@ -46,7 +45,7 @@ public class VentanaPrincipal extends JFrame {
 	private Ultimos_movimientos ultimos_movimientos;
 	private Mantenimiento_cuentaBancaria mantenimiento_cuenta;
 	private Mantenimiento_cliente mantenimiento_cliente;
-	private Mantenimiento_transaccion mantenimiento_transaccion;
+	//private Mantenimiento_transaccion mantenimiento_transaccion;
 	private Mantenimiento_moneda mantenimiento_moneda;
 	private MisCuentas mis_cuentas;
 	private Cuenta cuentaSeleccionada;
@@ -91,7 +90,7 @@ public class VentanaPrincipal extends JFrame {
 		ultimos_movimientos = new Ultimos_movimientos(this);
 		mantenimiento_cuenta = new Mantenimiento_cuentaBancaria(this);
 		mantenimiento_cliente = new Mantenimiento_cliente(this);
-		mantenimiento_transaccion = new Mantenimiento_transaccion(this);
+		//mantenimiento_transaccion = new Mantenimiento_transaccion(this);
 		mantenimiento_moneda = new Mantenimiento_moneda(this);
 		mis_cuentas = new MisCuentas(this);
 		movimientos = new Ultimos_movimientos(this);
@@ -169,6 +168,7 @@ public class VentanaPrincipal extends JFrame {
 
 	public void Retirar_dinero() {
 		retiro_dinero.CargarCuenta();
+		retiro_dinero.actualizarMoneda();
 		cambiar_panel(retiro_dinero);
 	}
 
@@ -189,9 +189,9 @@ public class VentanaPrincipal extends JFrame {
 		cambiar_panel(mantenimiento_cliente);
 	}
 
-	public void Mantenimiento_tipo_transaccion() {
-		cambiar_panel(mantenimiento_transaccion);
-	}
+	//public void Mantenimiento_tipo_transaccion() {
+	//	cambiar_panel(mantenimiento_transaccion);
+	//}
 
 	public void Mantenimiento_Moneda() {
 		cambiar_panel(mantenimiento_moneda);

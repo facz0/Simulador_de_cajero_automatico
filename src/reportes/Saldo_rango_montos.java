@@ -1,6 +1,7 @@
 package reportes;
 
 import javax.swing.*;
+import javax.swing.border.LineBorder;
 import javax.swing.table.DefaultTableModel;
 
 import modelos.Cuenta;
@@ -13,7 +14,7 @@ import operaciones.Metodo_reporte_admin;
 public class Saldo_rango_montos extends JPanel implements ActionListener {
 
     private static final long serialVersionUID = 1L;
-    private Ventana_reportee ventana_reportee;
+  
     private JTextField txtMin, txtMax;
     private JTable tablaCuentas;
     private DefaultTableModel modeloTabla;
@@ -59,25 +60,30 @@ public class Saldo_rango_montos extends JPanel implements ActionListener {
             txtMax.setBounds(200, 130, 250, 28);
             add(txtMax);
 
+        //  BOTÓN GENERAR
             btnGenerar = new JButton("Generar");
-            btnGenerar.setForeground(new Color(255, 255, 255));
-            btnGenerar.setBackground(new Color(128, 191, 33)); // color deseado
-            btnGenerar.setContentAreaFilled(false); //fondo de color
-            btnGenerar.setOpaque(true);//fondo de color
+            btnGenerar.setForeground(Color.WHITE);
+            btnGenerar.setBackground(new Color(128, 191, 33));
+            btnGenerar.setContentAreaFilled(false);
+            btnGenerar.setOpaque(true);
             btnGenerar.setBounds(570, 87, 120, 30);
+            btnGenerar.setIcon(generarReporte);
             btnGenerar.addActionListener(this);
-            btnGenerar.setIcon(generarReporte);//icono
             add(btnGenerar);
 
+            //  BOTÓN LIMPIAR
             btnLimpiar = new JButton("Limpiar");
-            btnLimpiar.setForeground(new Color(255, 255, 255));
-            btnLimpiar.setBackground(new Color(128, 191, 33)); // color deseado
-            btnLimpiar.setContentAreaFilled(false); //fondo de color
-            btnLimpiar.setOpaque(true);//fondo de color
+            btnLimpiar.setForeground(Color.WHITE);
+            btnLimpiar.setBackground(new Color(128, 191, 33));
+            btnLimpiar.setContentAreaFilled(false);
+            btnLimpiar.setOpaque(true);
             btnLimpiar.setBounds(730, 87, 120, 30);
+            btnLimpiar.setIcon(limpiarReporte);
             btnLimpiar.addActionListener(this);
-            btnLimpiar.setIcon(limpiarReporte);//icono
             add(btnLimpiar);
+
+
+            // MODELO DE TABLA
 
          // MODELO DE TABLA
             modeloTabla = new DefaultTableModel(
@@ -98,16 +104,18 @@ public class Saldo_rango_montos extends JPanel implements ActionListener {
             // SCROLL
             JScrollPane scroll = new JScrollPane(tablaCuentas);
             scroll.setBounds(30, 191, 860, 251);
+            scroll.setBorder(new LineBorder(Color.BLACK, 3));
             add(scroll);
     }
 
     @Override
     public void actionPerformed(ActionEvent e) {
-    	if (e.getSource() == btnGenerar) {
+    	// Validar y obtener el rango de montos ingresado por el usuario
+        if (e.getSource() == btnGenerar) {
 
             String minTxt = txtMin.getText().trim();
             String maxTxt = txtMax.getText().trim();
-
+         // Validaciones de los montos ingresados
             if (minTxt.isEmpty() || maxTxt.isEmpty()) {
                 JOptionPane.showMessageDialog(this,
                         "Ingrese el monto mínimo y máximo",
@@ -154,9 +162,12 @@ public class Saldo_rango_montos extends JPanel implements ActionListener {
         }
 
         if (e.getSource() == btnLimpiar) {
-            txtMin.setText("");
-            txtMax.setText("");
-            modeloTabla.setRowCount(0);
+        	limpiar();
         }
     }
-}
+    public void limpiar() {
+        txtMin.setText("");
+        txtMax.setText("");
+        modeloTabla.setRowCount(0);
+    }
+ }

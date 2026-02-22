@@ -107,21 +107,21 @@ public class Panel_inicio extends JPanel implements ActionListener{
 		add(lblLogo);
 		
 		lblNewLabel = new JLabel("BIENVENIDO");
-		lblNewLabel.setFont(new Font("Tahoma", Font.BOLD, 30));
+		lblNewLabel.setFont(new Font("Tahoma", Font.BOLD, 28));
 		lblNewLabel.setForeground(new Color(2, 64, 89));
-		lblNewLabel.setBounds(131, 79, 210, 54);
+		lblNewLabel.setBounds(143, 77, 210, 54);
 		add(lblNewLabel);
 		
 		lblBancoInstitucional = new JLabel("BANCO INSTITUCIONAL");
 		lblBancoInstitucional.setForeground(new Color(2, 64, 89));
-		lblBancoInstitucional.setFont(new Font("Tahoma", Font.BOLD, 30));
+		lblBancoInstitucional.setFont(new Font("Tahoma", Font.BOLD, 28));
 		lblBancoInstitucional.setBounds(78, 460, 348, 61);
 		add(lblBancoInstitucional);
 		
 		lblCibertec = new JLabel("CIBERTEC");
 		lblCibertec.setForeground(new Color(2, 64, 89));
-		lblCibertec.setFont(new Font("Tahoma", Font.BOLD, 30));
-		lblCibertec.setBounds(156, 519, 162, 61);
+		lblCibertec.setFont(new Font("Tahoma", Font.BOLD, 28));
+		lblCibertec.setBounds(165, 518, 162, 61);
 		add(lblCibertec);
 
 	}

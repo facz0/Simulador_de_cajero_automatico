@@ -38,12 +38,12 @@ public class Ventana_reportee extends JPanel implements ItemListener, ActionList
         JLabel lblTitulo = new JLabel("TIPO DE REPORTES");
         lblTitulo.setForeground(new Color(255, 255, 255));
         lblTitulo.setFont(new Font("Segoe UI", Font.BOLD, 20));
-        lblTitulo.setBounds(197, 60, 253, 30);
+        lblTitulo.setBounds(226, 60, 253, 30);
         lblTitulo.setIcon(reporte);
         add(lblTitulo);
 
         cboReportes = new JComboBox<>();
-        cboReportes.setBounds(422, 60, 320, 30);
+        cboReportes.setBounds(456, 60, 320, 30);
         cboReportes.addItem("Saldo de cliente");
         cboReportes.addItem("Clientes con saldo entre rango de montos");
         cboReportes.addItem("Transacciones por rango de fecha");
@@ -59,7 +59,7 @@ public class Ventana_reportee extends JPanel implements ItemListener, ActionList
         
         btnSalir = new JButton(" VOLVER");
         btnSalir.setForeground(new Color(255, 255, 255)); //blanquito
-        btnSalir.setBackground(new Color(220, 53, 69)); // color deseado
+        btnSalir.setBackground(new Color(192, 57, 43)); // color deseado
         btnSalir.setContentAreaFilled(false); //fondo de color
         btnSalir.setOpaque(true);//fondo de color
         btnSalir.addActionListener(this);
@@ -110,7 +110,16 @@ public class Ventana_reportee extends JPanel implements ItemListener, ActionList
 	//boton salir
 	protected void actionPerformedBtnNewButton(ActionEvent e) {
 		if(e.getSource()==btnSalir) {
-			ventanaPrincipal.Panel_inicio();
+			limpiarTodo();
+            // Regresar al panel inicio
+            ventanaPrincipal.Panel_inicio();
 		}
+	}
+	
+	public void limpiarTodo() {
+	    pnlSaldoCliente.limpiar();
+	    pnlRangoMontos.limpiar();
+	    pnlRangoFechas.limpiar();
+	    cboReportes.setSelectedIndex(0);
 	}
 }

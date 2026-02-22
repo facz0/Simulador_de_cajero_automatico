@@ -11,6 +11,7 @@ import javax.swing.JButton;
 import javax.swing.JTextArea;
 import gui.VentanaPrincipal;
 import javax.swing.JComboBox;
+import javax.swing.ImageIcon;
 
 public class Mantenimiento_cuentaBancaria extends JPanel implements ActionListener{
 
@@ -36,6 +37,13 @@ public class Mantenimiento_cuentaBancaria extends JPanel implements ActionListen
 		this.ventanaPrincipal = principal;		
 		setPreferredSize(new java.awt.Dimension(1000, 620));
 		
+		ImageIcon cuenta = new ImageIcon(getClass().getResource("/iconos/cuentaBancaria.png"));
+        ImageIcon listar = new ImageIcon(getClass().getResource("/iconos/listarReporte2.png"));
+        ImageIcon crear = new ImageIcon(getClass().getResource("/iconos/crearReporte.png"));
+        ImageIcon modificar = new ImageIcon(getClass().getResource("/iconos/modificarReportar.png"));
+        ImageIcon eliminar = new ImageIcon(getClass().getResource("/iconos/limpiarReporte.png"));
+        ImageIcon volver = new ImageIcon(getClass().getResource("/iconos/volver.png"));
+		
 		JSeparator separator = new JSeparator();
 		separator.setBounds(98, 83, 792, 20);
 		add(separator);
@@ -44,19 +52,21 @@ public class Mantenimiento_cuentaBancaria extends JPanel implements ActionListen
 		lblNewLabel.setForeground(new Color(255, 255, 255));
 		lblNewLabel.setFont(new Font("Tahoma", Font.PLAIN, 20));
 		lblNewLabel.setBounds(98, 38, 393, 34);
+		lblNewLabel.setIcon(cuenta);
 		add(lblNewLabel);
 		
-		btnListar = new JButton("LISTAR");
+		btnListar = new JButton("Listar");
 		btnListar.setBounds(98, 114, 150, 42);
 		btnListar.setFont(new Font("Tahoma", Font.PLAIN, 17));
 		btnListar.setForeground(new Color(255, 255, 255));
 		btnListar.addActionListener(this);
 		btnListar.setBackground(new Color(128, 191, 33));
 		add(btnListar);
-		btnListar.setContentAreaFilled(false); 
+		btnListar.setContentAreaFilled(false);
+		btnListar.setIcon(listar);
 		btnListar.setOpaque(true); 
 		
-		btnCrear = new JButton("CREAR");
+		btnCrear = new JButton("Crear");
 		btnCrear.setBounds(98, 209, 150, 42);
 		btnCrear.setFont(new Font("Tahoma", Font.PLAIN, 17));
 		btnCrear.setForeground(new Color(255, 255, 255));
@@ -64,6 +74,7 @@ public class Mantenimiento_cuentaBancaria extends JPanel implements ActionListen
 		btnCrear.setBackground(new Color(128, 191, 33));
 		add(btnCrear);
 		btnCrear.setContentAreaFilled(false); 
+		btnCrear.setIcon(crear);
 		btnCrear.setOpaque(true); 
 		
 		btnModificar = new JButton("Modificar");
@@ -74,6 +85,8 @@ public class Mantenimiento_cuentaBancaria extends JPanel implements ActionListen
 		btnModificar.setBackground(new Color(128, 191, 33));
 		add(btnModificar);
 		btnModificar.setContentAreaFilled(false); 
+		btnModificar.setIcon(modificar);
+		btnCrear.setIcon(crear);
 		btnModificar.setOpaque(true); 
 		
 		btnEliminar = new JButton("Eliminar");
@@ -84,16 +97,18 @@ public class Mantenimiento_cuentaBancaria extends JPanel implements ActionListen
 		btnEliminar.setBackground(new Color(128, 191, 33));
 		add(btnEliminar);
 		btnEliminar.setContentAreaFilled(false); 
+		btnEliminar.setIcon(eliminar);
 		btnEliminar.setOpaque(true);
 		
-		btnVolver = new JButton("< Volver");
+		btnVolver = new JButton("VOLVER");
 		btnVolver.setForeground(new Color(255, 255, 255));
-		btnVolver.setBackground(new Color(128, 191, 33));
 		btnVolver.addActionListener(this);
 		btnVolver.setFont(new Font("Tahoma", Font.PLAIN, 15));
-		btnVolver.setBounds(793, 40, 97, 35);
+		btnVolver.setBounds(767, 40, 123, 35);
 		add(btnVolver);
 		btnVolver.setContentAreaFilled(false); 
+		btnVolver.setIcon(volver);
+		btnVolver.setBackground(new Color(192, 57, 43));
 		btnVolver.setOpaque(true);
 		
 		panelPrincipal = new JPanel();

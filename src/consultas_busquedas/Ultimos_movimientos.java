@@ -12,7 +12,8 @@ import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JSeparator;
 import javax.swing.JTextArea;
-
+import javax.swing.BorderFactory;
+import javax.swing.ImageIcon;
 import gui.VentanaPrincipal;
 import modelos.Cuenta;
 import modelos.Transaccion;
@@ -40,27 +41,34 @@ public class Ultimos_movimientos extends JPanel implements ActionListener {
 	private JTable tabla;
 	private DefaultTableModel modelo;
 	private JScrollPane scrollPane;
+	private JLabel lblLinea;
 
 	public Ultimos_movimientos(VentanaPrincipal principal) {
 		setBackground(new Color(2, 64, 89));
 		this.ventanaPrincipal = principal;
 		setPreferredSize(new java.awt.Dimension(1000, 620));
 		setLayout(null);
+		
+		ImageIcon titulo = new ImageIcon(getClass().getResource("/iconos/tituloGrangeMoviento.png"));
+	    ImageIcon listar = new ImageIcon(getClass().getResource("/iconos/listarReporte.png"));
+	    ImageIcon volver = new ImageIcon(getClass().getResource("/iconos/volver.png"));    
 
-		JLabel lblTitulo = new JLabel("Últimos movimientos");
+		JLabel lblTitulo = new JLabel("ÚLTIMOS MOVIMIENTOS");
 		lblTitulo.setForeground(Color.WHITE);
-		lblTitulo.setFont(new Font("Tahoma", Font.PLAIN, 22));
-		lblTitulo.setBounds(399, 11, 272, 39);
+		lblTitulo.setFont(new Font("Tahoma",Font.BOLD, 25));
+		lblTitulo.setBounds(328, 66, 359, 39);
+		lblTitulo.setIcon(titulo);
 		add(lblTitulo);
 
 		btnListar = new JButton("LISTAR");
-		btnListar.setFont(new Font("Tahoma", Font.PLAIN, 20));
-		btnListar.setBounds(387, 99, 232, 45);
+		btnListar.setFont(new Font("Tahoma", Font.BOLD, 20));
+		btnListar.setBounds(547, 513, 232, 45);
 		btnListar.setForeground(Color.WHITE);
 		btnListar.setBackground(new Color(128, 191, 33));
 		btnListar.setContentAreaFilled(false);
 		btnListar.setOpaque(true);
 		btnListar.addActionListener(this);
+		btnListar.setIcon(listar);
 		add(btnListar);
 		
 		String[] columnas = {"Fecha", "Tipo", "Monto"};
@@ -73,30 +81,35 @@ public class Ultimos_movimientos extends JPanel implements ActionListener {
 		
 		tabla = new JTable(modelo);
 		scrollPane = new JScrollPane(tabla); 
-		scrollPane.setBounds(224, 191, 555, 329);
+		scrollPane.setBounds(224, 148, 555, 328);
 		add(scrollPane);
 		cargarDatos();
 
-		btnVolver = new JButton("< Volver");
+		btnVolver = new JButton("VOLVER");
 		btnVolver.setForeground(Color.WHITE);
-		btnVolver.setBackground(new Color(128, 191, 33));
+		btnVolver.setBackground(new Color(192, 57, 43));
 		btnVolver.addActionListener(this);
-		btnVolver.setFont(new Font("Tahoma", Font.PLAIN, 15));
-		btnVolver.setBounds(10, 15, 97, 35);
+		btnVolver.setFont(new Font("Tahoma", Font.BOLD, 20));
+		btnVolver.setBounds(229, 513, 232, 45);
 		btnVolver.setContentAreaFilled(false);
 		btnVolver.setOpaque(true);
+		btnVolver.setIcon(volver);
 		add(btnVolver);
 		
 		panel = new JPanel();
-		panel.setBorder(new LineBorder(new Color(255, 255, 255), 3));
 		panel.setBackground(new Color(2, 64, 89));
-		panel.setBounds(130, 83, 761, 495);
+		panel.setBounds(131, 133, 761, 360);
 		add(panel);
+		
+		lblLinea = new JLabel("");
+		lblLinea.setForeground(new Color(255, 255, 255));
+		lblLinea.setBounds(224, 108, 555, 14);
+		lblLinea.setBorder(BorderFactory.createMatteBorder(0, 0, 2, 0, Color.WHITE));
+		add(lblLinea);
 	}
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
-
 		if (e.getSource() == btnVolver) {
 			ventanaPrincipal.Mis_Cuentas();
 			return;
@@ -105,8 +118,9 @@ public class Ultimos_movimientos extends JPanel implements ActionListener {
 		if (e.getSource() == btnListar) {
 			Cuenta c = ventanaPrincipal.getCuentaSeleccionada();
 			modelo.setRowCount(0);
-
-			for (Object[] fila : Consultas.ultimosMovimientosFilas(c, 5)) {
+			ArrayList<Object[]> listaFilas = (ArrayList<Object[]>) Consultas.ultimosMovimientosFilas(c, 5);
+			for (int i = 0; i < listaFilas.size(); i++) {
+				Object[] fila = listaFilas.get(i);
 				modelo.addRow(fila);
 			}
 		}

@@ -5,8 +5,10 @@ import javax.swing.table.DefaultTableModel;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.Image;
+
 import javax.swing.ImageIcon;
+import javax.swing.border.LineBorder;
+
 import modelos.Cuenta;
 import modelos.Usuario;
 import operaciones.Metodo_reporte_admin;
@@ -21,34 +23,42 @@ public class Saldo_cliente extends JPanel implements ActionListener {
     private JButton btnGenerar, btnLimpiar;
 
     public Saldo_cliente() {
-    	
-    	setBackground(new Color(2, 64, 89)); 
+
+
+        // FONDO
+        setBackground(new Color(2, 64, 89));
         setLayout(null);
-        
+
+        //ICONOS
         ImageIcon usuarioReporte = new ImageIcon(getClass().getResource("/iconos/usuarioReporte.png"));
         ImageIcon generarReporte = new ImageIcon(getClass().getResource("/iconos/generarReporte.png"));
         ImageIcon limpiarReporte = new ImageIcon(getClass().getResource("/iconos/limpiarReporte.png"));
 
+        //  TÍTULO
         JLabel lblTitulo = new JLabel("Saldo de cliente");
         lblTitulo.setForeground(Color.WHITE);
         lblTitulo.setBounds(30, 20, 300, 30);
         lblTitulo.setFont(new Font("Segoe UI", Font.BOLD, 16));
         add(lblTitulo);
 
+        //  SEPARADOR
         JSeparator sep = new JSeparator();
         sep.setBounds(30, 55, 860, 2);
         add(sep);
 
+        //  LABEL CLIENTE
         JLabel lblCliente = new JLabel("Nombre del cliente:");
         lblCliente.setForeground(Color.WHITE);
         lblCliente.setBounds(30, 90, 180, 25);
         lblCliente.setIcon(usuarioReporte);
         add(lblCliente);
 
+        //  TXT CLIENTE
         txtCliente = new JTextField();
         txtCliente.setBounds(200, 90, 250, 28);
         add(txtCliente);
 
+        //  BOTÓN GENERAR
         btnGenerar = new JButton("Generar");
         btnGenerar.setForeground(Color.WHITE);
         btnGenerar.setBackground(new Color(128, 191, 33));
@@ -59,6 +69,7 @@ public class Saldo_cliente extends JPanel implements ActionListener {
         btnGenerar.addActionListener(this);
         add(btnGenerar);
 
+        //  BOTÓN LIMPIAR
         btnLimpiar = new JButton("Limpiar");
         btnLimpiar.setForeground(Color.WHITE);
         btnLimpiar.setBackground(new Color(128, 191, 33));
@@ -88,12 +99,16 @@ public class Saldo_cliente extends JPanel implements ActionListener {
         //  SCROLL
         JScrollPane scroll = new JScrollPane(tablaCuentas);
         scroll.setBounds(30, 191, 860, 251);
+        scroll.setBorder(new LineBorder(Color.BLACK, 3));
         add(scroll);
     }
 
     @Override
     public void actionPerformed(ActionEvent e) {
+
+
     	if (e.getSource() == btnGenerar) {
+
 
             String nombre = txtCliente.getText().trim();
 
@@ -128,8 +143,11 @@ public class Saldo_cliente extends JPanel implements ActionListener {
         }
 
         if (e.getSource() == btnLimpiar) {
-            txtCliente.setText("");
-            modeloTabla.setRowCount(0); // aquí sí se limpia todo
+        	limpiar();
         }
+    }
+    		public void limpiar() {
+    		txtCliente.setText("");
+    		modeloTabla.setRowCount(0);
     }
 }

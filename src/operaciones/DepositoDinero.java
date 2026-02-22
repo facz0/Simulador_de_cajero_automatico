@@ -45,7 +45,7 @@ public class DepositoDinero extends JPanel implements ActionListener {
 
         this.ventanaPrincipal = principal;
 
-        setBackground(new Color(255, 255, 255));
+        setBackground(new Color(2, 64, 89));
         setPreferredSize(new java.awt.Dimension(1000, 620));
         setLayout(null);
 
@@ -53,7 +53,7 @@ public class DepositoDinero extends JPanel implements ActionListener {
         lblTitulo.setHorizontalAlignment(SwingConstants.CENTER);
         lblTitulo.setFont(new Font("Tahoma", Font.BOLD, 28));
         lblTitulo.setBounds(199, 41, 600, 40);
-        lblTitulo.setForeground(new Color(2, 64, 89));
+        lblTitulo.setForeground(new Color(255, 255, 255));
         add(lblTitulo);
 
         separator = new JSeparator();
@@ -61,7 +61,7 @@ public class DepositoDinero extends JPanel implements ActionListener {
         add(separator);
 
         lblIngreseMonto = new JLabel("Ingrese monto a depositar");
-        lblIngreseMonto.setForeground(new Color(2, 64, 89));
+        lblIngreseMonto.setForeground(new Color(255, 255, 255));
         lblIngreseMonto.setFont(new Font("Tahoma", Font.BOLD, 20));
         lblIngreseMonto.setBounds(346, 117, 383, 30);
         add(lblIngreseMonto);
@@ -74,7 +74,7 @@ public class DepositoDinero extends JPanel implements ActionListener {
         lblMiCuenta = new JLabel("Número de cuenta ORIGEN:");
         lblMiCuenta.setFont(new Font("Tahoma", Font.BOLD, 20));
         lblMiCuenta.setBounds(127, 223, 350, 30);
-        lblMiCuenta.setForeground(new Color(2, 64, 89));
+        lblMiCuenta.setForeground(new Color(255, 255, 255));
         add(lblMiCuenta);
 
         cmbMiCuenta = new JComboBox<>();
@@ -82,7 +82,7 @@ public class DepositoDinero extends JPanel implements ActionListener {
         add(cmbMiCuenta);
 
         lblCuentaDestino = new JLabel("Número de cuenta DESTINO:");
-        lblCuentaDestino.setForeground(new Color(2, 64, 89));
+        lblCuentaDestino.setForeground(new Color(255, 255, 255));
         lblCuentaDestino.setFont(new Font("Tahoma", Font.BOLD, 20));
         lblCuentaDestino.setBounds(127, 279, 350, 30);
         add(lblCuentaDestino);
@@ -94,13 +94,13 @@ public class DepositoDinero extends JPanel implements ActionListener {
 
         lblSaldoActual = new JLabel("Saldo actual:");
         lblSaldoActual.setFont(new Font("Tahoma", Font.BOLD, 20));
-        lblSaldoActual.setBounds(178, 337, 200, 40);
-        lblSaldoActual.setForeground(new Color(2, 64, 89));
+        lblSaldoActual.setBounds(127, 337, 200, 40);
+        lblSaldoActual.setForeground(new Color(255, 255, 255));
         add(lblSaldoActual);
 
         txtSaldoActual = new JTextField();
         txtSaldoActual.setEditable(false);
-        txtSaldoActual.setEnabled(false);
+        txtSaldoActual.setForeground(new Color(2, 64, 89));
         txtSaldoActual.setFont(new Font("Tahoma", Font.BOLD, 14));
         txtSaldoActual.setBounds(538, 340, 261, 40);
         add(txtSaldoActual);
@@ -150,6 +150,16 @@ public class DepositoDinero extends JPanel implements ActionListener {
         mostrarSaldoCuentaOrigen();
         
     }
+    
+    public void actionPerformed(ActionEvent e) {
+        if (e.getSource() == btnConfirmar) {
+            confirmarOperacion();
+        }
+        
+        if (e.getSource() == btnCancelar || e.getSource() == btnVolver) {
+            ventanaPrincipal.menu_usuario();
+        }
+    }
 
     private void mostrarSaldoCuentaOrigen() {
     	if (cmbMiCuenta.getSelectedItem() == null) {
@@ -167,7 +177,7 @@ public class DepositoDinero extends JPanel implements ActionListener {
         }
     }
     
- // RECARGA LAS CUENTAS Y SALDO MOSTRADO EN LA PANTALLA
+    // RECARGA LAS CUENTAS Y SALDO MOSTRADO EN LA PANTALLA
     @Override
     public void addNotify() {
         super.addNotify();
@@ -306,16 +316,7 @@ public class DepositoDinero extends JPanel implements ActionListener {
         txtCuentaDestino.setText("");
     }
     
-    public void actionPerformed(ActionEvent e) {
-
-        if (e.getSource() == btnConfirmar) {
-            confirmarOperacion();
-        }
-
-        if (e.getSource() == btnCancelar || e.getSource() == btnVolver) {
-            ventanaPrincipal.menu_usuario();
-        }
-    }
+    
 }
   
 

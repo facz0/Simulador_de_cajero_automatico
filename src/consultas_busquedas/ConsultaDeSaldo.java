@@ -9,14 +9,17 @@ import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
-
+import javax.swing.BorderFactory;
+import javax.swing.ImageIcon;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 import gui.VentanaPrincipal;
 import modelos.Cuenta;
+import modelos.Usuario;
 import servicio.Consultas;
 import servicio.CuentaService;
+import servicio.Sesion;
 import servicio.Consultas;
 
 import javax.swing.border.LineBorder;
@@ -32,34 +35,29 @@ public class ConsultaDeSaldo extends JPanel implements ActionListener {
 	private DefaultTableModel modelo;
 	private JTable tabla;
 	private JScrollPane scrollPane;
+	private JLabel lblLinea;
 
 	public ConsultaDeSaldo(VentanaPrincipal principal) {
-		setBorder(new LineBorder(new Color(0, 0, 0), 3));
 		setBackground(new Color(2, 64, 89));
 		this.ventanaPrincipal = principal;
 		setPreferredSize(new java.awt.Dimension(1000, 620));
 		setLayout(null);
+		
+		// ICONOS
+		ImageIcon titulo = new ImageIcon(getClass().getResource("/iconos/tituloCuenta.png"));
+		ImageIcon volver = new ImageIcon(getClass().getResource("/iconos/volver.png"));
+		ImageIcon consultar = new ImageIcon(getClass().getResource("/iconos/ConsultaUltimo.png"));
 
 		JLabel lblTitulo = new JLabel("CONSULTAR SALDO");
 		lblTitulo.setForeground(new Color(255, 255, 255));
-		lblTitulo.setFont(new Font("Tahoma", Font.BOLD, 21));
-		lblTitulo.setBounds(386, 11, 216, 50);
+		lblTitulo.setFont(new Font("Tahoma", Font.BOLD, 25));
+		lblTitulo.setBounds(349, 54, 291, 50);
+		lblTitulo.setIcon(titulo);
 		add(lblTitulo);
 
-		btnVolver = new JButton("< Volver");
-		btnVolver.setForeground(Color.WHITE);
-		btnVolver.setBackground(new Color(128, 191, 33));
-		btnVolver.addActionListener(this);
-		btnVolver.setFont(new Font("Tahoma", Font.PLAIN, 15));
-		btnVolver.setBounds(10, 11, 97, 35);
-		btnVolver.setContentAreaFilled(false);
-		btnVolver.setOpaque(true);
-		add(btnVolver);
-
 		JPanel panel = new JPanel();
-		panel.setBorder(new LineBorder(new Color(255, 255, 255), 3));
 		panel.setBackground(new Color(2, 64, 89));
-		panel.setBounds(126, 78, 766, 445);
+		panel.setBounds(124, 130, 766, 479);
 		panel.setLayout(null);
 		add(panel);
 		
@@ -73,23 +71,38 @@ public class ConsultaDeSaldo extends JPanel implements ActionListener {
 		cargarDatos();
 
 		btnConsultar = new JButton("CONSULTAR");
-		btnConsultar.setBounds(94, 204, 129, 38);
+		btnConsultar.setBounds(425, 388, 228, 49);
 		btnConsultar.setForeground(Color.WHITE);
 		btnConsultar.setBackground(new Color(128, 191, 33));
 		btnConsultar.setContentAreaFilled(false);
 		btnConsultar.setOpaque(true);
-		btnConsultar.setFont(new Font("Tahoma", Font.BOLD, 15));
+		btnConsultar.setFont(new Font("Tahoma", Font.BOLD, 20));
 		btnConsultar.addActionListener(this);
+		btnConsultar.setIcon(consultar);
 		panel.add(btnConsultar);
 		
-				textArea = new JTextArea();
-				textArea.setBounds(269, 54, 416, 337);
-				panel.add(textArea);
-				
-				tabla = new JTable(modelo);
-				scrollPane = new JScrollPane(tabla);
-				scrollPane.setBounds(267, 54, 418, 339);
-				panel.add(scrollPane);
+		btnVolver = new JButton("VOLVER");
+		btnVolver.setBounds(92, 388, 228, 49);
+		panel.add(btnVolver);
+		btnVolver.setForeground(Color.WHITE);
+		btnVolver.setBackground(new Color(192, 57, 43));
+		btnVolver.addActionListener(this);
+		btnVolver.setFont(new Font("Tahoma", Font.BOLD, 20));
+		btnVolver.setContentAreaFilled(false);
+		btnVolver.setIcon(volver);
+		btnVolver.setOpaque(true);
+
+		lblLinea = new JLabel("");
+		lblLinea.setForeground(new Color(255, 255, 255));
+		lblLinea.setBounds(218, 105, 558, 14);
+		// Línea solo abajo 
+		lblLinea.setBorder(BorderFactory.createMatteBorder(0, 0, 2, 0, Color.WHITE));
+		add(lblLinea);
+		
+		tabla = new JTable(modelo);
+		scrollPane = new JScrollPane(tabla);
+		scrollPane.setBounds(92, 11, 561, 339);
+		panel.add(scrollPane);
 	}
 
 	@Override
@@ -114,15 +127,18 @@ public class ConsultaDeSaldo extends JPanel implements ActionListener {
 	
 	public void cargarDatos() {
 		modelo.setRowCount(0);
-		
+		Usuario usuarioActual = Sesion.obtener();
+		if (usuarioActual == null) {
+	        return; 
+	    }
 		CuentaService service = new CuentaService();
-		ArrayList<Cuenta> lista = service.listarCuenta();
+		ArrayList<Cuenta> lista = service.listarCuentasPorUsuario(usuarioActual);
 		
 		for(int i = 0; i < lista.size(); i++) {
 			Cuenta cuenta = lista.get(i);
 			Object[] fila = {
 				cuenta.getNumeroCuenta(),
-				cuenta.getMoneda(),
+				cuenta.getMoneda().getNombre(),
 				cuenta.getSaldo()
 			};
 			modelo.addRow(fila);
