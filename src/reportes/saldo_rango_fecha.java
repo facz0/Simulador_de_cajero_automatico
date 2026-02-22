@@ -184,7 +184,7 @@ public class saldo_rango_fecha extends JPanel implements ActionListener {
 
 		// Limpiar campos y tabla
 		if (e.getSource() == btnLimpiar) {
-			limpiar();
+			limpiar();	
 		}
 	}
 	public void limpiar() {

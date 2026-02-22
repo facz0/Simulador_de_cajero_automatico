@@ -1,22 +1,18 @@
 package operaciones;
 
 import javax.swing.JPanel;
-import javax.swing.JTextPane;
-
 import gui.VentanaPrincipal;
-
 import java.awt.Color;
 import javax.swing.JLabel;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-
 import javax.swing.JTextField;
 import javax.swing.JPasswordField;
+import javax.swing.BorderFactory;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
-import javax.swing.JSlider;
-import javax.swing.JMenuBar;
+
 
 public class Login_administrador extends JPanel implements ActionListener{
 	private static final long serialVersionUID = 1L;
@@ -29,6 +25,7 @@ public class Login_administrador extends JPanel implements ActionListener{
     private JLabel lbltitulo;
     private ImageIcon iconoReportes;
     private ImageIcon iconoMantenimiento;
+    private JLabel lblLinea;
 	/**
 	 * Create the panel.
 	 * @param ventanaPrincipal 
@@ -38,7 +35,7 @@ public class Login_administrador extends JPanel implements ActionListener{
 		
 		//ICONOS
         ImageIcon documentoIdentidad = new ImageIcon(getClass().getResource("/iconos/dni.png"));
-        ImageIcon volver = new ImageIcon(getClass().getResource("/iconos/Volver.png"));
+        ImageIcon volver = new ImageIcon(getClass().getResource("/iconos/salirReporte.png"));
         ImageIcon ingresarLogin = new ImageIcon(getClass().getResource("/iconos/ingresar.png"));
         ImageIcon contraseñaLogin = new ImageIcon(getClass().getResource("/iconos/contraseña.png"));
         iconoReportes = new ImageIcon(getClass().getResource("/iconos/report.png"));
@@ -56,9 +53,13 @@ public class Login_administrador extends JPanel implements ActionListener{
 		add(panel);
 		panel.setLayout(null);
 		
+
 		lbltitulo = new JLabel("LOGIN DE LOS REPORTES");
+
+		lbltitulo = new JLabel("LOGIN REPORTES");
+
 		lbltitulo.setForeground(new Color(255, 255, 255));
-		lbltitulo.setBounds(187, 55, 391, 29);
+		lbltitulo.setBounds(187, 50, 391, 29);
 		panel.add(lbltitulo);
 		lbltitulo.setFont(new Font("Segoe UI", Font.BOLD, 20));
 		
@@ -97,17 +98,26 @@ public class Login_administrador extends JPanel implements ActionListener{
 		btnIngresarLoginAdmin.setOpaque(true);
 		btnIngresarLoginAdmin.setIcon(ingresarLogin);
 		
-		btnVolver = new JButton("VOLVER");
+		btnVolver = new JButton("SALIR");
 		btnVolver.setBounds(185, 367, 127, 36);
 		panel.add(btnVolver);
 		btnVolver.setForeground(new Color(255, 255, 255));
-		btnVolver.setBackground(new Color(96, 125, 139)); // color deseado ROJO
+		btnVolver.setBackground(new Color(96, 125, 139)); // color deseado 
 		btnVolver.addActionListener(this);
 		btnVolver.setFont(new Font("Tahoma", Font.PLAIN, 15));
 		btnVolver.setContentAreaFilled(false); 
 		btnVolver.setOpaque(true);
 		btnVolver.setIcon(volver);
+		
+		lblLinea = new JLabel("");
+		lblLinea.setForeground(new Color(255, 255, 255));
+		lblLinea.setBounds(187, 79, 277, 14);
+		lblLinea.setBorder(BorderFactory.createMatteBorder(0, 0, 2, 0, Color.WHITE));
+		panel.add(lblLinea);
 	}
+	
+	
+	
 	
 	public void setModo(String modo) {
         this.tipoAcceso = modo;
@@ -118,48 +128,63 @@ public class Login_administrador extends JPanel implements ActionListener{
             lbltitulo.setText("LOGIN DE LOS REPORTES");
             lbltitulo.setIcon(iconoReportes);
         }
-    }
+	}
 	
 	@Override
 	public void actionPerformed(ActionEvent e) {
 
 	    if (e.getSource() == btnVolver) {
 	        ventanaPrincipal.Panel_inicio();
+	        txtAdminDni.setText("");
+			passwordAdmin.setText("");
 	        return;
 	    }
+
 
 	    if (e.getSource() == btnIngresarLoginAdmin) {
 
 	        String usuario = txtAdminDni.getText();
 	        String password = new String(passwordAdmin.getPassword());
 
-	        
 	        boolean acceso = Metodo_login_administrador.validarLogin(
 	                tipoAcceso, usuario, password
 	        );
 
 	        if (acceso) {
-	            // Si es correcto, navegamos
+
+	            //  limpiar antes de cambiar
+	            txtAdminDni.setText("");
+	            passwordAdmin.setText("");
+
 	            if ("MANTENIMIENTO".equals(tipoAcceso)) {
 	                ventanaPrincipal.Menu_mantenimiento();
 	            } else if ("REPORTES".equals(tipoAcceso)) {
 	                ventanaPrincipal.Menu_reportes();
 	            }
+
 	        } else {
-	            // --- INTEGRACIÓN DE JOPTIONPANE ---
+
 	            javax.swing.JOptionPane.showMessageDialog(
-	                this, 
-	                "Usuario o contraseña incorrectos para el acceso a " + tipoAcceso, 
-	                "Error de Autenticación", 
-	                javax.swing.JOptionPane.ERROR_MESSAGE
+	                    this,
+	                    "Usuario o contraseña incorrectos para el acceso a " + tipoAcceso,
+	                    "Error de Autenticación",
+	                    javax.swing.JOptionPane.ERROR_MESSAGE
 	            );
 
-	            // Limpiamos los campos para mayor comodidad del usuario
 	            txtAdminDni.setText("");
 	            passwordAdmin.setText("");
-	            txtAdminDni.requestFocus(); // Pone el cursor de nuevo en el DNI
+	            txtAdminDni.requestFocus();
 	        }
-	    }
-	}
-	}
+	    }}}
+	
+
+	
+
+
+	        
+	    
+
+	       
+	   
+	
 

@@ -6,6 +6,9 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+import javax.swing.ImageIcon;
+import javax.swing.border.LineBorder;
+
 import modelos.Cuenta;
 import modelos.Usuario;
 import operaciones.Metodo_reporte_admin;
@@ -21,17 +24,15 @@ public class Saldo_cliente extends JPanel implements ActionListener {
 
     public Saldo_cliente() {
 
+
         // FONDO
         setBackground(new Color(2, 64, 89));
         setLayout(null);
 
         //ICONOS
-        ImageIcon usuarioReporte = new ImageIcon(getClass().getResource("/iconos/usuarioReporte.png")
-        );
-        ImageIcon generarReporte = new ImageIcon(getClass().getResource("/iconos/generarReporte.png")
-        );
-        ImageIcon limpiarReporte = new ImageIcon(getClass().getResource("/iconos/limpiarReporte.png")
-        );
+        ImageIcon usuarioReporte = new ImageIcon(getClass().getResource("/iconos/usuarioReporte.png"));
+        ImageIcon generarReporte = new ImageIcon(getClass().getResource("/iconos/generarReporte.png"));
+        ImageIcon limpiarReporte = new ImageIcon(getClass().getResource("/iconos/limpiarReporte.png"));
 
         //  TÍTULO
         JLabel lblTitulo = new JLabel("Saldo de cliente");
@@ -98,13 +99,16 @@ public class Saldo_cliente extends JPanel implements ActionListener {
         //  SCROLL
         JScrollPane scroll = new JScrollPane(tablaCuentas);
         scroll.setBounds(30, 191, 860, 251);
+        scroll.setBorder(new LineBorder(Color.BLACK, 3));
         add(scroll);
     }
 
     @Override
     public void actionPerformed(ActionEvent e) {
 
-        if (e.getSource() == btnGenerar) {
+
+    	if (e.getSource() == btnGenerar) {
+
 
             String nombre = txtCliente.getText().trim();
 
@@ -139,8 +143,11 @@ public class Saldo_cliente extends JPanel implements ActionListener {
         }
 
         if (e.getSource() == btnLimpiar) {
-            txtCliente.setText("");
-            modeloTabla.setRowCount(0); // aquí sí se limpia todo
+        	limpiar();
         }
+    }
+    		public void limpiar() {
+    		txtCliente.setText("");
+    		modeloTabla.setRowCount(0);
     }
 }
