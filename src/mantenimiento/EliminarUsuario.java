@@ -60,7 +60,7 @@ public class EliminarUsuario extends JPanel implements ActionListener{
 		btnEliminar.setBackground(new Color(128, 191, 33));
 		btnEliminar.setForeground(new Color(255, 255, 255));
 		btnEliminar.setFont(new Font("Tahoma", Font.PLAIN, 20));
-		btnEliminar.setBounds(235, 273, 120, 40);
+		btnEliminar.setBounds(212, 273, 165, 40);
 		add(btnEliminar);
 		btnEliminar.setContentAreaFilled(false); 
 		btnEliminar.setOpaque(true);

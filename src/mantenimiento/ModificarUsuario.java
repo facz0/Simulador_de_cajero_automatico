@@ -78,7 +78,7 @@ public class ModificarUsuario extends JPanel implements ActionListener{
 		btnModificar.setBackground(new Color(128, 191, 33));
 		btnModificar.setForeground(new Color(255, 255, 255));
 		btnModificar.setFont(new Font("Tahoma", Font.PLAIN, 20));
-		btnModificar.setBounds(423, 376, 135, 40);
+		btnModificar.setBounds(384, 376, 174, 40);
 		add(btnModificar);
 		btnModificar.setContentAreaFilled(false); 
 		btnModificar.setOpaque(true);
