@@ -145,6 +145,11 @@ public class Cambio_clave extends JPanel implements ActionListener{
 		lblNota.setBounds(35, 369, 500, 20);
 		cajaAzul.add(lblNota);
 	}
+	
+	
+	
+	
+	
 
 	@Override
 	public void actionPerformed(ActionEvent e) {

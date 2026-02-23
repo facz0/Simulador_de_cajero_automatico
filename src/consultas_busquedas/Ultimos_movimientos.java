@@ -4,21 +4,30 @@ import java.awt.Color;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
 
-import javax.swing.BorderFactory;
-import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JSeparator;
 import javax.swing.JTextArea;
-
+import javax.swing.BorderFactory;
+import javax.swing.ImageIcon;
 import gui.VentanaPrincipal;
 import modelos.Cuenta;
+import modelos.Transaccion;
+import modelos.Usuario;
 import servicio.Consultas;
+import servicio.Sesion;
+import servicio.TransaccionService;
 
 import javax.swing.border.LineBorder;
+import javax.swing.JTable;
+import javax.swing.table.DefaultTableModel;
+
+import datos.AlmacenDatos;
+import servicio.Consultas;
 
 public class Ultimos_movimientos extends JPanel implements ActionListener {
 
@@ -29,6 +38,9 @@ public class Ultimos_movimientos extends JPanel implements ActionListener {
 	private JButton btnVolver;
 	private JTextArea textArea;
 	private JPanel panel;
+	private JTable tabla;
+	private DefaultTableModel modelo;
+	private JScrollPane scrollPane;
 	private JLabel lblLinea;
 
 	public Ultimos_movimientos(VentanaPrincipal principal) {
@@ -37,12 +49,10 @@ public class Ultimos_movimientos extends JPanel implements ActionListener {
 		setPreferredSize(new java.awt.Dimension(1000, 620));
 		setLayout(null);
 		
-		//ICONOS
-        ImageIcon titulo = new ImageIcon(getClass().getResource("/iconos/tituloGrangeMoviento.png"));
-        ImageIcon listar = new ImageIcon(getClass().getResource("/iconos/listarReporte.png"));
-        ImageIcon volver = new ImageIcon(getClass().getResource("/iconos/volver.png"));
-        
-        
+		ImageIcon titulo = new ImageIcon(getClass().getResource("/iconos/tituloGrangeMoviento.png"));
+	    ImageIcon listar = new ImageIcon(getClass().getResource("/iconos/listarReporte.png"));
+	    ImageIcon volver = new ImageIcon(getClass().getResource("/iconos/volver.png"));    
+
 		JLabel lblTitulo = new JLabel("ÚLTIMOS MOVIMIENTOS");
 		lblTitulo.setForeground(Color.WHITE);
 		lblTitulo.setFont(new Font("Tahoma",Font.BOLD, 25));
@@ -60,20 +70,27 @@ public class Ultimos_movimientos extends JPanel implements ActionListener {
 		btnListar.addActionListener(this);
 		btnListar.setIcon(listar);
 		add(btnListar);
-
-		JScrollPane scrollPane = new JScrollPane();
+		
+		String[] columnas = {"Fecha", "Tipo", "Monto"};
+		modelo = new DefaultTableModel(null, columnas) {
+			@Override
+			public boolean isCellEditable(int row, int column) { //hacer no editable las celdas
+				return false;
+			}
+		};
+		
+		tabla = new JTable(modelo);
+		scrollPane = new JScrollPane(tabla); 
 		scrollPane.setBounds(224, 148, 555, 328);
 		add(scrollPane);
-
-		textArea = new JTextArea();
-		scrollPane.setViewportView(textArea);
+		cargarDatos();
 
 		btnVolver = new JButton("VOLVER");
 		btnVolver.setForeground(Color.WHITE);
 		btnVolver.setBackground(new Color(192, 57, 43));
 		btnVolver.addActionListener(this);
 		btnVolver.setFont(new Font("Tahoma", Font.BOLD, 20));
-		btnVolver.setBounds(229, 513, 232, 45);
+		btnVolver.setBounds(224, 513, 232, 45);
 		btnVolver.setContentAreaFilled(false);
 		btnVolver.setOpaque(true);
 		btnVolver.setIcon(volver);
@@ -87,14 +104,12 @@ public class Ultimos_movimientos extends JPanel implements ActionListener {
 		lblLinea = new JLabel("");
 		lblLinea.setForeground(new Color(255, 255, 255));
 		lblLinea.setBounds(224, 108, 555, 14);
-		// Línea solo abajo
 		lblLinea.setBorder(BorderFactory.createMatteBorder(0, 0, 2, 0, Color.WHITE));
 		add(lblLinea);
 	}
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
-
 		if (e.getSource() == btnVolver) {
 			ventanaPrincipal.Mis_Cuentas();
 			return;
@@ -102,7 +117,25 @@ public class Ultimos_movimientos extends JPanel implements ActionListener {
 
 		if (e.getSource() == btnListar) {
 			Cuenta c = ventanaPrincipal.getCuentaSeleccionada();
-			textArea.setText(Consultas.ultimosMovimientos(c, 5));
+			modelo.setRowCount(0);
+			ArrayList<Object[]> listaFilas = (ArrayList<Object[]>) Consultas.ultimosMovimientosFilas(c, 5);
+			for (int i = 0; i < listaFilas.size(); i++) {
+				Object[] fila = listaFilas.get(i);
+				modelo.addRow(fila);
+			}
 		}
+	}
+	
+	public void cargarDatos() {
+		modelo.setRowCount(0);
+		
+		Cuenta cuentaSeleccionada = ventanaPrincipal.getCuentaSeleccionada();
+	    if (cuentaSeleccionada == null) return;
+
+	    ArrayList<Object[]> filas = (ArrayList<Object[]>) Consultas.ultimosMovimientosFilas(cuentaSeleccionada, 5);
+
+	    for (int i = 0; i < filas.size(); i++) {
+	        modelo.addRow(filas.get(i));
+	    }
 	}
 }

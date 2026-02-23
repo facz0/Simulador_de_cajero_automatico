@@ -4,7 +4,6 @@ import java.awt.Color;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JLabel;
@@ -38,14 +37,13 @@ public class Mantenimiento_cliente extends JPanel implements ActionListener{
 		this.ventanaPrincipal = principal;		
 		setPreferredSize(new java.awt.Dimension(1000, 620));
 		
-		//ICONOS
-        ImageIcon usuario = new ImageIcon(getClass().getResource("/iconos/usuarioReporte.png"));
+		ImageIcon usuario = new ImageIcon(getClass().getResource("/iconos/usuarioReporte.png"));
         ImageIcon listar = new ImageIcon(getClass().getResource("/iconos/listarReporte2.png"));
         ImageIcon crear = new ImageIcon(getClass().getResource("/iconos/crearReporte.png"));
         ImageIcon modificar = new ImageIcon(getClass().getResource("/iconos/modificarReportar.png"));
         ImageIcon eliminar = new ImageIcon(getClass().getResource("/iconos/limpiarReporte.png"));
         ImageIcon volver = new ImageIcon(getClass().getResource("/iconos/volver.png"));
-        		
+		
 		JSeparator separator = new JSeparator();
 		separator.setBounds(98, 83, 792, 20);
 		add(separator);
@@ -75,7 +73,7 @@ public class Mantenimiento_cliente extends JPanel implements ActionListener{
 		btnCrear.addActionListener(this);
 		btnCrear.setBackground(new Color(128, 191, 33));
 		add(btnCrear);
-		btnCrear.setContentAreaFilled(false); 
+		btnCrear.setContentAreaFilled(false);
 		btnCrear.setIcon(crear);
 		btnCrear.setOpaque(true); 
 		
@@ -86,7 +84,7 @@ public class Mantenimiento_cliente extends JPanel implements ActionListener{
 		btnModificar.addActionListener(this);
 		btnModificar.setBackground(new Color(128, 191, 33));
 		add(btnModificar);
-		btnModificar.setContentAreaFilled(false); 
+		btnModificar.setContentAreaFilled(false);
 		btnModificar.setIcon(modificar);
 		btnModificar.setOpaque(true); 
 		

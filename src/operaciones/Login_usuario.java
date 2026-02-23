@@ -5,24 +5,21 @@ import servicio.Sesion;
 import modelos.Cuenta;
 import modelos.Usuario;
 import javax.swing.JOptionPane;
-
 import javax.swing.JPanel;
 import javax.swing.JPasswordField;
 import javax.swing.JTextField;
-
 import gui.VentanaPrincipal;
 
 import javax.swing.BorderFactory;
 import javax.swing.ImageIcon;
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JLabel;
-
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.border.MatteBorder;
-
 import datos.AlmacenDatos;
 
 public class Login_usuario extends JPanel implements ActionListener{
@@ -40,30 +37,26 @@ public class Login_usuario extends JPanel implements ActionListener{
 	public Login_usuario(VentanaPrincipal principal) {
 		setBackground(new Color(2, 64, 89));
 		
-		//ICONOS
-        ImageIcon documentoIdentidad = new ImageIcon(getClass().getResource("/iconos/dni.png"));
+		ImageIcon documentoIdentidad = new ImageIcon(getClass().getResource("/iconos/dni.png"));
         ImageIcon volver = new ImageIcon(getClass().getResource("/iconos/salirReporte.png"));
         ImageIcon ingresarLogin = new ImageIcon(getClass().getResource("/iconos/ingresar.png"));
         ImageIcon contraseñaLogin = new ImageIcon(getClass().getResource("/iconos/contraseña.png"));
         ImageIcon userOriginal = new ImageIcon(getClass().getResource("/iconos/user.png"));
         
-		this.ventanaPrincipal = principal;
+        this.ventanaPrincipal = principal;
 		setPreferredSize(new java.awt.Dimension(1000, 620));
 		setLayout(null);
 		
 		
 		JPanel panel = new JPanel();
-		panel.setBounds(178, 74, 648, 491);
 		panel.setBackground(new Color(2, 64, 89));
-
-		panel.setBackground(new Color(2, 64, 89));
-
+		panel.setBounds(181, 75, 677, 491);
 		add(panel);
 		panel.setLayout(null);
 		
 		JLabel lblIngresaTusCredenciales = new JLabel("INGRESA TUS CREDENCIALES PARA INICIAR SESION");
 		lblIngresaTusCredenciales.setForeground(new Color(255, 255, 255));
-		lblIngresaTusCredenciales.setBounds(35, 43, 666, 29);
+		lblIngresaTusCredenciales.setBounds(35, 43, 597, 29);
 		lblIngresaTusCredenciales.setIcon(userOriginal);
 		lblIngresaTusCredenciales.setIconTextGap(10);
 		panel.add(lblIngresaTusCredenciales);
@@ -73,13 +66,9 @@ public class Login_usuario extends JPanel implements ActionListener{
 		lblDni.setForeground(new Color(255, 255, 255));
 		lblDni.setBackground(new Color(255, 255, 255));
 		lblDni.setFont(new Font("Tahoma", Font.PLAIN, 18));
-
-		lblDni.setBounds(187, 131, 93, 29);
 		lblDni.setIcon(documentoIdentidad);
-
+		lblDni.setBounds(187, 142, 93, 13);
 		lblDni.setIcon(documentoIdentidad);
-		
-
 		panel.add(lblDni);
 		
 		txtUserDni = new JTextField();
@@ -104,13 +93,13 @@ public class Login_usuario extends JPanel implements ActionListener{
 		btnIngresarLoginUser.setBackground(new Color(128, 191, 33));
 		btnIngresarLoginUser.addActionListener(this);
 		btnIngresarLoginUser.setFont(new Font("Tahoma", Font.PLAIN, 15));
-		btnIngresarLoginUser.setBounds(335, 367, 127, 36);
+		btnIngresarLoginUser.setBounds(337, 367, 127, 36);
 		panel.add(btnIngresarLoginUser);
 		btnIngresarLoginUser.setContentAreaFilled(false);
 		btnIngresarLoginUser.setIcon(ingresarLogin);
 		btnIngresarLoginUser.setOpaque(true);
 		
-		btnVolver = new JButton("VOLVER");
+		btnVolver = new JButton("SALIR");
 		btnVolver.setBounds(187, 367, 127, 36);
 		panel.add(btnVolver);
 		btnVolver.setForeground(new Color(255, 255, 255));
@@ -126,7 +115,7 @@ public class Login_usuario extends JPanel implements ActionListener{
 		lblLinea.setBounds(35, 70, 568, 14);
 		lblLinea.setBorder(BorderFactory.createMatteBorder(0, 0, 2, 0, Color.WHITE));
 		panel.add(lblLinea);
-		
+
 	}
 
 	@Override

@@ -114,12 +114,13 @@ public class Ventana_reportee extends JPanel implements ItemListener, ActionList
 	//boton salir
 	protected void actionPerformedBtnNewButton(ActionEvent e) {
 		if(e.getSource()==btnSalir) {
+
 		    limpiarTodo();
             // Regresar al panel inicio
             ventanaPrincipal.Panel_inicio();
-			
-		}
-	}
+		}}
+
+	
 	public void limpiarTodo() {
 	    pnlSaldoCliente.limpiar();
 	    pnlRangoMontos.limpiar();

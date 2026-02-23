@@ -5,156 +5,213 @@ import javax.swing.JLabel;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-
-import javax.swing.SwingConstants;
-
 import gui.VentanaPrincipal;
-
-import javax.swing.JSeparator;
+import datos.AlmacenDatos;
+import modelos.Moneda;
+import javax.swing.JOptionPane;
 import javax.swing.JButton;
-import java.awt.Color;
-import javax.swing.JTextField;
 import javax.swing.JComboBox;
-import javax.swing.DefaultComboBoxModel;
+import javax.swing.JTextField;
+import java.awt.Color;
+import gui.VentanaPrincipal;
+import javax.swing.JSeparator;
 import javax.swing.ImageIcon;
+
 
 public class CambioMoneda extends JPanel implements ActionListener{
 
 	private static final long serialVersionUID = 1L;
-	private VentanaPrincipal ventanaPrincipal;
-	private JLabel lblTitulo;
-	private JSeparator separator;
-	private JLabel lblClaveActual;
-	private JLabel lblClaveNueva;
-	private JLabel lblConfirmar;
-	private JButton btnCambiar;
-	private JButton btnCancelar;
-	private JLabel lblNota;
-	private JTextField textField;
-	private JComboBox comboBox;
-	private JComboBox comboBox_1;
-	private JLabel lblResultado;
-	private JLabel lblEur;
-
-	/**
-	 * Create the panel.
-	 */
-	public CambioMoneda(VentanaPrincipal principal) {
-		setBackground(new Color(2, 64, 89));
-		this.ventanaPrincipal = principal;
-		setPreferredSize(new java.awt.Dimension(1000, 620));
-		setLayout(null);
-		
-		//ICONOS
+    private VentanaPrincipal ventanaPrincipal;
+    private JLabel lblTitulo;
+    private JLabel lblCantidad;
+    private JLabel lblDe;
+    private JLabel lblA;
+    private JLabel lblResultadoTexto;
+    private JTextField txtCantidad;
+    private JTextField txtResultado;
+    private JComboBox<String> cbDe;
+    private JComboBox<String> cbA;
+    private JButton btnConvertir;
+    private JButton btnVolver;
+    private JSeparator separator;
+    
+    public CambioMoneda(VentanaPrincipal principal) {
+    	setBackground(new Color(2, 64, 89));
+        this.ventanaPrincipal = principal;
+        setPreferredSize(new java.awt.Dimension(1000, 620));
+        setLayout(null);
+        
         ImageIcon titulo = new ImageIcon(getClass().getResource("/iconos/tituloMoneda.png"));
         ImageIcon salir = new ImageIcon(getClass().getResource("/iconos/salirReporte.png"));
         ImageIcon cantidad = new ImageIcon(getClass().getResource("/iconos/billete2Reporte.png"));
         ImageIcon moneda = new ImageIcon(getClass().getResource("/iconos/moneda.png"));
         ImageIcon monedas = new ImageIcon(getClass().getResource("/iconos/monedas.png"));
         ImageIcon convertir = new ImageIcon(getClass().getResource("/iconos/generarReporte.png"));
-        
-        
-		
-		lblTitulo = new JLabel("CAMBIO DE MONEDA");
-		
-		lblTitulo.setForeground(new Color(255, 255, 255));
-		lblTitulo.setHorizontalAlignment(SwingConstants.CENTER);
-		lblTitulo.setFont(new Font("Tahoma", Font.BOLD, 28));
-		lblTitulo.setBounds(210, 85, 600, 40);
+
+        lblTitulo = new JLabel("CAMBIO DE MONEDA");
+        lblTitulo.setForeground(new Color(255, 255, 255));
+        lblTitulo.setFont(new Font("Tahoma", Font.BOLD, 28));
+        lblTitulo.setBounds(335, 84, 600, 40);
 		lblTitulo.setIcon(titulo);
-		add(lblTitulo);
-		
-		separator = new JSeparator();
+        add(lblTitulo);
+        
+        separator = new JSeparator();
 		separator.setBounds(210, 144, 600, 2);
 		add(separator);
-		
-		lblClaveActual = new JLabel("CANTIDAD A CONVERTIR:");
-		lblClaveActual.setForeground(new Color(255, 255, 255));
-		lblClaveActual.setFont(new Font("Tahoma", Font.BOLD, 20));
-		lblClaveActual.setBounds(210, 185, 293, 30);
-		lblClaveActual.setIcon(cantidad);
-		add(lblClaveActual);
-		
-		lblClaveNueva = new JLabel("DE:");
-		lblClaveNueva.setFont(new Font("Tahoma", Font.BOLD, 20));
-		lblClaveNueva.setBounds(210, 250, 200, 30);
-		lblClaveNueva.setForeground(new Color(255, 255, 255));
-		lblClaveNueva.setIcon(moneda);
-		add(lblClaveNueva);
-		
-		lblConfirmar = new JLabel("A:");
-		lblConfirmar.setFont(new Font("Tahoma", Font.BOLD, 20));
-		lblConfirmar.setBounds(210, 302, 200, 30);
-		lblConfirmar.setForeground(new Color(255, 255, 255));
-		lblConfirmar.setIcon(monedas);
-		add(lblConfirmar);
-		
-		btnCambiar = new JButton("CONVERTIR");
-		btnCambiar.setForeground(Color.WHITE);
-		btnCambiar.setFont(new Font("Tahoma", Font.BOLD, 20));
-		btnCambiar.setFocusPainted(false);
-		btnCambiar.setBackground(new Color(128, 191, 33));
-		btnCambiar.setBounds(600, 505, 210, 50);
-		add(btnCambiar);
-		btnCambiar.setContentAreaFilled(false); 
-		btnCambiar.setIcon(convertir);
-		btnCambiar.setOpaque(true);
-		
-		btnCancelar = new JButton("SALIR");
-		btnCancelar.addActionListener(this);
-		btnCancelar.setForeground(Color.WHITE);
-		btnCancelar.setFont(new Font("Tahoma", Font.BOLD, 20));
-		btnCancelar.setFocusPainted(false);
-		btnCancelar.setBackground(new Color(96, 125, 139));
-		btnCancelar.setBounds(210, 505, 210, 50);
-		add(btnCancelar);
-		btnCancelar.setContentAreaFilled(false); 
-		btnCancelar.setIcon(salir);
-		btnCancelar.setOpaque(true);
-		
-		lblNota = new JLabel("Tipo de cambio:             Dólar  3.30      Euro 3.99      Soles 1.00");
-		lblNota.setHorizontalAlignment(SwingConstants.CENTER);
-		lblNota.setForeground(new Color(255, 255, 255));
-		lblNota.setFont(new Font("Tahoma", Font.ITALIC, 15));
-		lblNota.setBounds(229, 364, 492, 20);
-		add(lblNota);
-		
-		textField = new JTextField();
-		textField.setFont(new Font("Tahoma", Font.BOLD, 16));
-		textField.setColumns(10);
-		textField.setBounds(560, 187, 250, 30);
-		add(textField);
-		
-		comboBox = new JComboBox();
-		comboBox.setModel(new DefaultComboBoxModel(new String[] {"    SOLES - PEN", "    DÓLARES - USD", "    EUROS - EUR"}));
-		comboBox.setBounds(684, 250, 126, 30);
-		add(comboBox);
-		
-		comboBox_1 = new JComboBox();
-		comboBox_1.setModel(new DefaultComboBoxModel(new String[] {"    SOLES - PEN", "    DÓLARES - USD", "    EUROS - EUR"}));
-		comboBox_1.setBounds(684, 306, 126, 30);
-		add(comboBox_1);
-		
-		lblResultado = new JLabel("RESULTADO:");
-		lblResultado.setFont(new Font("Tahoma", Font.BOLD, 20));
-		lblResultado.setForeground(new Color(255, 255, 255));
-		lblResultado.setBounds(260, 418, 200, 30);
-		add(lblResultado);
-		
-		lblEur = new JLabel(" 37.59 EUR");
-		lblEur.setHorizontalAlignment(SwingConstants.CENTER);
-		lblEur.setForeground(new Color(255, 255, 255));
-		lblEur.setFont(new Font("Tahoma", Font.BOLD, 16));
-		lblEur.setBounds(513, 425, 250, 20);
-		add(lblEur);
 
-	}
+        lblCantidad = new JLabel("CANTIDAD A CONVERTIR:");
+        lblCantidad.setForeground(new Color(255, 255, 255));
+        lblCantidad.setFont(new Font("Tahoma", Font.BOLD, 18));
+        lblCantidad.setBounds(210, 185, 293, 30);
+		lblCantidad.setIcon(cantidad);
+        add(lblCantidad);
 
-	@Override
-	public void actionPerformed(ActionEvent e) {
-		// TODO Auto-generated method stub
-		if(e.getSource() == btnCancelar) {
-			ventanaPrincipal.menu_usuario();
-		}
-	}
+        txtCantidad = new JTextField();
+        txtCantidad.setBounds(560, 188, 250, 30);
+        add(txtCantidad);
+
+        lblDe = new JLabel("DE:");
+        lblDe.setForeground(new Color(2, 64, 89));
+        lblDe.setFont(new Font("Tahoma", Font.BOLD, 18));
+        lblDe.setBounds(210, 250, 200, 30);
+		lblDe.setForeground(new Color(255, 255, 255));
+		lblDe.setIcon(moneda);
+        add(lblDe);
+
+        cbDe = new JComboBox<>();
+        cbDe.setBounds(560, 253, 250, 30);
+        add(cbDe);
+
+        lblA = new JLabel("A:");
+        lblA.setFont(new Font("Tahoma", Font.BOLD, 18));
+        lblA.setBounds(210, 317, 200, 30);
+		lblA.setForeground(new Color(255, 255, 255));
+		lblA.setIcon(monedas);
+        add(lblA);
+
+        cbA = new JComboBox<>();
+        cbA.setBounds(560, 320, 250, 30);
+        add(cbA);
+        
+        btnVolver = new JButton("SALIR"); 
+        btnVolver.addActionListener(this);
+        btnVolver.setForeground(Color.WHITE);
+        btnVolver.setFont(new Font("Tahoma", Font.BOLD, 18));
+        btnVolver.setBackground(new Color(96, 125, 139));
+        btnVolver.setBounds(210, 465, 210, 50); // Posición arriba
+        btnVolver.setContentAreaFilled(false);
+        btnVolver.setOpaque(true);
+        btnVolver.setIcon(salir);
+        add(btnVolver);
+        
+        lblResultadoTexto = new JLabel("RESULTADO:");
+        lblResultadoTexto.setForeground(new Color(255, 255, 255));
+        lblResultadoTexto.setFont(new Font("Tahoma", Font.BOLD, 18));
+        lblResultadoTexto.setBounds(210, 387, 150, 30);
+        add(lblResultadoTexto);
+
+        txtResultado = new JTextField();
+        txtResultado.setEditable(false);
+        txtResultado.setBounds(560, 390, 250, 30);
+        add(txtResultado);
+
+        btnConvertir = new JButton("CONVERTIR");
+        btnConvertir.setForeground(Color.WHITE);
+        btnConvertir.setBackground(new Color(128, 191, 33));
+        btnConvertir.setFont(new Font("Tahoma", Font.BOLD, 18));
+        btnConvertir.setBounds(600, 465, 210, 50);
+        btnConvertir.setContentAreaFilled(false);
+        btnConvertir.setOpaque(true);
+        btnConvertir.addActionListener(this);
+        btnConvertir.setIcon(convertir);
+        add(btnConvertir);
+        
+        cargarMonedasEnCombos();
+    }
+    
+    public void actionPerformed(ActionEvent e) {
+        
+        if (e.getSource() == btnVolver) {
+        	ventanaPrincipal.menu_usuario();
+        }
+
+        if (e.getSource() == btnConvertir) {
+
+            try {
+                double monto = Double.parseDouble(txtCantidad.getText().trim());
+
+                if (monto <= 0) {
+                    JOptionPane.showMessageDialog(this, "Ingrese una cantidad válida.");
+                    return;
+                }
+
+                String nombreDe = (String) cbDe.getSelectedItem();
+                String nombreA = (String) cbA.getSelectedItem();
+
+                if (nombreDe == null || nombreA == null) {
+                    JOptionPane.showMessageDialog(this, "Seleccione monedas.");
+                    return;
+                }
+
+                Moneda de = AlmacenDatos.monedaPorNombre(nombreDe);
+                Moneda a = AlmacenDatos.monedaPorNombre(nombreA);
+
+                if (de == null || a == null) {
+                    JOptionPane.showMessageDialog(this, "No se encontró la moneda.");
+                    return;
+                }
+
+                double resultado = convertir(monto, de, a);
+                txtResultado.setText(String.format("%.2f", resultado));
+
+            } catch (NumberFormatException ex) {
+                JOptionPane.showMessageDialog(this, "Ingrese un número válido.");
+            } catch (RuntimeException ex) {
+                JOptionPane.showMessageDialog(this, ex.getMessage());
+            }
+        }
+    }
+    
+    // METODO CAMBIO DE DINERO
+    private void cargarMonedasEnCombos() {
+        cbDe.removeAllItems();
+        cbA.removeAllItems();
+
+        for (int i = 0; i < AlmacenDatos.listaMonedas.size(); i++) {
+            Moneda m = AlmacenDatos.listaMonedas.get(i);
+            String item = m.getNombre(); 
+            cbDe.addItem(item);
+            cbA.addItem(item);
+        }
+        if (cbDe.getItemCount() > 0) cbDe.setSelectedIndex(0);
+        if (cbA.getItemCount() > 0) cbA.setSelectedIndex(0);
+    }
+    
+    public void addNotify() {
+        super.addNotify();
+        if (cbDe != null && cbA != null) {
+            cargarMonedasEnCombos();
+        }
+    }
+    
+    private double obtenerValorMoneda(Moneda m) {
+    	if (m == null) {
+            throw new IllegalArgumentException("La moneda no puede ser null");
+        }
+        return m.getTipoCambio(); 
+    }
+
+    // METODO CONVERTIR - formula
+    private double convertir(double monto, Moneda monedaOrigen, Moneda monedaDestino) {
+    	if (monedaOrigen == null || monedaDestino == null) {
+            throw new IllegalArgumentException("Las monedas no pueden ser null");
+        }
+    	
+    	if (monedaDestino.getTipoCambio() == 0) {
+            throw new ArithmeticException("El tipo de cambio destino no puede ser 0");
+        }
+    	
+    	return monto * (monedaOrigen.getTipoCambio() / monedaDestino.getTipoCambio());
+    }
+	
 }

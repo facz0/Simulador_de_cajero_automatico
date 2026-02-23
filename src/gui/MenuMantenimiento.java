@@ -2,15 +2,15 @@ package gui;
 
 import java.awt.Color;
 import java.awt.Font;
-import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-import javax.swing.BorderFactory;
-import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import java.awt.Image;
+import javax.swing.BorderFactory;
+import javax.swing.ImageIcon;
 
 public class MenuMantenimiento extends JPanel implements ActionListener{
 
@@ -21,7 +21,6 @@ public class MenuMantenimiento extends JPanel implements ActionListener{
 	private JButton btnCliente;
 	private JButton btnMoneda;
 	private JButton btnSalir;
-	
 	/**
 	 * Create the panel.
 	 */
@@ -31,14 +30,12 @@ public class MenuMantenimiento extends JPanel implements ActionListener{
 		setPreferredSize(new java.awt.Dimension(1000, 620));
 		setLayout(null);
 		
-		//ICONOS
-        ImageIcon usuario = new ImageIcon(getClass().getResource("/iconos/usuarioReporte.png"));
+		ImageIcon usuario = new ImageIcon(getClass().getResource("/iconos/usuarioReporte.png"));
         ImageIcon moneda = new ImageIcon(getClass().getResource("/iconos/monedas.png"));
         ImageIcon cuentaBanco = new ImageIcon(getClass().getResource("/iconos/cuentaBancaria.png"));
         ImageIcon salir = new ImageIcon(getClass().getResource("/iconos/salirReporte.png"));
         ImageIcon mantenimiento = new ImageIcon(getClass().getResource("/iconos/llave.png"));
 		
-        
 		lblNewLabel = new JLabel("MANTENIMIENTO");
 		lblNewLabel.setForeground(new Color(255, 255, 255));
 		lblNewLabel.setFont(new Font("Tahoma", Font.BOLD, 40));
@@ -55,7 +52,6 @@ public class MenuMantenimiento extends JPanel implements ActionListener{
 		btnCuenta.setOpaque(true);
 		btnCuenta.setBounds(307, 151, 400, 75);
 		btnCuenta.setIcon(cuentaBanco);
-		//btnCuenta.setBorder(BorderFactory.createLineBorder(Color.BLACK, 3));
 		add(btnCuenta);
 		
 		btnCliente = new JButton("CLIENTE");
@@ -67,7 +63,6 @@ public class MenuMantenimiento extends JPanel implements ActionListener{
 		btnCliente.setOpaque(true);
 		btnCliente.setBounds(307, 391, 400, 75);
 		btnCliente.setIcon(usuario);
-		
 		add(btnCliente);
 		
 		btnMoneda = new JButton("MONEDA");
@@ -79,7 +74,6 @@ public class MenuMantenimiento extends JPanel implements ActionListener{
 		btnMoneda.setOpaque(true);
 		btnMoneda.setBounds(307, 273, 400, 75);
 		btnMoneda.setIcon(moneda);
-		
 		add(btnMoneda);
 		
 		btnSalir = new JButton("SALIR");
@@ -91,7 +85,6 @@ public class MenuMantenimiento extends JPanel implements ActionListener{
 		btnSalir.setOpaque(true);
 		btnSalir.setBounds(307, 510, 400, 75);
 		btnSalir.setIcon(salir);
-		
 		add(btnSalir);
 	}
 	@Override

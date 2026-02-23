@@ -1,22 +1,17 @@
 package operaciones;
 
-
 import datos.AlmacenDatos;
 import modelos.Usuario;
 import modelos.Cuenta;
 import modelos.Transaccion;
 
-
-
 public class Metodo_reporte_admin {
 
-
-    /**
+	/**
      * Busca un usuario por su NOMBRE
      * Devuelve el Usuario si existe
      * Devuelve null si no existe
      */
-
 	 public static Usuario clientePorNombre(String nombre) {
 		  if (nombre == null || nombre.trim().isEmpty()) {
 	            return null;
@@ -31,6 +26,8 @@ public class Metodo_reporte_admin {
 	        }
 	        return null;
 	    }
+
+	   
 
 	    /**
 	     * NUEVO MÉTODO
@@ -65,7 +62,7 @@ public class Metodo_reporte_admin {
     
     //metodo de monto
     public static Cuenta[] cuentasPorRangoSaldo(double saldoMinimo, double saldoMaximo) {
-    // 1️⃣ Contar cuántas cuentas cumplen la condición
+    // Contar cuántas cuentas cumplen la condición
     int indice = 0;
     for (int i = 0; i < AlmacenDatos.listaCuentas.size(); i++) {
         Cuenta c = AlmacenDatos.listaCuentas.get(i);
@@ -88,7 +85,7 @@ public class Metodo_reporte_admin {
     }
 
     return resultado; // si no hay cuentas, devuelve un arreglo vacío
-}
+    }
     
     //* Este método recibe una transacción y busca la cuenta completa
     //* permitiendo acceder luego al Usuario y a la Moneda.
@@ -99,7 +96,4 @@ public class Metodo_reporte_admin {
        // Usamos el método que ya tienes en AlmacenDatos para buscar por número
        return AlmacenDatos.cuentaPorNumero(t.getNumeroCuenta());
    }
-    
-    
 }
-

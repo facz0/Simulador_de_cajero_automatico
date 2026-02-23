@@ -1,14 +1,15 @@
 package reportes;
 
 import javax.swing.*;
-import javax.swing.border.LineBorder;
-import javax.swing.table.DefaultTableModel;
-import javax.swing.text.MaskFormatter; // Importante para la máscara
-
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.text.ParseException; // Manejo de error de la máscara
+import java.awt.Image;
+import javax.swing.ImageIcon;
+import javax.swing.border.LineBorder;
+import javax.swing.table.DefaultTableModel;
+import javax.swing.text.MaskFormatter; 
+import java.text.ParseException;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
@@ -23,8 +24,7 @@ public class saldo_rango_fecha extends JPanel implements ActionListener {
 
     private static final long serialVersionUID = 1L;
 
-    
-	private JFormattedTextField txtInicio, txtFin;
+    private JFormattedTextField txtInicio, txtFin;
 	private JTable tablaTransacciones;
 	private DefaultTableModel modeloTabla;
 	private JButton btnGenerar, btnLimpiar;
@@ -184,7 +184,7 @@ public class saldo_rango_fecha extends JPanel implements ActionListener {
 
 		// Limpiar campos y tabla
 		if (e.getSource() == btnLimpiar) {
-			limpiar();	
+			limpiar();
 		}
 	}
 	public void limpiar() {

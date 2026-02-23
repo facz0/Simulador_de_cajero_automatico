@@ -7,12 +7,11 @@ import javax.swing.JPanel;
 import javax.swing.JSeparator;
 import javax.swing.JLabel;
 import java.awt.Font;
-
-import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JTextArea;
 import gui.VentanaPrincipal;
 import javax.swing.JComboBox;
+import javax.swing.ImageIcon;
 
 public class Mantenimiento_cuentaBancaria extends JPanel implements ActionListener{
 
@@ -38,8 +37,7 @@ public class Mantenimiento_cuentaBancaria extends JPanel implements ActionListen
 		this.ventanaPrincipal = principal;		
 		setPreferredSize(new java.awt.Dimension(1000, 620));
 		
-		//ICONOS
-        ImageIcon cuenta = new ImageIcon(getClass().getResource("/iconos/cuentaBancaria.png"));
+		ImageIcon cuenta = new ImageIcon(getClass().getResource("/iconos/cuentaBancaria.png"));
         ImageIcon listar = new ImageIcon(getClass().getResource("/iconos/listarReporte2.png"));
         ImageIcon crear = new ImageIcon(getClass().getResource("/iconos/crearReporte.png"));
         ImageIcon modificar = new ImageIcon(getClass().getResource("/iconos/modificarReportar.png"));
@@ -64,7 +62,7 @@ public class Mantenimiento_cuentaBancaria extends JPanel implements ActionListen
 		btnListar.addActionListener(this);
 		btnListar.setBackground(new Color(128, 191, 33));
 		add(btnListar);
-		btnListar.setContentAreaFilled(false); 
+		btnListar.setContentAreaFilled(false);
 		btnListar.setIcon(listar);
 		btnListar.setOpaque(true); 
 		
@@ -88,6 +86,7 @@ public class Mantenimiento_cuentaBancaria extends JPanel implements ActionListen
 		add(btnModificar);
 		btnModificar.setContentAreaFilled(false); 
 		btnModificar.setIcon(modificar);
+		btnCrear.setIcon(crear);
 		btnModificar.setOpaque(true); 
 		
 		btnEliminar = new JButton("Eliminar");

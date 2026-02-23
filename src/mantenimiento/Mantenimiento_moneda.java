@@ -4,7 +4,6 @@ import java.awt.Color;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JLabel;
@@ -38,8 +37,7 @@ public class Mantenimiento_moneda extends JPanel implements ActionListener{
 		this.ventanaPrincipal = principal;		
 		setPreferredSize(new java.awt.Dimension(1000, 620));
 		
-		//ICONOS
-        ImageIcon monedas = new ImageIcon(getClass().getResource("/iconos/monedas.png"));
+		ImageIcon monedas = new ImageIcon(getClass().getResource("/iconos/monedas.png"));
         ImageIcon listar = new ImageIcon(getClass().getResource("/iconos/listarReporte2.png"));
         ImageIcon crear = new ImageIcon(getClass().getResource("/iconos/crearReporte.png"));
         ImageIcon modificar = new ImageIcon(getClass().getResource("/iconos/modificarReportar.png"));
@@ -64,7 +62,7 @@ public class Mantenimiento_moneda extends JPanel implements ActionListener{
 		btnListar.addActionListener(this);
 		btnListar.setBackground(new Color(128, 191, 33));
 		add(btnListar);
-		btnListar.setContentAreaFilled(false); 
+		btnListar.setContentAreaFilled(false);
 		btnListar.setIcon(listar);
 		btnListar.setOpaque(true); 
 		
@@ -88,6 +86,7 @@ public class Mantenimiento_moneda extends JPanel implements ActionListener{
 		add(btnModificar);
 		btnModificar.setContentAreaFilled(false); 
 		btnModificar.setIcon(modificar);
+		btnCrear.setIcon(crear);
 		btnModificar.setOpaque(true); 
 		
 		btnEliminar = new JButton("Eliminar");
@@ -103,13 +102,13 @@ public class Mantenimiento_moneda extends JPanel implements ActionListener{
 		
 		btnVolver = new JButton("VOLVER");
 		btnVolver.setForeground(new Color(255, 255, 255));
-		btnVolver.setBackground(new Color(192, 57, 43));
 		btnVolver.addActionListener(this);
 		btnVolver.setFont(new Font("Tahoma", Font.PLAIN, 15));
 		btnVolver.setBounds(767, 40, 123, 35);
 		add(btnVolver);
 		btnVolver.setContentAreaFilled(false); 
 		btnVolver.setIcon(volver);
+		btnVolver.setBackground(new Color(192, 57, 43));
 		btnVolver.setOpaque(true);
 		
 		panelPrincipal = new JPanel();

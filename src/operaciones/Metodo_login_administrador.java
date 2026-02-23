@@ -1,7 +1,6 @@
 package operaciones;
 
 public class Metodo_login_administrador {
-
 	// Constructor privado (opcional, evita instancias)
     private Metodo_login_administrador() {}
 
@@ -27,4 +26,4 @@ public class Metodo_login_administrador {
     private static boolean validarReportes(String usuario, String password) {
         return usuario.equals("admin") && password.equals("reporte123");
     }
-    }
+}

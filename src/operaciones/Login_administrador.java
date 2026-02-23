@@ -175,16 +175,6 @@ public class Login_administrador extends JPanel implements ActionListener{
 	            passwordAdmin.setText("");
 	            txtAdminDni.requestFocus();
 	        }
+
 	    }}}
 	
-
-	
-
-
-	        
-	    
-
-	       
-	   
-	
-

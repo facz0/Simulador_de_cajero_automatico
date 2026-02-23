@@ -9,6 +9,7 @@ import java.awt.Image;
 import javax.swing.SwingConstants;
 
 import operaciones.DepositoDinero;
+import operaciones.Retiro_dinero;
 
 import java.awt.Color;
 
@@ -33,7 +34,7 @@ public class Menu_usuario extends JPanel implements ActionListener {
 	private JButton btnConsultas;
 	private JButton btnCancelar;
 	private DepositoDinero depositarDinero;
-
+	private Retiro_dinero retiro_dinero;
 	
 	
 	/**
@@ -59,14 +60,14 @@ public class Menu_usuario extends JPanel implements ActionListener {
 		
 		separator = new JSeparator();
 		separator.setForeground(new Color(255, 255, 255));
-		separator.setBounds(164, 157, 694, 2);
+		separator.setBounds(164, 127, 694, 30);
 		add(separator);
 		
 		lblTitulo = new JLabel("MENÚ PRINCIPAL");
 		lblTitulo.setForeground(new Color(255, 255, 255));
 		lblTitulo.setHorizontalAlignment(SwingConstants.CENTER);
 		lblTitulo.setFont(new Font("Tahoma", Font.BOLD, 28));
-		lblTitulo.setBounds(226, 94, 540, 40);
+		lblTitulo.setBounds(226, 69, 540, 40);
 		add(lblTitulo);
 		
 		lblSelecciona = new JLabel("SELECCIONA LA OPERACIÓN A REALIZAR");
@@ -74,7 +75,7 @@ public class Menu_usuario extends JPanel implements ActionListener {
 		lblSelecciona.setHorizontalAlignment(SwingConstants.CENTER);
 		lblSelecciona.setForeground(new Color(255, 255, 255));
 		lblSelecciona.setFont(new Font("Tahoma", Font.ITALIC, 16));
-		lblSelecciona.setBounds(327, 184, 338, 20);
+		lblSelecciona.setBounds(327, 147, 338, 20);
 		add(lblSelecciona);
 		
 		
@@ -86,11 +87,11 @@ public class Menu_usuario extends JPanel implements ActionListener {
 		btnCambiarClave.setFocusPainted(false);
 		btnCambiarClave.setContentAreaFilled(false);
 		btnCambiarClave.setBackground(new Color(128, 191, 33));
-		btnCambiarClave.setBounds(164, 505, 299, 72);
+		btnCambiarClave.setBounds(164, 458, 299, 72);
 		add(btnCambiarClave);
 		btnCambiarClave.setContentAreaFilled(false); 
 		btnCambiarClave.setOpaque(true);
-		btnCambiarClave.setIcon(clave); // plasma icono en el boton
+		btnCambiarClave.setIcon(clave);
 		
 		
 		
@@ -102,7 +103,7 @@ public class Menu_usuario extends JPanel implements ActionListener {
 		btnRetiroDeDinero.setFocusPainted(false);
 		btnRetiroDeDinero.setContentAreaFilled(false);
 		btnRetiroDeDinero.setBackground(new Color(128, 191, 33));
-		btnRetiroDeDinero.setBounds(164, 243, 299, 72);
+		btnRetiroDeDinero.setBounds(164, 203, 299, 72);
 		add(btnRetiroDeDinero);
 		btnRetiroDeDinero.setContentAreaFilled(false); 
 		btnRetiroDeDinero.setOpaque(true);
@@ -117,7 +118,7 @@ public class Menu_usuario extends JPanel implements ActionListener {
 		btnDepositoDeDinero.setFocusPainted(false);
 		btnDepositoDeDinero.setContentAreaFilled(false);
 		btnDepositoDeDinero.setBackground(new Color(128, 191, 33));
-		btnDepositoDeDinero.setBounds(164, 375, 299, 72);
+		btnDepositoDeDinero.setBounds(164, 330, 299, 72);
 		add(btnDepositoDeDinero);
 		btnDepositoDeDinero.setContentAreaFilled(false); 
 		btnDepositoDeDinero.setOpaque(true);
@@ -133,7 +134,7 @@ public class Menu_usuario extends JPanel implements ActionListener {
 		btnCambiarMoneda.setFocusPainted(false);
 		btnCambiarMoneda.setContentAreaFilled(false);
 		btnCambiarMoneda.setBackground(new Color(128, 191, 33));
-		btnCambiarMoneda.setBounds(559, 375, 299, 72);
+		btnCambiarMoneda.setBounds(559, 330, 299, 72);
 		add(btnCambiarMoneda);
 		btnCambiarMoneda.setContentAreaFilled(false); 
 		btnCambiarMoneda.setOpaque(true);
@@ -147,7 +148,7 @@ public class Menu_usuario extends JPanel implements ActionListener {
 		btnConsultas.setFocusPainted(false);
 		btnConsultas.setContentAreaFilled(false);
 		btnConsultas.setBackground(new Color(128, 191, 33));
-		btnConsultas.setBounds(559, 243, 299, 72);
+		btnConsultas.setBounds(559, 203, 299, 72);
 		add(btnConsultas);
 		btnConsultas.setContentAreaFilled(false); 
 		btnConsultas.setOpaque(true);
@@ -161,13 +162,14 @@ public class Menu_usuario extends JPanel implements ActionListener {
 		btnCancelar.setFocusPainted(false);
 		btnCancelar.setContentAreaFilled(false);
 		btnCancelar.setBackground(new Color(96, 125, 139));
-		btnCancelar.setBounds(559, 506, 299, 72);
+		btnCancelar.setBounds(559, 459, 299, 72);
 		add(btnCancelar);
 		btnCancelar.setContentAreaFilled(false); 
 		btnCancelar.setOpaque(true);
 		btnCancelar.setIcon(cancelar);
 		
 		depositarDinero = new DepositoDinero(principal);
+		retiro_dinero = new Retiro_dinero(principal);
 		
 	}
 	public void actionPerformed(ActionEvent e) {

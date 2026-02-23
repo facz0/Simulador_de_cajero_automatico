@@ -7,9 +7,9 @@ import java.awt.event.ActionListener;
 
 import modelos.Usuario;
 import servicio.Sesion;
-
 import javax.swing.BorderFactory;
 import javax.swing.ImageIcon;
+
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JLabel;
@@ -20,7 +20,6 @@ import datos.AlmacenDatos;
 import gui.VentanaPrincipal;
 import modelos.Cuenta;
 import javax.swing.border.LineBorder;
-import javax.swing.JTextField;
 
 public class MisCuentas extends JPanel implements ActionListener {
 
@@ -33,9 +32,8 @@ public class MisCuentas extends JPanel implements ActionListener {
 	private JButton btnConsultaSaldo;
 	private JButton btnConsultasRango;
 	private JButton btnUltimosMovimientos;
-
-	private Cuenta cuentaSeleccionada;
 	private JLabel lblLinea;
+	private Cuenta cuentaSeleccionada;
 	
 	public void refrescar() {
 	    cargarCuentas();
@@ -47,7 +45,7 @@ public class MisCuentas extends JPanel implements ActionListener {
 		this.ventanaPrincipal = principal;
 		setPreferredSize(new java.awt.Dimension(1000, 620));
 		setLayout(null);
-		
+
 		//ICONOS
         ImageIcon consulta = new ImageIcon(getClass().getResource("/iconos/tituloConsulta.png"));
         ImageIcon movimiento = new ImageIcon(getClass().getResource("/iconos/tituloMovimiento.png"));
@@ -62,13 +60,11 @@ public class MisCuentas extends JPanel implements ActionListener {
 		lblTitulo.setIcon(consulta);
 		add(lblTitulo);
 		
-		
 		lblLinea = new JLabel("");
 		lblLinea.setBounds(107, 107, 788, 14);
 		add(lblLinea);
-		// Línea solo abajo (0 arriba, 0 izquierda, 2 abajo, 0 derecha)
 		lblLinea.setBorder(BorderFactory.createMatteBorder(0, 0, 2, 0, Color.WHITE));
-		
+
 		panel = new JPanel();
 		panel.setLayout(null);
 		panel.setBackground(new Color(2, 64, 89));
@@ -82,11 +78,8 @@ public class MisCuentas extends JPanel implements ActionListener {
 		panel.add(lblSeleccion);
 
 		comboBox = new JComboBox<>();
-		comboBox.setBounds(222, 46, 306, 22);
+		comboBox.setBounds(222, 46, 320, 22);
 		panel.add(comboBox);
-
-		//  cargar cuentas (por ahora: todas)
-		//cargarCuentas();
 		
 
 		btnConsultaSaldo = new JButton("CONSULTAR SALDO");
@@ -94,7 +87,7 @@ public class MisCuentas extends JPanel implements ActionListener {
 		btnConsultaSaldo.setFont(new Font("Tahoma", Font.BOLD, 20));
 		btnConsultaSaldo.setFocusPainted(false);
 		btnConsultaSaldo.setBackground(new Color(128, 191, 33));
-		btnConsultaSaldo.setBounds(222, 116, 306, 50);
+		btnConsultaSaldo.setBounds(222, 116, 320, 50);
 		btnConsultaSaldo.setContentAreaFilled(false);
 		btnConsultaSaldo.setOpaque(true);
 		btnConsultaSaldo.addActionListener(this);
@@ -106,7 +99,7 @@ public class MisCuentas extends JPanel implements ActionListener {
 		btnUltimosMovimientos.setFont(new Font("Tahoma", Font.BOLD, 20));
 		btnUltimosMovimientos.setFocusPainted(false);
 		btnUltimosMovimientos.setBackground(new Color(128, 191, 33));
-		btnUltimosMovimientos.setBounds(222, 199, 306, 50);
+		btnUltimosMovimientos.setBounds(222, 199, 320, 50);
 		btnUltimosMovimientos.setContentAreaFilled(false);
 		btnUltimosMovimientos.setOpaque(true);
 		btnUltimosMovimientos.addActionListener(this);
@@ -118,7 +111,7 @@ public class MisCuentas extends JPanel implements ActionListener {
 		btnConsultasRango.setFont(new Font("Tahoma", Font.BOLD, 20));
 		btnConsultasRango.setFocusPainted(false);
 		btnConsultasRango.setBackground(new Color(128, 191, 33));
-		btnConsultasRango.setBounds(222, 286, 306, 50);
+		btnConsultasRango.setBounds(222, 286, 320, 50);
 		btnConsultasRango.setContentAreaFilled(false);
 		btnConsultasRango.setOpaque(true);
 		btnConsultasRango.addActionListener(this);
@@ -126,7 +119,7 @@ public class MisCuentas extends JPanel implements ActionListener {
 		panel.add(btnConsultasRango);
 		
 		btnVolver = new JButton("SALIR");
-		btnVolver.setBounds(349, 508, 309, 50);
+		btnVolver.setBounds(349, 508, 324, 50);
 		add(btnVolver);
 		btnVolver.setForeground(Color.WHITE);
 		btnVolver.setFont(new Font("Tahoma", Font.BOLD, 20));
@@ -135,21 +128,19 @@ public class MisCuentas extends JPanel implements ActionListener {
 		btnVolver.setOpaque(true);
 		btnVolver.setIcon(salir);
 		btnVolver.addActionListener(this);
-		
-		
 	}
 
 	private void cargarCuentas() {
 	    comboBox.removeAllItems();
-	    // ✅ usuario logueado
 	    Usuario usuarioActual = Sesion.obtener();
-
 	    if (usuarioActual == null) {
 	        JOptionPane.showMessageDialog(this, "No hay usuario logueado.");
 	        return;
 	    }
 
-	    for (Cuenta c : AlmacenDatos.listaCuentas) {
+	    for (int i = 0; i < AlmacenDatos.listaCuentas.size(); i++) {
+	        Cuenta c = AlmacenDatos.listaCuentas.get(i);
+	        
 	        if (c.getUsuario() != null && c.getUsuario().getDNI().equals(usuarioActual.getDNI())) {
 	            comboBox.addItem(c);
 	        }
